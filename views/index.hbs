@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="input-field col s12">
+        <input type="text" id="blr" class="validate" placeholder="0">
+        <label for="blr" class="active active">BLR</label>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s12">
+        <input type="text" id="usd" class="validate" placeholder="0" />
+        <label for="usd">USD</label>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s12">
+        <input type="text" id="eur" class="validate" placeholder="0" />
+        <label for="eur">EUR</label>
+    </div>
+</div>
+<div class="row">
+    <div class="input-field col s12">
+        <input type="text" id="rub" class="validate"placeholder="0" />
+        <label for="rub">RUB</label>
+    </div>
+</div>
+
+
+<script>
+
+
+        const usd = {{USD}}
+        const eur = {{EUR}}
+        const rub = {{RUB}}
+       
+        function numberCheck(e) {  
+            e.target.value = e.target.value.replace(/[^\d.]/g, '')
+        }
+    
+
+inputBLR = document.querySelector('#blr')
+inputUSD = document.querySelector('#usd')
+inputEUR = document.querySelector('#eur')
+inputRUB = document.querySelector('#rub')
+
+inputBLR.addEventListener('input',(e)=>{
+    numberCheck(e)
+    inputUSD.value = e.target.value / usd
+    inputEUR.value = (e.target.value / eur)
+    inputRUB.value = e.target.value / rub * 100
+})
+
+inputUSD.addEventListener('input',(e)=>{
+    numberCheck(e)
+    inputBLR.value = (e.target.value * usd)
+    inputEUR.value = (usd / eur * e.target.value )
+    inputRUB.value = (usd / rub * e.target.value *100 )
+})
+
+inputEUR.addEventListener('input',(e)=>{
+    numberCheck(e)
+    inputBLR.value = (e.target.value * eur)
+    inputUSD.value = (eur / usd * e.target.value )
+    inputRUB.value = (eur / rub * e.target.value *100 )
+})
+inputRUB.addEventListener('input',(e)=>{
+    numberCheck(e)
+    inputBLR.value = e.target.value * rub / 100
+    inputUSD.value = (rub / usd * e.target.value / 100)
+    inputEUR.value = (rub / eur * e.target.value / 100)
+})  </script>
