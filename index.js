@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 
-const mainRoute = require('./router/main_route')
 
 const Handlebars = require('handlebars')
 const exphbs = require("express-handlebars");
@@ -11,11 +10,16 @@ var hbs = exphbs.create({
     extname:'hbs',
     handlebars: allowInsecurePrototypeAccess(Handlebars)
  });
+
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
-
 app.use(express.static('public'));
+
+
+const mainRoute = require('./router/main_route')
+
+
 
 app.use('/', mainRoute)
 

@@ -10,5 +10,4 @@ async function getRate() {
     } 
   }
 
-const data = getRate()
-module.exports = data
+module.exports = getRate()
