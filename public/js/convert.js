@@ -38,7 +38,7 @@ function convert(USD, EUR, RUB) {
         inputRUB.value = formatNumber(eur / rub * e.target.value *100 )
     })
     inputRUB.addEventListener('input',(e)=>{
-        numberCheck(e)
+
         inputBLR.value = formatNumber(e.target.value * rub / 100)
         inputUSD.value = formatNumber(rub / usd * e.target.value / 100)
         inputEUR.value = formatNumber(rub / eur * e.target.value / 100)
