@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 
 async function getRate() {
     try{
-        const res = await fetch('https://www.nbrb.by/api/exrates/rates?periodicity=0');
+        const res = await fetch('http://www.nbrb.by/api/exrates/rates?periodicity=0');
         let data = await res.json();
         return  data
     }catch(err){

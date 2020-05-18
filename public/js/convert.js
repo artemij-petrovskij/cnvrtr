@@ -1,6 +1,9 @@
-function numberCheck(e) {  
-    e.target.value = e.target.value.replace(/[^\d.]/g, '')
-}
+
+
+function formatNumber(value) {  
+    return parseFloat(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1 ").replace('.', '.');
+ }
+ 
 
 function convert(USD, EUR, RUB) {
 
@@ -14,29 +17,30 @@ function convert(USD, EUR, RUB) {
     let inputRUB = document.querySelector('#rub')
 
     inputBLR.addEventListener('input',(e)=>{
-        numberCheck(e)
-        inputUSD.value = (e.target.value / usd).toFixed(2)
-        inputEUR.value = (e.target.value / eur).toFixed(2)
-        inputRUB.value = (e.target.value / rub * 100).toFixed(2)
+     
+      
+        inputUSD.value = formatNumber(e.target.value / usd)
+        inputEUR.value = formatNumber(e.target.value / eur)
+        inputRUB.value = formatNumber(e.target.value / rub * 100)
     })
 
     inputUSD.addEventListener('input',(e)=>{
-        numberCheck(e)
-        inputBLR.value = (e.target.value * usd).toFixed(2)
-        inputEUR.value = (usd / eur * e.target.value ).toFixed(2)
-        inputRUB.value = (usd / rub * e.target.value *100 ).toFixed(2)
+  
+        inputBLR.value = formatNumber(e.target.value * usd)
+        inputEUR.value = formatNumber(usd / eur * e.target.value )
+        inputRUB.value = formatNumber(usd / rub * e.target.value *100 )
     })
 
     inputEUR.addEventListener('input',(e)=>{
-        numberCheck(e)
-        inputBLR.value = (e.target.value * eur).toFixed(2)
-        inputUSD.value = (eur / usd * e.target.value ).toFixed(2)
-        inputRUB.value = (eur / rub * e.target.value *100 ).toFixed(2)
+    
+        inputBLR.value = formatNumber(e.target.value * eur)
+        inputUSD.value = formatNumber(eur / usd * e.target.value )
+        inputRUB.value = formatNumber(eur / rub * e.target.value *100 )
     })
     inputRUB.addEventListener('input',(e)=>{
         numberCheck(e)
-        inputBLR.value = (e.target.value * rub / 100).toFixed(2)
-        inputUSD.value = (rub / usd * e.target.value / 100).toFixed(2)
-        inputEUR.value = (rub / eur * e.target.value / 100).toFixed(2)
+        inputBLR.value = formatNumber(e.target.value * rub / 100)
+        inputUSD.value = formatNumber(rub / usd * e.target.value / 100)
+        inputEUR.value = formatNumber(rub / eur * e.target.value / 100)
     })
 }
