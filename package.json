@@ -18,9 +18,8 @@
   },
   "homepage": "https://github.com/artemij-petrovskij/cnvrtr#readme",
   "dependencies": {
-    "@handlebars/allow-prototype-access": "^1.0.3",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
-    "express-handlebars": "^4.0.4",
     "node-fetch": "^2.6.0"
   },
   "devDependencies": {

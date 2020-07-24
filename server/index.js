@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
-
-const main = require('./router/main_route')
+const cors = require('cors')
+const main = require('./router/currencyRoute')
 
 app.use(express.static('public'));
 
@@ -10,7 +10,8 @@ if (process.env.NODE_ENV === 'production') {
     app.get(/.*/, (req, res) => res.sendFile(__dirname+'/public/index.html'))
 }
 
-app.use('/', main)
+app.use(cors())
+app.use('/api', main)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, function () {
