@@ -15,7 +15,7 @@
             />BLR
           </span>
 
-          <el-input name="text" v-model="valBLR"></el-input>
+          <el-input name="text" v-model="result.BLR" @input="currencyBLR"></el-input>
         </el-form-item>
         <!--  item -->
 
@@ -88,8 +88,7 @@ export default {
         EUR: "",
         RUB: "",
         PLN: "",
-      },
-      valBLR:''
+      }
     };
   },
   async created() {
@@ -100,6 +99,12 @@ export default {
     this.currency.PLN = currencies[6].Cur_OfficialRate;
   },
   methods: {
+    currencyBLR: function(e) {
+      this.result.USD = e / this.currency.USD;
+      this.result.EUR = e / this.currency.EUR;
+      this.result.RUB = (e / this.currency.RUB) * 100;
+      this.result.PLN = (e / this.currency.PLN) * 10;
+    },
     currencyUSD: function (e) {
       this.result.BLR = e * this.currency.USD;
       this.result.EUR = e * (this.currency.USD / this.currency.EUR);
@@ -124,16 +129,9 @@ export default {
       this.result.USD = e * (this.currency.PLN / this.currency.USD / 10);
       this.result.EUR = e * (this.currency.PLN / this.currency.EUR / 10);
       this.result.RUB = e * ((this.currency.PLN / this.currency.RUB) * 10);
-    },
-  },
-  watch: {
-    valBLR(e) {
-      this.result.USD = e / this.currency.USD;
-      this.result.EUR = e / this.currency.EUR;
-      this.result.RUB = (e / this.currency.RUB) * 100;
-      this.result.PLN = (e / this.currency.PLN) * 10;
-    },
-  },
+    }
+  }
+
 };
 </script>
 
