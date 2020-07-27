@@ -14,7 +14,7 @@
             />BLR
           </span>
 
-          <el-input name="text" v-model="result.BLR" @input="currencyBLR"></el-input>
+          <el-input v-on:input="currencyBLR" name="text" v-model="result.BLR" ></el-input>
         </el-form-item>
         <!--  item -->
 
@@ -134,7 +134,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 img {
   margin-top: 10px;
   margin-right: 10px;
