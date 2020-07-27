@@ -1,6 +1,5 @@
 const fetch = require('node-fetch')
 
-
 class CurrencyService {
     static getCurrency = async () => {
         try {
