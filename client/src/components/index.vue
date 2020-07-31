@@ -8,7 +8,7 @@
       >
         <!-- item  -->
         <el-form-item>
-          <p>{{currency.USD}}</p>
+        
           <span slot="label" class="label">
             <img
               src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_belorussija_enl.jpg"
