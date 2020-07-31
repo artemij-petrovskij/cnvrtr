@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>Header1</el-header>
+    <el-header>Header2</el-header>
     <el-main>
       <el-form
         style="max-width: 400px;position: relative;margin:0px auto;padding:20px;"
@@ -93,6 +93,7 @@ export default {
   },
   async created() {
     const currencies = await CurrencyService.getCurrency();
+   
     this.currency.USD = currencies[4].Cur_OfficialRate;
     this.currency.EUR = currencies[5].Cur_OfficialRate;
     this.currency.RUB = currencies[16].Cur_OfficialRate;

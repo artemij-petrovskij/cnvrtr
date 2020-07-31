@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
 const cors = require('cors')
 const main = require('./router/currencyRoute')
 
@@ -10,6 +11,7 @@ if (process.env.NODE_ENV === 'production') {
     app.get(/.*/, (req, res) => res.sendFile(__dirname+'/public/index.html'))
 }
 
+app.use(bodyParser.json())
 app.use(cors())
 app.use('/api', main)
 
