@@ -1,6 +1,6 @@
 <template>
   <el-container>
-    <el-header>Header</el-header>
+    <el-header>Header1</el-header>
     <el-main>
       <el-form
         style="max-width: 400px;position: relative;margin:0px auto;padding:20px;"
