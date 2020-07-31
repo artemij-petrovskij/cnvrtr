@@ -7,9 +7,6 @@ const main = require('./router/currencyRoute')
 app.use(express.static(__dirname + '/public/'))
 
 
-if (process.env.NODE_ENV === 'production') {
-   // app.get(/.*/, (req, res) => res.sendFile(__dirname+'/public/index.html'))
-}
 
 app.use(bodyParser.json())
 app.use(cors())

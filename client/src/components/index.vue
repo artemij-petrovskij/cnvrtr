@@ -1,21 +1,24 @@
 <template>
   <el-container>
-    <el-header>Header5</el-header>
+    <el-header>
+      <h1>CNVRTR</h1>
+    </el-header>
     <el-main>
       <el-form
-        style="max-width: 400px;position: relative;margin:0px auto;padding:20px;"
-        label-width="150px"
+        style="max-width: 400px;position: relative;margin:0px auto;padding:10px;"
+        label-width="60px"
       >
         <!-- item  -->
         <el-form-item>
-        
           <span slot="label" class="label">
             <img
               src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_belorussija_enl.jpg"
-            />BLR
+            />
           </span>
 
-          <el-input name="text" v-model="result.BLR" @input="currencyBLR"></el-input>
+          <el-input type="tel" name="text" v-model="result.BLR" @input="currencyBLR" clearable>
+            <template slot="append">BLR</template>
+          </el-input>
         </el-form-item>
         <!--  item -->
 
@@ -24,10 +27,12 @@
           <span slot="label" class="label">
             <img
               src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_usa_enl.jpg"
-            />USD
+            />
           </span>
 
-          <el-input name="text" v-model="result.USD" @input="currencyUSD"></el-input>
+          <el-input type="tel" name="text" v-model="result.USD" @input="currencyUSD" clearable>
+            <template slot="append">USD</template>
+          </el-input>
         </el-form-item>
         <!-- item -->
 
@@ -36,10 +41,12 @@
           <span slot="label" class="label">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/250px-Flag_of_Europe.svg.png"
-            />EUR
+            />
           </span>
 
-          <el-input name="text" v-model="result.EUR" @input="currencyEUR"></el-input>
+          <el-input type="tel" name="text" v-model="result.EUR" @input="currencyEUR" clearable>
+            <template slot="append">EUR</template>
+          </el-input>
         </el-form-item>
         <!-- item -->
 
@@ -48,10 +55,12 @@
           <span slot="label" class="label">
             <img
               src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/shop/products/flag_rf_enl.jpg"
-            />RUB
+            />
           </span>
 
-          <el-input name="text" v-model="result.RUB" @input="currencyRUB"></el-input>
+          <el-input type="tel" name="text" v-model="result.RUB" @input="currencyRUB" clearable>
+            <template slot="append">RUB</template>
+          </el-input>
         </el-form-item>
         <!-- item -->
 
@@ -60,10 +69,12 @@
           <span slot="label" class="label">
             <img
               src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_polsha_enl.jpg?itok=-HFE5GGA"
-            />PLN
+            />
           </span>
 
-          <el-input name="text" v-model="result.PLN" @input="currencyPLN"></el-input>
+          <el-input type="tel" name="text" v-model="result.PLN" @input="currencyPLN" clearable>
+            <template slot="append">PLN</template>
+          </el-input>
         </el-form-item>
         <!-- item -->
       </el-form>
@@ -74,34 +85,34 @@
 <script>
 import CurrencyService from "../CurrencyService";
 export default {
-  name: "HelloWorld",
   data() {
     return {
       currency: {
-        USD: "",
-        EUR: "",
-        RUB: "",
-        PLN: "",
+        USD: '',
+        EUR: '',
+        RUB: '',
+        PLN: '',
       },
       result: {
-        USD: "",
-        EUR: "",
-        RUB: "",
-        PLN: "",
-      }
+        USD: '',
+        EUR: '',
+        RUB: '',
+        PLN: '',
+      },
     };
   },
   async created() {
     const currencies = await CurrencyService.getCurrency();
-   
+
     this.currency.USD = currencies[4].Cur_OfficialRate;
     this.currency.EUR = currencies[5].Cur_OfficialRate;
     this.currency.RUB = currencies[16].Cur_OfficialRate;
     this.currency.PLN = currencies[6].Cur_OfficialRate;
   },
+
   methods: {
-    currencyBLR: function(e) {
-      this.result.USD = e / this.currency.USD;
+    currencyBLR: function (e) {
+      this.result.USD = this.formatNumber(e / this.currency.USD);
       this.result.EUR = e / this.currency.EUR;
       this.result.RUB = (e / this.currency.RUB) * 100;
       this.result.PLN = (e / this.currency.PLN) * 10;
@@ -130,21 +141,43 @@ export default {
       this.result.USD = e * (this.currency.PLN / this.currency.USD / 10);
       this.result.EUR = e * (this.currency.PLN / this.currency.EUR / 10);
       this.result.RUB = e * ((this.currency.PLN / this.currency.RUB) * 10);
-    }
-  }
+    },
 
+    formatNumber:function (value) {
+    return parseFloat(value).toFixed(2).replace(/(\d)(?=(\d{3})+\.)/g, "$1 ").replace('.', '.');
+ }
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
+body,
+html {
+  font-family: "Assistant", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+.el-header {
+  text-align: center;
+}
+h1 {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 5);
+}
 img {
   margin-top: 10px;
   margin-right: 10px;
   max-height: 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
-span.label {
-  margin-bottom: 15px !important;
+div.el-input-group__append {
+  width: 30px !important;
+  font-size: 15px;
+}
+input {
+  outline: none;
+}
+input:focus {
+  outline: 0;
 }
 </style>
