@@ -16,7 +16,7 @@
             />
           </span>
 
-          <el-input type="tel" name="text" v-model="result.BLR" @input="currencyBLR" @click="select" clearable>
+          <el-input type="tel" name="text" v-model="result.BLR" @input="currencyBLR" clearable>
             <template slot="append">BLR</template>
           </el-input>
         </el-form-item>
@@ -76,6 +76,7 @@
             <template slot="append">PLN</template>
           </el-input>
         </el-form-item>
+        <el-button type="danger" @click="clearFields" round>Очистить</el-button>
         <!-- item -->
       </el-form>
     </el-main>
@@ -88,65 +89,102 @@ export default {
   data() {
     return {
       currency: {
-        USD: '',
-        EUR: '',
-        RUB: '',
-        PLN: '',
+        USD: "",
+        EUR: "",
+        RUB: "",
+        PLN: "",
       },
       result: {
-        USD: '',
-        EUR: '',
-        RUB: '',
-        PLN: '',
+        BLR: "",
+        USD: "",
+        EUR: "",
+        RUB: "",
+        PLN: "",
       },
     };
   },
   async created() {
-    const currencies = await CurrencyService.getCurrency()
+    const currencies = await CurrencyService.getCurrency();
 
-    this.currency.USD = currencies[4].Cur_OfficialRate
-    this.currency.EUR = currencies[5].Cur_OfficialRate
-    this.currency.RUB = currencies[16].Cur_OfficialRate
-    this.currency.PLN = currencies[6].Cur_OfficialRate
+    this.currency.USD = currencies[4].Cur_OfficialRate;
+    this.currency.EUR = currencies[5].Cur_OfficialRate;
+    this.currency.RUB = currencies[16].Cur_OfficialRate;
+    this.currency.PLN = currencies[6].Cur_OfficialRate;
   },
 
   methods: {
     currencyBLR: function () {
       this.result.BLR = event.target.value = this.ifNaN(event.target.value);
-      this.result.USD = this.formatNumber(this.result.BLR / this.currency.USD)
-      this.result.EUR = this.formatNumber(this.result.BLR / this.currency.EUR)
-      this.result.RUB = this.formatNumber((this.result.BLR / this.currency.RUB) * 100)
-      this.result.PLN = this.formatNumber((this.result.BLR / this.currency.PLN) * 10)
+      this.result.USD = this.formatNumber(this.result.BLR / this.currency.USD);
+      this.result.EUR = this.formatNumber(this.result.BLR / this.currency.EUR);
+      this.result.RUB = this.formatNumber(
+        (this.result.BLR / this.currency.RUB) * 100
+      );
+      this.result.PLN = this.formatNumber(
+        (this.result.BLR / this.currency.PLN) * 10
+      );
     },
     currencyUSD: function () {
-      this.result.USD = event.target.value = this.ifNaN(event.target.value)
-      this.result.BLR = this.formatNumber(this.result.USD * this.currency.USD)
-      this.result.EUR = this.formatNumber(this.result.USD * (this.currency.USD / this.currency.EUR))
-      this.result.RUB = this.formatNumber(this.result.USD * (this.currency.USD / this.currency.RUB) * 100)
-      this.result.PLN = this.formatNumber(this.result.USD * (this.currency.USD / this.currency.PLN) * 10)
+      this.result.USD = event.target.value = this.ifNaN(event.target.value);
+      this.result.BLR = this.formatNumber(this.result.USD * this.currency.USD);
+      this.result.EUR = this.formatNumber(
+        this.result.USD * (this.currency.USD / this.currency.EUR)
+      );
+      this.result.RUB = this.formatNumber(
+        this.result.USD * (this.currency.USD / this.currency.RUB) * 100
+      );
+      this.result.PLN = this.formatNumber(
+        this.result.USD * (this.currency.USD / this.currency.PLN) * 10
+      );
     },
     currencyEUR: function () {
-      this.result.EUR = event.target.value = this.ifNaN(event.target.value)
-      this.result.BLR = this.result.EUR * this.currency.EUR;
-      this.result.USD = this.result.EUR * (this.currency.EUR / this.currency.USD);
-      this.result.RUB = this.result.EUR * (this.currency.EUR / this.currency.RUB) * 100;
-      this.result.PLN = this.result.EUR * (this.currency.EUR / this.currency.PLN) * 10;
+      this.result.EUR = event.target.value = this.ifNaN(event.target.value);
+      this.result.BLR = this.formatNumber(this.result.EUR * this.currency.EUR);
+      this.result.USD = this.formatNumber(
+        this.result.EUR * (this.currency.EUR / this.currency.USD)
+      );
+      this.result.RUB = this.formatNumber(
+        this.result.EUR * (this.currency.EUR / this.currency.RUB) * 100
+      );
+      this.result.PLN = this.formatNumber(
+        this.result.EUR * (this.currency.EUR / this.currency.PLN) * 10
+      );
     },
     currencyRUB: function () {
-      this.result.PLN = event.target.value = this.ifNaN(event.target.value)
-      this.result.BLR = (this.result.PLN * this.currency.RUB) / 100;
-      this.result.USD = this.result.PLN * (this.currency.RUB / this.currency.USD / 100);
-      this.result.EUR = this.result.PLN * (this.currency.RUB / this.currency.EUR / 100);
-      this.result.PLN = this.result.PLN * ((this.currency.RUB / this.currency.PLN / 100) * 10);
+      this.result.PLN = event.target.value = this.ifNaN(event.target.value);
+      this.result.BLR = this.formatNumber(
+        (this.result.PLN * this.currency.RUB) / 100
+      );
+      this.result.USD = this.formatNumber(
+        this.result.PLN * (this.currency.RUB / this.currency.USD / 100)
+      );
+      this.result.EUR = this.formatNumber(
+        this.result.PLN * (this.currency.RUB / this.currency.EUR / 100)
+      );
+      this.result.PLN = this.formatNumber(
+        this.result.PLN * ((this.currency.RUB / this.currency.PLN / 100) * 10)
+      );
     },
     currencyPLN: function () {
-      this.result.PLN = event.target.value = this.ifNaN(event.target.value)
+      this.result.PLN = event.target.value = this.ifNaN(event.target.value);
       this.result.BLR = (this.result.PLN * this.currency.PLN) / 10;
-      this.result.USD = this.result.PLN * (this.currency.PLN / this.currency.USD / 10);
-      this.result.EUR = this.result.PLN * (this.currency.PLN / this.currency.EUR / 10);
-      this.result.RUB = this.result.PLN * ((this.currency.PLN / this.currency.RUB) * 10);
+      this.result.USD = this.formatNumber(
+        this.result.PLN * (this.currency.PLN / this.currency.USD / 10)
+      );
+      this.result.EUR = this.formatNumber(
+        this.result.PLN * (this.currency.PLN / this.currency.EUR / 10)
+      );
+      this.result.RUB = this.formatNumber(
+        this.result.PLN * ((this.currency.PLN / this.currency.RUB) * 10)
+      );
     },
-
+    clearFields: function () {
+      this.result.BLR = "";
+      this.result.USD = "";
+      this.result.EUR = "";
+      this.result.RUB = "";
+      this.result.PLN = "";
+    },
     formatNumber: function (value) {
       return parseFloat(value)
         .toFixed(2)
@@ -161,9 +199,6 @@ export default {
         .replace(/\./g, "")
         .replace(/x/, ".");
     },
-    select(e){
-      e.target.value.select()
-    }
   },
 };
 </script>
@@ -191,6 +226,9 @@ img {
 div.el-input-group__append {
   width: 30px !important;
   font-size: 15px;
+}
+.el-button {
+  width: 100%;
 }
 input {
   outline: none;
