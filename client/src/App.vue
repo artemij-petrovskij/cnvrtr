@@ -1,14 +1,28 @@
 <template>
-  <index></index>
+  <el-container>
+    <el-header>
+      <h1>CNVRTR</h1>
+    </el-header>
+    <el-main>
+      <el-tabs type="card">
+        <el-tab-pane label="NBRB"><NBRB></NBRB> </el-tab-pane>
+        <el-tab-pane label="CBR"><CBR></CBR></el-tab-pane>
+      </el-tabs>
+    </el-main>
+  </el-container>
+
+ 
 </template>
 
 <script>
-import index from "./components/index.vue";
+import NBRB from "./components/NBRB-component.vue";
+import CBR from "./components/CBR-component.vue";
 
 export default {
   name: "App",
   components: {
-    index,
+    NBRB,
+    CBR
   },
 };
 </script>
