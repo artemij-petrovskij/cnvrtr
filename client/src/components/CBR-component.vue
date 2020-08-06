@@ -3,8 +3,10 @@
     style="max-width: 400px;position: relative;margin:0px auto;padding:10px;"
     label-width="60px"
   >
+    <h4>Курс ЦБР</h4>
     <!-- item -->
     <el-form-item>
+    
       <span slot="label" class="label">
         <img
           src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/shop/products/flag_rf_enl.jpg"

@@ -1,8 +1,10 @@
 <template>
+
   <el-form
     style="max-width: 400px;position: relative;margin:0px auto;padding:10px;"
     label-width="60px"
   >
+  <h4>Курс НБРБ</h4>
     <!-- item  -->
     <el-form-item>
       <span slot="label" class="label">
@@ -197,7 +199,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
+<style scoped>
 body,
 html {
   font-family: "Assistant", sans-serif;
@@ -210,6 +212,7 @@ html {
 h1 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 5);
 }
+
 img {
   margin-top: 10px;
   margin-right: 10px;
