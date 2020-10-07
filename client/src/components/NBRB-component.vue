@@ -162,7 +162,7 @@ export default {
     },
     currencyPLN: function () {
       this.result.PLN = event.target.value = this.ifNaN(event.target.value);
-      this.result.BYN = (this.result.PLN * this.currency.PLN) / 10;
+      this.result.BYN = this.formatNumber((this.result.PLN * this.currency.PLN) / 10);
       this.result.USD = this.formatNumber(
         this.result.PLN * (this.currency.PLN / this.currency.USD / 10)
       );

@@ -5,8 +5,8 @@
     </el-header>
     <el-main>
       <el-tabs type="card">
-        <el-tab-pane label="NBRB"><NBRB></NBRB> </el-tab-pane>
-        <el-tab-pane label="CBR"><CBR></CBR></el-tab-pane>
+        <el-tab-pane label="НБРБ"><NBRB></NBRB> </el-tab-pane>
+        <el-tab-pane label="ЦБР"><CBR></CBR></el-tab-pane>
       </el-tabs>
     </el-main>
   </el-container>
