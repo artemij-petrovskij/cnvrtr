@@ -1,19 +1,30 @@
 <template>
-
   <el-form
-    style="max-width: 400px;position: relative;margin:0px auto;padding:10px;"
+    style="
+      max-width: 400px;
+      position: relative;
+      margin: 0px auto;
+      padding: 10px;
+    "
     label-width="60px"
   >
-  <h4>Курс НБРБ</h4>
+    <h4>Курс НБРБ</h4>
     <!-- item  -->
     <el-form-item>
       <span slot="label" class="label">
         <img
+          class="flag"
           src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_belorussija_enl.jpg"
         />
       </span>
 
-      <el-input type="tel" name="text" v-model="result.BYN" @input="currencyBYN" clearable>
+      <el-input
+        type="tel"
+        name="text"
+        v-model="result.BYN"
+        @input="currencyBYN"
+        clearable
+      >
         <template slot="append">BYN</template>
       </el-input>
     </el-form-item>
@@ -23,11 +34,18 @@
     <el-form-item>
       <span slot="label" class="label">
         <img
+          class="flag"
           src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_usa_enl.jpg"
         />
       </span>
 
-      <el-input type="tel" name="text" v-model="result.USD" @input="currencyUSD" clearable>
+      <el-input
+        type="tel"
+        name="text"
+        v-model="result.USD"
+        @input="currencyUSD"
+        clearable
+      >
         <template slot="append">USD</template>
       </el-input>
     </el-form-item>
@@ -37,11 +55,18 @@
     <el-form-item>
       <span slot="label" class="label">
         <img
+          class="flag"
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/250px-Flag_of_Europe.svg.png"
         />
       </span>
 
-      <el-input type="tel" name="text" v-model="result.EUR" @input="currencyEUR" clearable>
+      <el-input
+        type="tel"
+        name="text"
+        v-model="result.EUR"
+        @input="currencyEUR"
+        clearable
+      >
         <template slot="append">EUR</template>
       </el-input>
     </el-form-item>
@@ -51,11 +76,18 @@
     <el-form-item>
       <span slot="label" class="label">
         <img
+          class="flag"
           src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/shop/products/flag_rf_enl.jpg"
         />
       </span>
 
-      <el-input type="tel" name="text" v-model="result.RUB" @input="currencyRUB" clearable>
+      <el-input
+        type="tel"
+        name="text"
+        v-model="result.RUB"
+        @input="currencyRUB"
+        clearable
+      >
         <template slot="append">RUB</template>
       </el-input>
     </el-form-item>
@@ -65,11 +97,18 @@
     <el-form-item>
       <span slot="label" class="label">
         <img
+          class="flag"
           src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_polsha_enl.jpg?itok=-HFE5GGA"
         />
       </span>
 
-      <el-input type="tel" name="text" v-model="result.PLN" @input="currencyPLN" clearable>
+      <el-input
+        type="tel"
+        name="text"
+        v-model="result.PLN"
+        @input="currencyPLN"
+        clearable
+      >
         <template slot="append">PLN</template>
       </el-input>
     </el-form-item>
@@ -162,7 +201,9 @@ export default {
     },
     currencyPLN: function () {
       this.result.PLN = event.target.value = this.ifNaN(event.target.value);
-      this.result.BYN = this.formatNumber((this.result.PLN * this.currency.PLN) / 10);
+      this.result.BYN = this.formatNumber(
+        (this.result.PLN * this.currency.PLN) / 10
+      );
       this.result.USD = this.formatNumber(
         this.result.PLN * (this.currency.PLN / this.currency.USD / 10)
       );
@@ -198,38 +239,4 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-body,
-html {
-  font-family: "Assistant", sans-serif;
-  margin: 0;
-  padding: 0;
-}
-.el-header {
-  text-align: center;
-}
-h1 {
-  text-shadow: 0 0 1px rgba(0, 0, 0, 5);
-}
 
-img {
-  margin-top: 10px;
-  margin-right: 10px;
-  max-height: 20px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
-div.el-input-group__append {
-  width: 30px !important;
-  font-size: 15px;
-}
-.el-button {
-  width: 100%;
-}
-input {
-  outline: none;
-}
-input:focus {
-  outline: 0;
-}
-</style>
