@@ -31,7 +31,7 @@ class CurrencyService {
       const res = await fetch(`${url}/BTC`);
 
       const data = await res.json();
-      console.log(data)
+
       return data
     } catch (err) {
 

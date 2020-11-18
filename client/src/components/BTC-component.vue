@@ -20,10 +20,16 @@
     <h3>{{ USDinBTC }} BTC</h3>
     <el-form class="demo-form-inline">
       <el-form-item>
-        <el-input placeholder="USD to BTC" v-model="USDtoBTC"></el-input>
+        <el-input
+          placeholder="USD to BTC"
+          @input="checkInputUSD"
+          v-model="USDtoBTC"
+        ></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="fromUSDtoBTC">CONVERT USD IN BTC</el-button>
+        <el-button type="primary" @click="fromUSDtoBTC"
+          >CONVERT USD IN BTC</el-button
+        >
       </el-form-item>
     </el-form>
   </el-card>
@@ -39,18 +45,38 @@ export default {
       currency: {
         BTC: "",
       },
+      timer: "",
     };
   },
-  async created() {
-    const currencies = await CurrencyService.getBTCCurrency();
-    this.currency.BTC = currencies.USD.last;
+  mounted() {
+    this.fetchCurrencyBTC();
+  },
+  created() {
+    this.refreshCurrencyBTC();
   },
 
   methods: {
-    async fromUSDtoBTC(){
-      let response = await CurrencyService.fromUSDtoBTC({value:this.USDtoBTC})
-      this.USDinBTC = response
+    async fromUSDtoBTC() {
+      let response = await CurrencyService.fromUSDtoBTC({
+        value: this.USDtoBTC,
+      });
+      this.USDinBTC = response;
     },
+    checkInputUSD() {
+      this.USDtoBTC = event.target.value = this.ifNaN(event.target.value);
+    },
+
+    async fetchCurrencyBTC() {
+      let currencies = await CurrencyService.getBTCCurrency();
+      this.currency.BTC = currencies.USD.last;
+    },
+    refreshCurrencyBTC() {
+      setInterval(() => {
+        this.fetchCurrencyBTC();
+        console.log(1);
+      }, 5000);
+    },
+
     ifNaN(e) {
       return e
         .replace(",", ".")
