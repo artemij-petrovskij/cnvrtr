@@ -49,12 +49,20 @@ html {
 h1 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 5);
 }
+h2{
+  text-align: center;
+}
 
 img.flag {
   margin-top: 10px;
   margin-right: 10px;
   max-height: 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
+}
+img.btc-logo{
+
+  max-height: 20px;
+  box-shadow: none;
 }
 img.btc {
   width: 100%;

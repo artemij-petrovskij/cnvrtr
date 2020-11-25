@@ -1,15 +1,12 @@
 <template>
-  <el-card
-    class="box-card"
-    shadow="hover"
+  <el-form
     style="
       max-width: 400px;
-      height: 600px;
       position: relative;
       margin: 0px auto;
       padding: 10px;
-      text-align: center;
     "
+    label-width="60px"
   >
     <h2>1 BTC = {{ currency.BTC }}$</h2>
     <img
@@ -17,21 +14,41 @@
       src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG35.png"
       alt="BTC-logo"
     />
-    <el-form class="demo-form-inline">
-      <el-form-item>
-        <el-input placeholder="BTC" @input="convertBTC" v-model="fields.BTC">
-          <template slot="append">BTC</template>
-        </el-input>
-      </el-form-item>
 
-      <el-form-item>
-        <el-input placeholder="USD" @input="convertUSD" v-model="fields.USD">
-          <template slot="append">USD</template>
-        </el-input>
-      </el-form-item>
-   
-    </el-form>
-  </el-card>
+    <el-form-item>
+      <span slot="label" class="label">
+        <img
+          class="flag btc-logo"
+          src="https://www.dhresource.com/0x0/f2/albu/g9/M00/27/85/rBVaVVxO822ACwv4AALYau1h4a8355.jpg/500pcs-30mm-diameter-bitcoin-logo-label-sticker.jpg"
+        />
+      </span>
+      <el-input
+        placeholder="BTC"
+        @input="convertBTC"
+        v-model="fields.BTC"
+        clearable
+      >
+        <template slot="append">BTC</template>
+      </el-input>
+    </el-form-item>
+
+    <el-form-item>
+      <span slot="label" class="label">
+        <img
+          class="flag"
+          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_usa_enl.jpg"
+        />
+      </span>
+      <el-input
+        placeholder="USD"
+        @input="convertUSD"
+        v-model="fields.USD"
+        clearable
+      >
+        <template slot="append">USD</template>
+      </el-input>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script>
@@ -42,10 +59,10 @@ export default {
       currency: {
         BTC: 0,
       },
-      fields:{
-        BTC:"",
-        USD:""
-      }
+      fields: {
+        BTC: "",
+        USD: "",
+      },
     };
   },
   mounted() {
@@ -58,11 +75,11 @@ export default {
   methods: {
     convertBTC() {
       this.fields.BTC = event.target.value = this.ifNaN(event.target.value);
-      this.fields.USD = this.fields.BTC * this.currency.BTC
+      this.fields.USD = this.fields.BTC * this.currency.BTC;
     },
     convertUSD() {
-       this.fields.USD = event.target.value = this.ifNaN(event.target.value);
-       this.fields.BTC = this.fields.USD / this.currency.BTC
+      this.fields.USD = event.target.value = this.ifNaN(event.target.value);
+      this.fields.BTC = this.fields.USD / this.currency.BTC;
     },
     /*
     async fromUSDtoBTC() {
@@ -72,7 +89,6 @@ export default {
       this.USDinBTC = response;
     },
     */
-  
 
     async fetchCurrencyBTC() {
       let currencies = await CurrencyService.getBTCCurrency();
