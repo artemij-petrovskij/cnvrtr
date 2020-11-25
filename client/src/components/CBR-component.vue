@@ -148,7 +148,6 @@ export default {
   methods: {
     currencyRUB: function () {
       this.result.RUB = event.target.value = this.ifNaN(event.target.value);
-
       this.result.BYN = this.formatNumber(this.result.RUB * this.currency.BYN);
       this.result.USD = this.formatNumber(this.result.RUB * this.currency.USD);
       this.result.EUR = this.formatNumber(this.result.RUB * this.currency.EUR);
@@ -157,7 +156,6 @@ export default {
 
     currencyUSD: function () {
       this.result.USD = event.target.value = this.ifNaN(event.target.value);
-
       this.result.RUB = this.formatNumber(this.result.USD / this.currency.USD);
       this.result.EUR = this.formatNumber(
         this.result.USD * (this.currency.EUR / this.currency.USD)

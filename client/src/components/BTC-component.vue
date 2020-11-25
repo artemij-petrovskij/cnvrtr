@@ -17,20 +17,19 @@
       src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG35.png"
       alt="BTC-logo"
     />
-    <h3>{{ USDinBTC }} BTC</h3>
     <el-form class="demo-form-inline">
       <el-form-item>
-        <el-input
-          placeholder="USD to BTC"
-          @input="checkInputUSD"
-          v-model="USDtoBTC"
-        ></el-input>
+        <el-input placeholder="BTC" @input="convertBTC" v-model="fields.BTC">
+          <template slot="append">BTC</template>
+        </el-input>
       </el-form-item>
+
       <el-form-item>
-        <el-button type="primary" @click="fromUSDtoBTC"
-          >CONVERT USD IN BTC</el-button
-        >
+        <el-input placeholder="USD" @input="convertUSD" v-model="fields.USD">
+          <template slot="append">USD</template>
+        </el-input>
       </el-form-item>
+   
     </el-form>
   </el-card>
 </template>
@@ -40,12 +39,13 @@ import CurrencyService from "../CurrencyService";
 export default {
   data() {
     return {
-      USDtoBTC: "",
-      USDinBTC: "0",
       currency: {
-        BTC: "",
+        BTC: 0,
       },
-      timer: "",
+      fields:{
+        BTC:"",
+        USD:""
+      }
     };
   },
   mounted() {
@@ -56,15 +56,23 @@ export default {
   },
 
   methods: {
+    convertBTC() {
+      this.fields.BTC = event.target.value = this.ifNaN(event.target.value);
+      this.fields.USD = this.fields.BTC * this.currency.BTC
+    },
+    convertUSD() {
+       this.fields.USD = event.target.value = this.ifNaN(event.target.value);
+       this.fields.BTC = this.fields.USD / this.currency.BTC
+    },
+    /*
     async fromUSDtoBTC() {
       let response = await CurrencyService.fromUSDtoBTC({
         value: this.USDtoBTC,
       });
       this.USDinBTC = response;
     },
-    checkInputUSD() {
-      this.USDtoBTC = event.target.value = this.ifNaN(event.target.value);
-    },
+    */
+  
 
     async fetchCurrencyBTC() {
       let currencies = await CurrencyService.getBTCCurrency();
@@ -73,7 +81,6 @@ export default {
     refreshCurrencyBTC() {
       setInterval(() => {
         this.fetchCurrencyBTC();
-        console.log(1);
       }, 5000);
     },
 
