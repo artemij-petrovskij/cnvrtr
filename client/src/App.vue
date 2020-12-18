@@ -30,7 +30,7 @@ export default {
 
 <style lang="css">
 #app {
-  font-family: "Assistant", sans-serif;
+  font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -39,7 +39,7 @@ export default {
 }
 body,
 html {
-  font-family: "Assistant", sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -49,18 +49,23 @@ html {
 h1 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 5);
 }
-h2{
+h2 {
   text-align: center;
+  font-weight: 600;
+  font-size: 36px;
 }
-
+.small-icon{
+  color: rgb(177, 184, 199);
+  font-size: 22px;
+  font-weight: 500;
+}
 img.flag {
   margin-top: 10px;
   margin-right: 10px;
   max-height: 20px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
 }
-img.btc-logo{
-
+img.btc-logo {
   max-height: 20px;
   box-shadow: none;
 }

@@ -8,7 +8,7 @@
     "
     label-width="60px"
   >
-    <h2>1 BTC = {{ currency.BTC }}$</h2>
+    <h2>Bitcoin <span class="small-icon">BTC</span> {{ currency.BTC }}$</h2>
     <img
       class="btc"
       src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG35.png"
@@ -92,7 +92,8 @@ export default {
 
     async fetchCurrencyBTC() {
       let currencies = await CurrencyService.getBTCCurrency();
-      this.currency.BTC = currencies.USD.last;
+      this.currency.BTC = this.formatNumber(currencies.USD.last);
+     
     },
     refreshCurrencyBTC() {
       setInterval(() => {
@@ -107,6 +108,12 @@ export default {
         .replace(/\./, "x")
         .replace(/\./g, "")
         .replace(/x/, ".");
+    },
+    formatNumber: function (value) {
+      return parseFloat(value)
+        .toFixed(2)
+        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+        .replace(".", ".");
     },
   },
 };
