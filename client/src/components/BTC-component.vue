@@ -8,7 +8,7 @@
     "
     label-width="60px"
   >
-    <h2>Bitcoin <span class="small-icon">BTC</span> {{ actual_course }}$</h2>
+    <h2>Bitcoin {{ actual_course }}$</h2>
     <img
       class="btc"
       src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG35.png"
