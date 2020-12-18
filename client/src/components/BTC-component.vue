@@ -1,14 +1,14 @@
 <template>
   <el-form
     style="
-      max-width: 400px;
+      max-width: 500px;
       position: relative;
       margin: 0px auto;
       padding: 10px;
     "
     label-width="60px"
   >
-    <h2>Bitcoin <span class="small-icon">BTC</span> {{ currency.BTC }}$</h2>
+    <h2>Bitcoin <span class="small-icon">BTC</span> {{ actual_course }}$</h2>
     <img
       class="btc"
       src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG35.png"
@@ -56,6 +56,9 @@ import CurrencyService from "../CurrencyService";
 export default {
   data() {
     return {
+      page:{
+        actual_course: ""
+      },
       currency: {
         BTC: 0,
       },
@@ -92,8 +95,8 @@ export default {
 
     async fetchCurrencyBTC() {
       let currencies = await CurrencyService.getBTCCurrency();
-      this.currency.BTC = this.formatNumber(currencies.USD.last);
-     
+      this.currency.BTC = currencies.USD.last
+      this.actual_course = this.formatNumber(currencies.USD.last);
     },
     refreshCurrencyBTC() {
       setInterval(() => {
