@@ -56,9 +56,7 @@ import CurrencyService from "../CurrencyService";
 export default {
   data() {
     return {
-      page:{
-        actual_course: ""
-      },
+      actual_course: "",
       currency: {
         BTC: 0,
       },
@@ -95,7 +93,7 @@ export default {
 
     async fetchCurrencyBTC() {
       let currencies = await CurrencyService.getBTCCurrency();
-      this.currency.BTC = currencies.USD.last
+      this.currency.BTC = currencies.USD.last;
       this.actual_course = this.formatNumber(currencies.USD.last);
     },
     refreshCurrencyBTC() {
