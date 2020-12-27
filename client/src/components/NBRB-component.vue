@@ -8,7 +8,7 @@
     "
     label-width="60px"
   >
-    <h4>Курс НБРБ</h4>
+    <h2>Курс НБРБ</h2>
     <!-- item  -->
     <el-form-item>
       <span slot="label" class="label">

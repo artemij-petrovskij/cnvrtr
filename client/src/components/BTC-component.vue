@@ -8,12 +8,13 @@
     "
     label-width="60px"
   >
-    <h2>Bitcoin {{ actual_course }}$</h2>
-    <img
-      class="btc"
-      src="https://pngimg.com/uploads/bitcoin/bitcoin_PNG35.png"
-      alt="BTC-logo"
-    />
+    <h2>
+      Bitcoin {{ actual_course }}$<br /><el-link
+        icon="el-icon-copy-document"
+        @click="copyRate"
+        >Копировать</el-link
+      >
+    </h2>
 
     <el-form-item>
       <span slot="label" class="label">
@@ -82,14 +83,6 @@ export default {
       this.fields.USD = event.target.value = this.ifNaN(event.target.value);
       this.fields.BTC = this.fields.USD / this.currency.BTC;
     },
-    /*
-    async fromUSDtoBTC() {
-      let response = await CurrencyService.fromUSDtoBTC({
-        value: this.USDtoBTC,
-      });
-      this.USDinBTC = response;
-    },
-    */
 
     async fetchCurrencyBTC() {
       let currencies = await CurrencyService.getBTCCurrency();
@@ -115,6 +108,20 @@ export default {
         .toFixed(2)
         .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
         .replace(".", ".");
+    },
+    copyRate() {
+      var el = document.createElement("textarea");
+      el.value = `Bitcoin ${this.actual_course}$`;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand("copy");
+      document.body.removeChild(el);
+   
+      this.$message({
+        message: `Скопировано ${el.value}`,
+        type: "success",
+      });
+
     },
   },
 };
