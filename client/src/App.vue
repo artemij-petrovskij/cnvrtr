@@ -173,6 +173,7 @@ h2 {
   text-align: center;
   font-weight: 600;
   font-size: 36px;
+ white-space: pre;
 }
 .small-icon {
   color: rgb(177, 184, 199);
