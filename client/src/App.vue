@@ -1,20 +1,20 @@
 <template>
-  <div class="particles">
-    <div id="particles-js">
-      <el-container>
-        <el-header>
-          <h1>CNVRTR</h1>
-        </el-header>
-        <el-main>
-          <el-tabs type="card">
-            <el-tab-pane label="ВТС"><BTC></BTC> </el-tab-pane>
-            <el-tab-pane label="НБРБ"><NBRB></NBRB> </el-tab-pane>
-            <el-tab-pane label="ЦБР"><CBR></CBR></el-tab-pane>
-          </el-tabs>
-        </el-main>
-      </el-container>
+  <el-container>
+    <div class="particles">
+      <div id="particles-js"></div>
     </div>
-  </div>
+    <el-header>
+      <h1>CNVRTR</h1>
+    </el-header>
+
+    <el-main>
+      <el-tabs type="card">
+        <el-tab-pane label="CRYPTO"><BTC></BTC> </el-tab-pane>
+        <el-tab-pane label="НБРБ"><NBRB></NBRB> </el-tab-pane>
+        <el-tab-pane label="ЦБР"><CBR></CBR></el-tab-pane>
+      </el-tabs>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -39,10 +39,10 @@ export default {
       window.particlesJS("particles-js", {
         particles: {
           number: {
-            value: 80,
+            value: 200,
             density: {
               enable: true,
-              value_area: 900,
+              value_area: 800,
             },
           },
           color: {
@@ -57,14 +57,19 @@ export default {
             polygon: {
               nb_sides: 5,
             },
+            image: {
+              src: "img/github.svg",
+              width: 100,
+              height: 100,
+            },
           },
           opacity: {
-            value: 0.5,
-            random: false,
+            value: 1,
+            random: true,
             anim: {
-              enable: false,
+              enable: true,
               speed: 1,
-              opacity_min: 0.1,
+              opacity_min: 0,
               sync: false,
             },
           },
@@ -73,15 +78,15 @@ export default {
             random: true,
             anim: {
               enable: false,
-              speed: 40,
-              size_min: 0.1,
+              speed: 4,
+              size_min: 0.3,
               sync: false,
             },
           },
           line_linked: {
-            enable: true,
+            enable: false,
             distance: 150,
-            color: "#000000",
+            color: "#ffffff",
             opacity: 0.4,
             width: 1,
           },
@@ -89,14 +94,14 @@ export default {
             enable: true,
             speed: 1,
             direction: "none",
-            random: false,
+            random: true,
             straight: false,
             out_mode: "out",
             bounce: false,
             attract: {
               enable: false,
               rotateX: 600,
-              rotateY: 1200,
+              rotateY: 600,
             },
           },
         },
@@ -104,35 +109,35 @@ export default {
           detect_on: "canvas",
           events: {
             onhover: {
-              enable: true,
+              enable: false,
               mode: "bubble",
             },
             onclick: {
               enable: true,
-              mode: "push",
+              mode: "repulse",
             },
             resize: true,
           },
           modes: {
             grab: {
-              distance: 140,
+              distance: 400,
               line_linked: {
                 opacity: 1,
               },
             },
             bubble: {
-              distance: 200,
-              size: 10,
+              distance: 250,
+              size: 0,
               duration: 2,
-              opacity: 8,
-              speed: 100,
+              opacity: 0,
+              speed: 3,
             },
             repulse: {
               distance: 400,
               duration: 0.4,
             },
             push: {
-              particles_nb: 2,
+              particles_nb: 4,
             },
             remove: {
               particles_nb: 2,
@@ -148,7 +153,6 @@ export default {
 
 <style lang="css">
 #app {
-
   font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -169,11 +173,12 @@ html {
 h1 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 5);
 }
+
 h2 {
   text-align: center;
   font-weight: 600;
   font-size: 36px;
- white-space: pre;
+  white-space: pre;
 }
 .small-icon {
   color: rgb(177, 184, 199);
@@ -208,15 +213,17 @@ input:focus {
   outline: 0;
 }
 #particles-js {
- width: 100%;
-    height: 100%;
-    position: fixed;
-  
-    top: 0;
-    left: 0
+  width: 100%;
+  height: 80px;
+  position: absolute;
+
+  top: 0;
+  left: 0;
 }
-a.el-link{
+a.el-link {
   text-align: center;
-} 
+  font-size: 20px;
+  text-decoration: none;
+}
 </style>
 

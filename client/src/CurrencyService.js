@@ -38,6 +38,18 @@ class CurrencyService {
       console.error(err);
     }
   }
+  static getETHCurrency = async () => {
+    try {
+      const res = await fetch(`${url}/ETH`);
+
+      const data = await res.json();
+
+      return data
+    } catch (err) {
+
+      console.error(err);
+    }
+  }
   static fromUSDtoBTC = async (body) => {
     try {
       const query = await fetch(`${url}/USDtoBTC`,

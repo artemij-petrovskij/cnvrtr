@@ -46,11 +46,10 @@ router.get('/BTC', async function (req, res) {
    
 });
 
-router.post('/USDtoBTC', async function (req, res) {
-
-
+router.get('/ETH', async function (req, res) {
+   
     try {
-        const data = await fetch(`https://blockchain.info/tobtc?currency=USD&value=${req.body.value}`);
+        const data = await fetch(`https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD`);
         const jsondata = await data.json();
         res.json(jsondata)
         res.end()
@@ -61,5 +60,6 @@ router.post('/USDtoBTC', async function (req, res) {
     }
    
 });
+
 
 module.exports = router
