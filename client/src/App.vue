@@ -3,31 +3,36 @@
     <div class="particles">
       <div id="particles-js"></div>
     </div>
+
     <el-header>
       <h1>CNVRTR</h1>
     </el-header>
 
     <el-main>
       <el-tabs type="card">
-        <el-tab-pane label="CRYPTO"><BTC></BTC> </el-tab-pane>
+        <el-tab-pane label="CRYPTO"><CRYPTO></CRYPTO> </el-tab-pane>
         <el-tab-pane label="НБРБ"><NBRB></NBRB> </el-tab-pane>
         <el-tab-pane label="ЦБР"><CBR></CBR></el-tab-pane>
       </el-tabs>
     </el-main>
+
+    <el-footer>
+      <el-link icon="el-icon-s-tools" @click="openAPI">API CNVRTR</el-link>
+    </el-footer>
   </el-container>
 </template>
 
 <script>
 import "particles.js";
 
-import BTC from "./components/BTC-component.vue";
+import CRYPTO from "./components/CRYPTO-component.vue";
 import NBRB from "./components/NBRB-component.vue";
 import CBR from "./components/CBR-component.vue";
 
 export default {
   name: "App",
   components: {
-    BTC,
+    CRYPTO,
     NBRB,
     CBR,
   },
@@ -35,6 +40,14 @@ export default {
     this.initParticles();
   },
   methods: {
+    openAPI() {
+      this.$alert(
+        
+        '<p>Bitcoin <a href="https://cnvrtr.herokuapp.com/api/currency/BTC">BTC</a></p><p>Etherium <a href="https://cnvrtr.herokuapp.com/api/currency/ETH">ETH</a></p><p> Национальный банк Республики Беларусь <a href=""></a><a href="https://cnvrtr.herokuapp.com/api/currency/NBRB">НБРБ</a></p> <p>Центральный Банк России <a href="https://cnvrtr.herokuapp.com/api/currency/CRB">ЦБР</a></p>',
+        'API CNVRTR',{  dangerouslyUseHTMLString: true,   confirmButtonText: 'OK',}
+        
+      );
+    },
     initParticles() {
       window.particlesJS("particles-js", {
         particles: {
@@ -180,6 +193,13 @@ h2 {
   font-size: 36px;
   white-space: pre;
 }
+
+@media (max-width: 600px) {
+  h2 {
+    font-size: 28px;
+  }
+}
+
 .small-icon {
   color: rgb(177, 184, 199);
   font-size: 22px;
@@ -224,6 +244,12 @@ a.el-link {
   text-align: center;
   font-size: 20px;
   text-decoration: none;
+}
+.el-footer {
+  width: 100%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
 }
 </style>
 
