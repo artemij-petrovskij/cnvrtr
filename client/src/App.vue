@@ -243,7 +243,7 @@ input:focus {
 }
 a.el-link {
   text-align: center;
-  font-size: 14px;
+  font-size: 20px;
   margin: 5px;
 
 }
