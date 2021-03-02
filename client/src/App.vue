@@ -6,6 +6,7 @@
 
     <el-header>
       <h1>CNVRTR</h1>
+       <el-link icon="el-icon-s-tools" @click="openAPI">API</el-link>
     </el-header>
 
     <el-main>
@@ -17,7 +18,7 @@
     </el-main>
 
     <el-footer>
-      <el-link icon="el-icon-s-tools" @click="openAPI">API CNVRTR</el-link>
+    
     </el-footer>
   </el-container>
 </template>
@@ -43,7 +44,7 @@ export default {
     openAPI() {
       this.$alert(
         
-        '<p>Bitcoin <a href="https://cnvrtr.herokuapp.com/api/currency/BTC">BTC</a></p><p>Etherium <a href="https://cnvrtr.herokuapp.com/api/currency/ETH">ETH</a></p><p> Национальный банк Республики Беларусь <a href=""></a><a href="https://cnvrtr.herokuapp.com/api/currency/NBRB">НБРБ</a></p> <p>Центральный Банк России <a href="https://cnvrtr.herokuapp.com/api/currency/CRB">ЦБР</a></p>',
+        '<p>Bitcoin <a href="https://cnvrtr.herokuapp.com/api/currency/BTC">BTC</a></p><p>Etherium <a href="https://cnvrtr.herokuapp.com/api/currency/ETH">ETH</a></p><p> Национальный банк Республики Беларусь <a href=""></a><a href="https://cnvrtr.herokuapp.com/api/currency/NBRB">НБРБ</a></p> <p>Центральный банк России <a href="https://cnvrtr.herokuapp.com/api/currency/CRB">ЦБР</a></p>',
         'API CNVRTR',{  dangerouslyUseHTMLString: true,   confirmButtonText: 'OK',}
         
       );
@@ -190,7 +191,7 @@ h1 {
 h2 {
   text-align: center;
   font-weight: 600;
-  font-size: 36px;
+  font-size: 30px;
   white-space: pre;
 }
 
@@ -242,8 +243,9 @@ input:focus {
 }
 a.el-link {
   text-align: center;
-  font-size: 20px;
-  text-decoration: none;
+  font-size: 14px;
+  margin: 5px;
+
 }
 .el-footer {
   width: 100%;
