@@ -5,8 +5,8 @@
     </div>
 
     <el-header>
-      <h1>CNVRTR</h1>
-       <el-link icon="el-icon-s-tools" @click="openAPI">API</el-link>
+      <h1>CNVRTR <el-link icon="el-icon-s-tools" @click="openAPI"></el-link></h1>
+      
     </el-header>
 
     <el-main>
