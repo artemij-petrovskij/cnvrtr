@@ -18,7 +18,7 @@
           src="https://www.dhresource.com/0x0/f2/albu/g9/M00/27/85/rBVaVVxO822ACwv4AALYau1h4a8355.jpg/500pcs-30mm-diameter-bitcoin-logo-label-sticker.jpg"
         />
       </span>
-      Bitcoin {{ actual_course_BTC }}$
+      BTC {{ actual_course_BTC }}$
       <el-link
         icon="el-icon-copy-document"
         @click="copyRate('Bitcoin')"
@@ -32,7 +32,7 @@
           src="https://totalcoin.io/uploads/coins/big/eth.png"
         />
       </span>
-      Etherium {{ actual_course_ETH }}$
+      ETH {{ actual_course_ETH }}$
       <el-link
         icon="el-icon-copy-document"
         @click="copyRate('Etherium')"
