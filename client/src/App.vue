@@ -1,12 +1,23 @@
 <template>
-  <el-container>
+  <el-container v-bind:class="{ night: nightMode }">
     <div class="particles">
       <div id="particles-js"></div>
     </div>
 
     <el-header>
-      <h1>CNVRTR <el-link icon="el-icon-s-tools" @click="openAPI"></el-link></h1>
-      
+      <h1>
+        <el-link icon="el-icon-s-tools" @click="openAPI"></el-link>
+        CNVRTR
+        {{ nightMode }}
+        <el-switch
+          v-model="nightMode"
+          active-color="#A9A9A9"
+          inactive-color="#282828"
+        >
+        </el-switch>
+        &nbsp;
+        <i class="el-icon-moon"></i>
+      </h1>
     </el-header>
 
     <el-main>
@@ -17,9 +28,7 @@
       </el-tabs>
     </el-main>
 
-    <el-footer>
-    
-    </el-footer>
+    <el-footer> </el-footer>
   </el-container>
 </template>
 
@@ -31,91 +40,111 @@ import NBRB from "./components/NBRB-component.vue";
 import CBR from "./components/CBR-component.vue";
 
 export default {
+  data() {
+    return {
+      nightMode: Boolean,
+    };
+  },
   name: "App",
   components: {
     CRYPTO,
     NBRB,
     CBR,
   },
+
   mounted() {
     this.initParticles();
+    this.localControllerNightMode();
+  },
+
+  watch: {
+    nightMode: function () {
+      localStorage.nightMode = this.nightMode;
+    },
   },
   methods: {
+    localControllerNightMode() {
+      if (localStorage.nightMode === "true") {
+        this.nightMode = true;
+      }
+      if (localStorage.nightMode === "false") {
+        this.nightMode = false;
+      }
+    },
     openAPI() {
       this.$alert(
-        
         '<p>Bitcoin <a href="https://cnvrtr.herokuapp.com/api/currency/BTC">BTC</a></p><p>Etherium <a href="https://cnvrtr.herokuapp.com/api/currency/ETH">ETH</a></p><p> Национальный банк Республики Беларусь <a href=""></a><a href="https://cnvrtr.herokuapp.com/api/currency/NBRB">НБРБ</a></p> <p>Центральный банк России <a href="https://cnvrtr.herokuapp.com/api/currency/CRB">ЦБР</a></p>',
-        'API CNVRTR',{  dangerouslyUseHTMLString: true,   confirmButtonText: 'OK',}
-        
+        "API CNVRTR",
+        { dangerouslyUseHTMLString: true, confirmButtonText: "OK" }
       );
     },
     initParticles() {
       window.particlesJS("particles-js", {
         particles: {
           number: {
-            value: 200,
+            value: 8,
             density: {
-              enable: true,
-              value_area: 800,
+              enable: false,
+              value_area: 394.57382081613633,
             },
           },
           color: {
-            value: "#000000",
+            value: "#1b1e34",
           },
           shape: {
-            type: "circle",
+            type: "image",
             stroke: {
-              width: 0,
-              color: "#000000",
+              width: 1,
+              color: "#000",
             },
             polygon: {
-              nb_sides: 5,
+              nb_sides: 1,
             },
             image: {
-              src: "img/github.svg",
-              width: 100,
-              height: 100,
+              src: "https://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png",
+              width: 10,
+              height: 10,
             },
           },
           opacity: {
-            value: 1,
-            random: true,
+            value: 0.12626362266116362,
+            random: false,
             anim: {
-              enable: true,
-              speed: 1,
-              opacity_min: 0,
+              enable: false,
+              speed: 0.1,
+              opacity_min: 0.1,
               sync: false,
             },
           },
           size: {
-            value: 3,
-            random: true,
+            value: 10,
+            random: false,
             anim: {
-              enable: false,
-              speed: 4,
-              size_min: 0.3,
+              enable: true,
+              speed: 5,
+              size_min: 40,
               sync: false,
             },
           },
           line_linked: {
             enable: false,
-            distance: 150,
+            distance: 200,
             color: "#ffffff",
-            opacity: 0.4,
-            width: 1,
+            opacity: 1,
+            width: 2,
           },
           move: {
             enable: true,
             speed: 1,
-            direction: "none",
+            direction: "top",
             random: true,
             straight: false,
             out_mode: "out",
             bounce: false,
             attract: {
-              enable: false,
-              rotateX: 600,
-              rotateY: 600,
+              enable: true,
+              rotateX: 320.6824121731046,
+              rotateY: 721.5354273894853,
             },
           },
         },
@@ -124,11 +153,11 @@ export default {
           events: {
             onhover: {
               enable: false,
-              mode: "bubble",
+              mode: "grab",
             },
             onclick: {
-              enable: true,
-              mode: "repulse",
+              enable: false,
+              mode: "push",
             },
             resize: true,
           },
@@ -140,14 +169,14 @@ export default {
               },
             },
             bubble: {
-              distance: 250,
-              size: 0,
+              distance: 400,
+              size: 40,
               duration: 2,
-              opacity: 0,
+              opacity: 8,
               speed: 3,
             },
             repulse: {
-              distance: 400,
+              distance: 200,
               duration: 0.4,
             },
             push: {
@@ -180,6 +209,9 @@ html {
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
+}
+.el-container {
+  height: 100%;
 }
 .el-header {
   text-align: center;
@@ -245,13 +277,24 @@ a.el-link {
   text-align: center;
   font-size: 20px;
   margin: 5px;
-
 }
 .el-footer {
   width: 100%;
   text-align: center;
   position: absolute;
   bottom: 0;
+}
+.night {
+  background-color: #282828;
+  color: white;
+}
+.night .el-tabs__item {
+  background-color: #282828;
+  color: white;
+}
+.el-tabs__item .night {
+  background-color: #282828;
+  color: white !important;
 }
 </style>
 

@@ -15,7 +15,7 @@
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
-          src="https://www.dhresource.com/0x0/f2/albu/g9/M00/27/85/rBVaVVxO822ACwv4AALYau1h4a8355.jpg/500pcs-30mm-diameter-bitcoin-logo-label-sticker.jpg"
+          src="http://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png"
         />
       </span>
       BTC {{ actual_course_BTC }}$
@@ -43,7 +43,7 @@
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
-          src="https://www.dhresource.com/0x0/f2/albu/g9/M00/27/85/rBVaVVxO822ACwv4AALYau1h4a8355.jpg/500pcs-30mm-diameter-bitcoin-logo-label-sticker.jpg"
+          src="http://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png"
         />
       </span>
       <el-input
