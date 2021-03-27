@@ -8,7 +8,6 @@
       <h1>
         <el-link icon="el-icon-s-tools" @click="openAPI"></el-link>
         CNVRTR
-        {{ nightMode }}
         <el-switch
           v-model="nightMode"
           active-color="#A9A9A9"
