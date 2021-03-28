@@ -5,11 +5,9 @@ class CurrencyService {
   static getNBRBCurrency = async () => {
     try {
       const res = await fetch(`${url}/NBRB`);
-
       const data = await res.json();
       return data
     } catch (err) {
-
       console.error(err);
     }
   }
@@ -17,11 +15,9 @@ class CurrencyService {
   static getCRBCurrency = async () => {
     try {
       const res = await fetch(`${url}/CRB`);
-
       const data = await res.json();
       return data
     } catch (err) {
-
       console.error(err);
     }
   }
@@ -29,12 +25,9 @@ class CurrencyService {
   static getBTCCurrency = async () => {
     try {
       const res = await fetch(`${url}/BTC`);
-
       const data = await res.json();
-
-      return data
+      return data.USD.last
     } catch (err) {
-
       console.error(err);
     }
   }
@@ -44,27 +37,45 @@ class CurrencyService {
 
       const data = await res.json();
 
-      return data
+      return data.USD
     } catch (err) {
-
       console.error(err);
     }
   }
-  static fromUSDtoBTC = async (body) => {
+
+  static getADACurrency = async () => {
     try {
-      const query = await fetch(`${url}/USDtoBTC`,
-        {
-          method: 'post',
-          body: JSON.stringify(body),
-          headers: { 'Content-Type': 'application/json' },
-        });
-
-      const responseJSON = await query.json();
-      return responseJSON
+      const res = await fetch(`${url}/ADA`);
+      const data = await res.json();
+      return data.data[0].last
     } catch (err) {
       console.error(err);
     }
   }
+
+  static getDOTCurrency = async () => {
+    try {
+      const res = await fetch(`${url}/DOT`);
+      const data = await res.json();
+      return data.data[0].last
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  static getXRPCurrency = async () => {
+    try {
+      const res = await fetch(`${url}/XRP`);
+      const data = await res.json();
+      return data.data[0].last
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+
 }
+
+
 
 module.exports = CurrencyService

@@ -20,10 +20,12 @@
     </el-header>
 
     <el-main>
-      <el-tabs type="card">
+      <el-tabs type="card" stretch>
+        <el-tab-pane label="TICKER"><TICKER></TICKER> </el-tab-pane>
         <el-tab-pane label="CRYPTO"><CRYPTO></CRYPTO> </el-tab-pane>
         <el-tab-pane label="НБРБ"><NBRB></NBRB> </el-tab-pane>
         <el-tab-pane label="ЦБР"><CBR></CBR></el-tab-pane>
+      
       </el-tabs>
     </el-main>
 
@@ -33,7 +35,7 @@
 
 <script>
 import "particles.js";
-
+import TICKER from "./components/TICKER-component.vue";
 import CRYPTO from "./components/CRYPTO-component.vue";
 import NBRB from "./components/NBRB-component.vue";
 import CBR from "./components/CBR-component.vue";
@@ -46,9 +48,10 @@ export default {
   },
   name: "App",
   components: {
+    TICKER,
     CRYPTO,
     NBRB,
-    CBR,
+    CBR
   },
 
   mounted() {
@@ -232,6 +235,12 @@ h2 {
   }
 }
 
+.index {
+  text-align: left;
+  font-weight: 600;
+  font-size: 25px;
+  white-space: pre;
+}
 .small-icon {
   color: rgb(177, 184, 199);
   font-size: 22px;
@@ -283,6 +292,15 @@ a.el-link {
   position: absolute;
   bottom: 0;
 }
+.el-tabs__item.is-top {
+  padding: 0px;
+}
+.el-tabs--bottom .el-tabs--left>.el-tabs__header .el-tabs__item:nth-child(2), .el-tabs--bottom .el-tabs--right>.el-tabs__header .el-tabs__item:nth-child(2), .el-tabs--bottom.el-tabs--border-card>.el-tabs__header .el-tabs__item:nth-child(2), .el-tabs--bottom.el-tabs--card>.el-tabs__header .el-tabs__item:nth-child(2), .el-tabs--top .el-tabs--left>.el-tabs__header .el-tabs__item:nth-child(2), .el-tabs--top .el-tabs--right>.el-tabs__header .el-tabs__item:nth-child(2), .el-tabs--top.el-tabs--border-card>.el-tabs__header .el-tabs__item:nth-child(2), .el-tabs--top.el-tabs--card>.el-tabs__header .el-tabs__item:nth-child(2){
+  padding:0px;
+}
+.el-tabs--bottom .el-tabs--left>.el-tabs__header .el-tabs__item:last-child, .el-tabs--bottom .el-tabs--right>.el-tabs__header .el-tabs__item:last-child, .el-tabs--bottom.el-tabs--border-card>.el-tabs__header .el-tabs__item:last-child, .el-tabs--bottom.el-tabs--card>.el-tabs__header .el-tabs__item:last-child, .el-tabs--top .el-tabs--left>.el-tabs__header .el-tabs__item:last-child, .el-tabs--top .el-tabs--right>.el-tabs__header .el-tabs__item:last-child, .el-tabs--top.el-tabs--border-card>.el-tabs__header .el-tabs__item:last-child, .el-tabs--top.el-tabs--card>.el-tabs__header .el-tabs__item:last-child{
+   padding:0px;
+}
 .night {
   background-color: #282828;
   color: white;
@@ -294,6 +312,10 @@ a.el-link {
 .el-tabs__item .night {
   background-color: #282828;
   color: white !important;
+
+}
+.el-tabs--card>.el-tabs__header .el-tabs__item.is-active{
+  color:#409EFF;
 }
 </style>
 

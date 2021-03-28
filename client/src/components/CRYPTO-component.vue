@@ -1,8 +1,6 @@
 <template>
   <el-form
-    v-loading="loading"
-    v-show="visible"
-    element-loading-background="rgba(255, 255, 255)"
+    element-loading-background="transparent"
     style="
       max-width: 500px;
       position: relative;
@@ -11,39 +9,11 @@
     "
     label-width="60px"
   >
-    <h2>
-      <span slot="label" class="label">
-        <img
-          class="flag btc-logo"
-          src="http://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png"
-        />
-      </span>
-      BTC {{ actual_course_BTC }}$
-      <el-link
-        icon="el-icon-copy-document"
-        @click="copyRate('Bitcoin')"
-      ></el-link>
-    </h2>
-
-    <h2>
-      <span slot="label" class="label">
-        <img
-          class="flag btc-logo"
-          src="https://totalcoin.io/uploads/coins/big/eth.png"
-        />
-      </span>
-      ETH {{ actual_course_ETH }}$
-      <el-link
-        icon="el-icon-copy-document"
-        @click="copyRate('Etherium')"
-      ></el-link>
-    </h2>
-
     <el-form-item>
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
-          src="http://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png"
+          src="@/assets/images/crypto-icons/bitcoin.png"
         />
       </span>
       <el-input
@@ -60,7 +30,7 @@
       <span slot="label" class="label">
         <img
           class="flag"
-          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_usa_enl.jpg"
+          src="@/assets/images/flags/flag_usa.jpg"
         />
       </span>
       <el-input
@@ -80,13 +50,10 @@ import CurrencyService from "../CurrencyService";
 export default {
   data() {
     return {
-      loading: true,
-      visible: false,
-      actual_course_BTC: "",
-      actual_course_ETH: "",
       currency: {
         BTC: 0,
         ETH: 0,
+        ADA: 0,
       },
       fields: {
         BTC: "",
@@ -96,7 +63,6 @@ export default {
   },
   mounted() {
     this.fetchCurrencyBTC();
-    this.fetchCurrencyETH();
   },
   created() {
     this.refreshСurrencies();
@@ -113,23 +79,13 @@ export default {
     },
 
     async fetchCurrencyBTC() {
-      let currencies = await CurrencyService.getBTCCurrency();
-      this.currency.BTC = currencies.USD.last;
-      this.actual_course_BTC = this.formatNumber(currencies.USD.last);
-    },
-
-    async fetchCurrencyETH() {
-      let currencies = await CurrencyService.getETHCurrency();
-      this.currency.ETH = currencies.USD;
-      this.actual_course_ETH = this.formatNumber(this.currency.ETH);
-      this.visible = true;
-      this.loading = false;
+      let btcPrice = await CurrencyService.getBTCCurrency();
+      this.currency.BTC = btcPrice;
     },
 
     refreshСurrencies() {
       setInterval(() => {
         this.fetchCurrencyBTC();
-        this.fetchCurrencyETH();
       }, 5000);
     },
 
@@ -146,26 +102,6 @@ export default {
         .toFixed(2)
         .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
         .replace(".", ".");
-    },
-    copyRate(name) {
-      var el = document.createElement("textarea");
-      if (name == "Bitcoin") {
-        el.value = `${name} ${this.actual_course_BTC}$`;
-      } else if (name == "Etherium") {
-        el.value = `${name} ${this.actual_course_ETH}$`;
-      } else {
-        null
-      }
-
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand("copy");
-      document.body.removeChild(el);
-
-      this.$message({
-        message: `Скопировано ${el.value}`,
-        type: "success",
-      });
     },
   },
 };
