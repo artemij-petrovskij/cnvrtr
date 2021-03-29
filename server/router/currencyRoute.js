@@ -27,7 +27,7 @@ router.get('/CRB', async function (req, res) {
 
 router.get('/BTC', async function (req, res) {
     try {
-        const data = await fetch(`https://blockchain.info/ticker`);
+        const data = await fetch(`https://www.okex.com/api/v5/market/ticker?instId=BTC-USD-SWAP`);
         const jsondata = await data.json();
         res.json(jsondata)
         res.end()
@@ -39,7 +39,7 @@ router.get('/BTC', async function (req, res) {
 
 router.get('/ETH', async function (req, res) {
     try {
-        const data = await fetch(`https://min-api.cryptocompare.com/data/price?fsym=ETH&tsyms=USD`);
+        const data = await fetch(`https://www.okex.com/api/v5/market/ticker?instId=ETH-USD-SWAP`);
         const jsondata = await data.json();
         res.json(jsondata)
         res.end()

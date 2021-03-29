@@ -11,108 +11,137 @@
     "
     label-width="60px"
   >
-
     <div class="index">
+      <h6>
+        Bitcoin {{ BTC.difference_currency }} {{ BTC.difference_percent }}
+      </h6>
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
           src="@/assets/images/crypto-icons/bitcoin.png"
         />
       </span>
-      BTC {{ formatted_price_BTC }}$
+      BTC {{ BTC.last }}$
       <el-link
         icon="el-icon-copy-document"
-        @click="copyRate('Bitcoin', formatted_price_BTC)"
+        @click="copyRate('Bitcoin', BTC.last)"
       ></el-link>
     </div>
+
     <el-divider></el-divider>
+
     <div class="index">
+      <h6>
+        Ethereum {{ ETH.difference_currency }} {{ ETH.difference_percent }}
+      </h6>
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
           src="@/assets/images/crypto-icons/ethereum.png"
         />
       </span>
-      ETH {{ formatted_price_ETH }}$
+      ETH {{ ETH.last }}$
       <el-link
         icon="el-icon-copy-document"
-        @click="copyRate('Etherium', formatted_price_ETH)"
+        @click="copyRate('Etherium', ETH.last)"
       ></el-link>
     </div>
+
     <el-divider></el-divider>
+
     <div class="index">
+      <h6>
+        Cardano {{ ADA.difference_currency }} {{ ADA.difference_percent }}
+      </h6>
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
           src="@/assets/images/crypto-icons/cardano.png"
         />
       </span>
-      ADA {{ formatted_price_ADA }}$
+      ADA {{ ADA.last }}$
       <el-link
         icon="el-icon-copy-document"
-        @click="copyRate('Cardano', formatted_price_ADA)"
+        @click="copyRate('Cardano', ADA.last)"
       ></el-link>
     </div>
+
     <el-divider></el-divider>
+
     <div class="index">
+      <h6>Polkadot {{ DOT.difference_currency }} {{ DOT.difference_percent }}</h6>
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
           src="@/assets/images/crypto-icons/polkadot.png"
         />
       </span>
-      DOT {{ formatted_price_DOT }}$
+      DOT {{ DOT.last }}$
       <el-link
         icon="el-icon-copy-document"
-        @click="copyRate('Polkadot', formatted_price_DOT)"
+        @click="copyRate('Polkadot', DOT.last)"
       ></el-link>
     </div>
+
     <el-divider></el-divider>
+
     <div class="index">
+      <h6>XRP {{ XRP.difference_currency }} {{ XRP.difference_percent }}</h6>
       <span slot="label" class="label">
         <img class="flag btc-logo" src="@/assets/images/crypto-icons/xrp.png" />
       </span>
-      XRP {{ formatted_price_XRP }}$
+      XRP {{ XRP.last }}$
       <el-link
         icon="el-icon-copy-document"
-        @click="copyRate('XRP', formatted_price_XRP)"
+        @click="copyRate('XRP', XRP.last)"
       ></el-link>
     </div>
+
     <el-divider></el-divider>
   </el-form>
 </template>
 
 <script>
-
 import CurrencyService from "../CurrencyService";
 
-
 export default {
-
   data() {
     return {
-           
       loading: true,
       visible: false,
-      formatted_price_BTC: "",
-      formatted_price_ETH: "",
-      formatted_price_ADA: "",
-      formatted_price_DOT: "",
-      formatted_price_XRP: "",
-      currency: {
-        BTC: 0,
-        ETH: 0,
-        ADA: 0,
+      BTC: {
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
       },
-      fields: {
-        BTC: "",
-        USD: "",
+
+      ETH: {
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
+      },
+
+      ADA: {
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
+      },
+
+      DOT: {
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
+      },
+
+      XRP: {
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
       },
     };
   },
 
   mounted() {
-      
     this.fetchCurrencyBTC();
     this.fetchCurrencyETH();
     this.fetchCurrencyADA();
@@ -124,40 +153,50 @@ export default {
   },
 
   methods: {
-    convertBTC() {
-      this.fields.BTC = event.target.value = this.ifNaN(event.target.value);
-      this.fields.USD = this.fields.BTC * this.currency.BTC;
+    calculateDifferenceCurrency(currency) {
+      let difference = currency.last - currency.open24h;
+
+      return difference.toFixed(2);
     },
-    convertUSD() {
-      this.fields.USD = event.target.value = this.ifNaN(event.target.value);
-      this.fields.BTC = this.fields.USD / this.currency.BTC;
+    calculatePercentСurrency(currency) {
+      let difference = currency.last - currency.open24h;
+      let percent = (difference / currency.last) * 100;
+      return `${percent.toFixed(2)}%`;
     },
 
     async fetchCurrencyBTC() {
       let btcPrice = await CurrencyService.getBTCCurrency();
-      this.currency.BTC = btcPrice;
-      this.formatted_price_BTC = this.formatNumber(this.currency.BTC);
+      this.BTC.last = this.formatNumber(btcPrice.last);
+      this.BTC.difference_currency = this.calculateDifferenceCurrency(btcPrice);
+      this.BTC.difference_percent = this.calculatePercentСurrency(btcPrice);
     },
 
     async fetchCurrencyETH() {
       let ethPrice = await CurrencyService.getETHCurrency();
-      this.currency.ETH = ethPrice;
-      this.formatted_price_ETH = this.formatNumber(this.currency.ETH);
+      this.ETH.last = this.formatNumber(ethPrice.last);
+      this.ETH.difference_currency = this.calculateDifferenceCurrency(ethPrice);
+      this.ETH.difference_percent = this.calculatePercentСurrency(ethPrice);
     },
 
     async fetchCurrencyADA() {
       let adaPrice = await CurrencyService.getADACurrency();
-      this.formatted_price_ADA = this.formatNumber(adaPrice);
+      this.ADA.last = this.formatNumber(adaPrice.last);
+      this.ADA.difference_currency = this.calculateDifferenceCurrency(adaPrice);
+      this.ADA.difference_percent = this.calculatePercentСurrency(adaPrice);
     },
 
     async fetchCurrencyDOT() {
       let dotPrice = await CurrencyService.getDOTCurrency();
-      this.formatted_price_DOT = this.formatNumber(dotPrice);
+      this.DOT.last = this.formatNumber(dotPrice.last);
+      this.DOT.difference_currency = this.calculateDifferenceCurrency(dotPrice);
+      this.DOT.difference_percent = this.calculatePercentСurrency(dotPrice);
     },
 
     async fetchCurrencyXRP() {
-      let dotPrice = await CurrencyService.getXRPCurrency();
-      this.formatted_price_XRP = this.formatNumber(dotPrice);
+      let xrpPrice = await CurrencyService.getXRPCurrency();
+      this.XRP.last = this.formatNumber(xrpPrice.last);
+      this.XRP.difference_currency = this.calculateDifferenceCurrency(xrpPrice);
+      this.XRP.difference_percent = this.calculatePercentСurrency(xrpPrice);
       this.visible = true;
       this.loading = false;
     },
@@ -168,7 +207,8 @@ export default {
         this.fetchCurrencyETH();
         this.fetchCurrencyADA();
         this.fetchCurrencyDOT();
-      }, 5000);
+        this.fetchCurrencyXRP();
+      }, 2000);
     },
 
     ifNaN(e) {

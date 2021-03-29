@@ -25,8 +25,8 @@ class CurrencyService {
   static getBTCCurrency = async () => {
     try {
       const res = await fetch(`${url}/BTC`);
-      const data = await res.json();
-      return data.USD.last
+      const currencydata = await res.json();
+      return currencydata.data[0]
     } catch (err) {
       console.error(err);
     }
@@ -34,10 +34,8 @@ class CurrencyService {
   static getETHCurrency = async () => {
     try {
       const res = await fetch(`${url}/ETH`);
-
-      const data = await res.json();
-
-      return data.USD
+      const currencydata = await res.json();
+      return currencydata.data[0]
     } catch (err) {
       console.error(err);
     }
@@ -46,8 +44,8 @@ class CurrencyService {
   static getADACurrency = async () => {
     try {
       const res = await fetch(`${url}/ADA`);
-      const data = await res.json();
-      return data.data[0].last
+      const currencydata = await res.json();
+      return currencydata.data[0]
     } catch (err) {
       console.error(err);
     }
@@ -56,8 +54,8 @@ class CurrencyService {
   static getDOTCurrency = async () => {
     try {
       const res = await fetch(`${url}/DOT`);
-      const data = await res.json();
-      return data.data[0].last
+      const currencydata = await res.json();
+      return currencydata.data[0]
     } catch (err) {
       console.error(err);
     }
@@ -66,8 +64,8 @@ class CurrencyService {
   static getXRPCurrency = async () => {
     try {
       const res = await fetch(`${url}/XRP`);
-      const data = await res.json();
-      return data.data[0].last
+      const currencydata = await res.json();
+      return currencydata.data[0]
     } catch (err) {
       console.error(err);
     }

@@ -43,7 +43,7 @@ import CBR from "./components/CBR-component.vue";
 export default {
   data() {
     return {
-      nightMode: Boolean,
+      nightMode: false,
     };
   },
   name: "App",
@@ -229,6 +229,11 @@ h2 {
   white-space: pre;
 }
 
+h6{
+  margin:0px;
+  font-size: 0.5em;
+}
+
 @media (max-width: 600px) {
   h2 {
     font-size: 28px;
@@ -316,6 +321,11 @@ a.el-link {
 }
 .el-tabs--card>.el-tabs__header .el-tabs__item.is-active{
   color:#409EFF;
+}
+.el-divider {
+  margin-top:8px;
+  margin-bottom:8px;
+
 }
 </style>
 
