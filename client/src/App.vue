@@ -230,8 +230,10 @@ h2 {
 }
 
 h6{
+ 
   margin:0px;
   font-size: 0.5em;
+ 
 }
 
 @media (max-width: 600px) {
@@ -327,5 +329,22 @@ a.el-link {
   margin-bottom:8px;
 
 }
+.up-class {
+  color:green;
+  inline-size: 150px;
+  display: inline-block;
+}
+.down-class {
+  color:red;
+  inline-size: 150px;
+  display: inline-block;
+}
+
+.full-name-crypto{
+
+display: inline-block;
+ width: 65px;
+}
+
 </style>
 

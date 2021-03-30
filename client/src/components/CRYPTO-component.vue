@@ -71,16 +71,16 @@ export default {
   methods: {
     convertBTC() {
       this.fields.BTC = event.target.value = this.ifNaN(event.target.value);
-      this.fields.USD = this.fields.BTC * this.currency.BTC;
+      this.fields.USD = this.formatNumber(this.fields.BTC * this.currency.BTC);
     },
     convertUSD() {
       this.fields.USD = event.target.value = this.ifNaN(event.target.value);
-      this.fields.BTC = this.fields.USD / this.currency.BTC;
+      this.fields.BTC = this.formatBTC(this.fields.USD / this.currency.BTC);
     },
 
     async fetchCurrencyBTC() {
       let btcPrice = await CurrencyService.getBTCCurrency();
-      this.currency.BTC = btcPrice;
+      this.currency.BTC = btcPrice.last;
     },
 
     refreshСurrencies() {
@@ -100,6 +100,12 @@ export default {
     formatNumber: function (value) {
       return parseFloat(value)
         .toFixed(2)
+        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+        .replace(".", ".");
+    },
+    formatBTC: function (value) {
+      return parseFloat(value)
+        .toFixed(7)
         .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
         .replace(".", ".");
     },

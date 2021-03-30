@@ -13,7 +13,14 @@
   >
     <div class="index">
       <h6>
-        Bitcoin {{ BTC.difference_currency }} {{ BTC.difference_percent }}
+        <div class="full-name-crypto"> Bitcoin</div>
+        <div v-if="BTC.difference_currency >= 0" class="up-class">
+          {{ BTC.difference_currency }} +{{ BTC.difference_percent }}
+        </div>
+
+        <div v-else class="down-class">
+          {{ BTC.difference_currency }} {{ BTC.difference_percent }}
+        </div>
       </h6>
       <span slot="label" class="label">
         <img
@@ -32,7 +39,14 @@
 
     <div class="index">
       <h6>
-        Ethereum {{ ETH.difference_currency }} {{ ETH.difference_percent }}
+        <div class="full-name-crypto"> Ethereum</div>
+        <div v-if="ETH.difference_currency >= 0" class="up-class">
+          {{ ETH.difference_currency }} +{{ ETH.difference_percent }}
+        </div>
+
+        <div v-else class="down-class">
+          {{ ETH.difference_currency }} {{ ETH.difference_percent }}
+        </div>
       </h6>
       <span slot="label" class="label">
         <img
@@ -51,14 +65,19 @@
 
     <div class="index">
       <h6>
-        Cardano {{ ADA.difference_currency }} {{ ADA.difference_percent }}
+        <div class="full-name-crypto"> Cardano</div>
+        <div v-if="ADA.difference_currency >= 0" class="up-class">
+          {{ ADA.difference_currency }} +{{ ADA.difference_percent }}
+        </div>
+
+        <div v-else class="down-class">
+          {{ ADA.difference_currency }} {{ ADA.difference_percent }}
+        </div>
       </h6>
-      <span slot="label" class="label">
-        <img
+       <img
           class="flag btc-logo"
           src="@/assets/images/crypto-icons/cardano.png"
         />
-      </span>
       ADA {{ ADA.last }}$
       <el-link
         icon="el-icon-copy-document"
@@ -69,13 +88,22 @@
     <el-divider></el-divider>
 
     <div class="index">
-      <h6>Polkadot {{ DOT.difference_currency }} {{ DOT.difference_percent }}</h6>
+      <h6>
+        <div class="full-name-crypto"> Polkadot</div>
+        <div v-if="DOT.difference_currency >= 0" class="up-class">
+          {{ DOT.difference_currency }} +{{ DOT.difference_percent }}
+        </div>
+
+        <div v-else class="down-class">
+          {{ DOT.difference_currency }} {{ DOT.difference_percent }}
+        </div>
+      </h6>
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
           src="@/assets/images/crypto-icons/polkadot.png"
         />
-      </span>
+      </span >
       DOT {{ DOT.last }}$
       <el-link
         icon="el-icon-copy-document"
@@ -86,7 +114,16 @@
     <el-divider></el-divider>
 
     <div class="index">
-      <h6>XRP {{ XRP.difference_currency }} {{ XRP.difference_percent }}</h6>
+      <h6>
+        <div class="full-name-crypto"> XRP </div>
+        <div v-if="XRP.difference_currency >= 0" class="up-class">
+          {{ XRP.difference_currency }} +{{ XRP.difference_percent }}
+        </div>
+
+        <div v-else class="down-class">
+          {{ XRP.difference_currency }} {{ XRP.difference_percent }}
+        </div>
+      </h6>
       <span slot="label" class="label">
         <img class="flag btc-logo" src="@/assets/images/crypto-icons/xrp.png" />
       </span>
@@ -155,8 +192,7 @@ export default {
   methods: {
     calculateDifferenceCurrency(currency) {
       let difference = currency.last - currency.open24h;
-
-      return difference.toFixed(2);
+      return `${difference.toFixed(2)}`;
     },
     calculatePercentСurrency(currency) {
       let difference = currency.last - currency.open24h;
