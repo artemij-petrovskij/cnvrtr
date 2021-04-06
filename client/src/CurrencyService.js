@@ -71,6 +71,16 @@ class CurrencyService {
     }
   }
 
+  static getBTTCurrency = async () => {
+    try {
+      const res = await fetch(`${url}/BTT`);
+      const currencydata = await res.json();
+      return currencydata.data[0]
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
 
 }
 

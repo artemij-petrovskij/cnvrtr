@@ -85,4 +85,16 @@ router.get('/XRP', async function (req, res) {
     }
 });
 
+router.get('/BTT', async function (req, res) {
+    try {
+        const data = await fetch(`https://www.okex.com/api/v5/market/ticker?instId=BTT-USDT-SWAP`);
+        const jsondata = await data.json();
+        res.json(jsondata)
+        res.end()
+    } catch (err) {
+        console.log('connection error')
+        console.error(err);
+    }
+});
+
 module.exports = router
