@@ -136,75 +136,61 @@
 
     <el-divider></el-divider>
 
-     <div class="index">
-      <h6>
-        <div class="full-name-crypto">BTT</div>
-<!--
-        <div v-if="BTT.difference_currency > 0" class="up-class">
-          {{ BTT.difference_currency }} +{{ BTT.difference_percent }}
-        </div>
-
-        <div v-else class="down-class">
-          {{ BTT.difference_currency }} {{ BTT.difference_percent }}
-        </div>
--->
-      </h6>
-      <span slot="label" class="label">
-        <img class="flag btc-logo" src="@/assets/images/crypto-icons/bittorrent.png" />
-      </span>
-      BTT {{ BTT.last }}$
-      <el-link
-        icon="el-icon-copy-document"
-        @click="copyRate('BTT', BTT.last)"
-      ></el-link>
-    </div>
-
-    <el-divider></el-divider>
+    <el-autocomplete
+      v-model="state"
+      :fetch-suggestions="querySearchAsync"
+      placeholder="Please input"
+      @select="handleSelect"
+      clearable
+    >
+      <template slot-scope="{ item }">
+        <div class="value">{{ item.value }}</div>
+        <span class="link">{{ item.last }}</span>
+        <el-divider></el-divider>
+      </template>
+    </el-autocomplete>
   </el-form>
 </template>
 
 <script>
-import CurrencyService from "../CurrencyService";
+import CurrencyService from '../CurrencyService';
 
 export default {
   data() {
     return {
+      links: [],
+      state: '',
+      timeout: null,
       loading: true,
       visible: false,
       BTC: {
-        last: "",
-        difference_currency: "",
-        difference_percent: "",
+        last: '',
+        difference_currency: '',
+        difference_percent: '',
       },
 
       ETH: {
-        last: "",
-        difference_currency: "",
-        difference_percent: "",
+        last: '',
+        difference_currency: '',
+        difference_percent: '',
       },
 
       ADA: {
-        last: "",
-        difference_currency: "",
-        difference_percent: "",
+        last: '',
+        difference_currency: '',
+        difference_percent: '',
       },
 
       DOT: {
-        last: "",
-        difference_currency: "",
-        difference_percent: "",
+        last: '',
+        difference_currency: '',
+        difference_percent: '',
       },
 
       XRP: {
-        last: "",
-        difference_currency: "",
-        difference_percent: "",
-      },
-
-      BTT: {
-        last: "",
-        difference_currency: "",
-        difference_percent: "",
+        last: '',
+        difference_currency: '',
+        difference_percent: '',
       },
     };
   },
@@ -215,6 +201,7 @@ export default {
     this.fetchCurrencyADA();
     this.fetchCurrencyDOT();
     this.fetchCurrencyXRP();
+    this.fetchIndexTickers();
   },
   created() {
     this.refreshСurrencies();
@@ -267,13 +254,19 @@ export default {
       this.visible = true;
       this.loading = false;
     },
-    async fetchCurrencyBTT() {
-      let bttPrice = await CurrencyService.getBTTCurrency();
-      this.BTT.last = bttPrice.last;
-      this.BTT.difference_currency = this.calculateDifferenceCurrency(bttPrice);
-      this.BTT.difference_percent = this.calculatePercentСurrency(bttPrice);
-      this.visible = true;
-      this.loading = false;
+
+    async fetchIndexTickers() {
+      let index_tickers = await CurrencyService.getIndexTickers();
+      let indexes = [];
+      for (let i in index_tickers) {
+        indexes.push({
+          value: index_tickers[i]['instId'],
+          last: index_tickers[i]['idxPx'],
+        });
+      }
+      console.log(indexes);
+      this.links = indexes;
+      return indexes;
     },
 
     refreshСurrencies() {
@@ -283,34 +276,50 @@ export default {
         this.fetchCurrencyADA();
         this.fetchCurrencyDOT();
         this.fetchCurrencyXRP();
-        this.fetchCurrencyBTT();
+        this.fetchIndexTickers();
       }, 2000);
     },
 
-
-    formatNumber: function (value) {
+    formatNumber: function(value) {
       return parseFloat(value)
         .toFixed(2)
-        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
-        .replace(".", ".");
+        .replace(/(\d)(?=(\d{3})+\.)/g, '$1 ')
+        .replace('.', '.');
     },
     copyRate(name, price) {
-      var el = document.createElement("textarea");
-
+      var el = document.createElement('textarea');
       el.value = `${name} ${price}$`;
-
       document.body.appendChild(el);
       el.select();
-      document.execCommand("copy");
+      document.execCommand('copy');
       document.body.removeChild(el);
 
       this.$message({
         message: `Скопировано ${el.value}`,
-        type: "success",
+        type: 'success',
       });
+    },
+    querySearchAsync(queryString, cb) {
+      var links = this.links;
+      var results = queryString
+        ? links.filter(this.createFilter(queryString))
+        : links;
+
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        cb(results);
+      }, 1000 * Math.random());
+    },
+    createFilter(queryString) {
+      return (link) => {
+        return (
+          link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
+        );
+      };
+    },
+    handleSelect(item) {
+      console.log(item);
     },
   },
 };
 </script>
-
-
