@@ -8,6 +8,7 @@ router.get('/NBRB', async function (req, res) {
       `https://www.nbrb.by/api/exrates/rates?periodicity=0`
     );
     const jsondata = await data.json();
+  
     res.json(jsondata);
     res.end();
   } catch (err) {

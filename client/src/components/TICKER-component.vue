@@ -153,44 +153,44 @@
 </template>
 
 <script>
-import CurrencyService from '../CurrencyService';
+import CurrencyService from "../CurrencyService";
 
 export default {
   data() {
     return {
       links: [],
-      state: '',
+      state: "",
       timeout: null,
       loading: true,
       visible: false,
       BTC: {
-        last: '',
-        difference_currency: '',
-        difference_percent: '',
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
       },
 
       ETH: {
-        last: '',
-        difference_currency: '',
-        difference_percent: '',
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
       },
 
       ADA: {
-        last: '',
-        difference_currency: '',
-        difference_percent: '',
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
       },
 
       DOT: {
-        last: '',
-        difference_currency: '',
-        difference_percent: '',
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
       },
 
       XRP: {
-        last: '',
-        difference_currency: '',
-        difference_percent: '',
+        last: "",
+        difference_currency: "",
+        difference_percent: "",
       },
     };
   },
@@ -260,11 +260,11 @@ export default {
       let indexes = [];
       for (let i in index_tickers) {
         indexes.push({
-          value: index_tickers[i]['instId'],
-          last: index_tickers[i]['idxPx'],
+          value: index_tickers[i]["instId"],
+          last: index_tickers[i]["idxPx"],
         });
       }
-      console.log(indexes);
+      //console.log(indexes);
       this.links = indexes;
       return indexes;
     },
@@ -280,23 +280,23 @@ export default {
       }, 2000);
     },
 
-    formatNumber: function(value) {
+    formatNumber: function (value) {
       return parseFloat(value)
         .toFixed(2)
-        .replace(/(\d)(?=(\d{3})+\.)/g, '$1 ')
-        .replace('.', '.');
+        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+        .replace(".", ".");
     },
     copyRate(name, price) {
-      var el = document.createElement('textarea');
+      var el = document.createElement("textarea");
       el.value = `${name} ${price}$`;
       document.body.appendChild(el);
       el.select();
-      document.execCommand('copy');
+      document.execCommand("copy");
       document.body.removeChild(el);
 
       this.$message({
         message: `Скопировано ${el.value}`,
-        type: 'success',
+        type: "success",
       });
     },
     querySearchAsync(queryString, cb) {

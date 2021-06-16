@@ -98,7 +98,7 @@
       <span slot="label" class="label">
         <img
           class="flag"
-          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_polsha_enl.jpg?itok=-HFE5GGA"
+          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_polsha_enl.jpg"
         />
       </span>
 
@@ -112,8 +112,29 @@
         <template slot="append">PLN</template>
       </el-input>
     </el-form-item>
-    <el-button type="danger" @click="clearFields" round>Очистить</el-button>
     <!-- item -->
+
+    <!-- item -->
+    <el-form-item>
+      <span slot="label" class="label">
+        <img
+          class="flag"
+          src="https://www.megaflag.ru/sites/default/files/styles/galleryformatter_slide/public/images/shop/products/flag_ukraina_new.jpg"
+        />
+      </span>
+
+      <el-input
+        type="tel"
+        name="text"
+        v-model="result.UAH"
+        @input="currencyUAH"
+        clearable
+      >
+        <template slot="append">UAH</template>
+      </el-input>
+    </el-form-item>
+    <!-- item -->
+    <el-button type="danger" @click="clearFields" round>Очистить</el-button>
   </el-form>
 </template>
 
@@ -127,6 +148,7 @@ export default {
         EUR: "",
         RUB: "",
         PLN: "",
+        UAH: "",
       },
       result: {
         BYN: "",
@@ -134,16 +156,17 @@ export default {
         EUR: "",
         RUB: "",
         PLN: "",
+        UAH: "",
       },
     };
   },
   async created() {
     const currencies = await CurrencyService.getNBRBCurrency();
-
     this.currency.USD = currencies[4].Cur_OfficialRate;
     this.currency.EUR = currencies[5].Cur_OfficialRate;
     this.currency.RUB = currencies[16].Cur_OfficialRate;
     this.currency.PLN = currencies[6].Cur_OfficialRate;
+    this.currency.UAH = currencies[2].Cur_OfficialRate;
   },
 
   methods: {
@@ -156,6 +179,9 @@ export default {
       );
       this.result.PLN = this.formatNumber(
         (this.result.BYN / this.currency.PLN) * 10
+      );
+      this.result.UAH = this.formatNumber(
+        (this.result.BYN / this.currency.UAH) * 100
       );
     },
     currencyUSD: function () {
@@ -170,6 +196,9 @@ export default {
       this.result.PLN = this.formatNumber(
         this.result.USD * (this.currency.USD / this.currency.PLN) * 10
       );
+      this.result.UAH = this.formatNumber(
+        this.result.USD * (this.currency.USD / this.currency.UAH) * 100
+      );
     },
     currencyEUR: function () {
       this.result.EUR = event.target.value = this.ifNaN(event.target.value);
@@ -183,20 +212,26 @@ export default {
       this.result.PLN = this.formatNumber(
         this.result.EUR * (this.currency.EUR / this.currency.PLN) * 10
       );
+      this.result.UAH = this.formatNumber(
+        this.result.EUR * (this.currency.EUR / this.currency.UAH) * 100
+      );
     },
     currencyRUB: function () {
       this.result.PLN = event.target.value = this.ifNaN(event.target.value);
       this.result.BYN = this.formatNumber(
-        (this.result.PLN * this.currency.RUB) / 100
+        (this.result.RUB * this.currency.RUB) / 100
       );
       this.result.USD = this.formatNumber(
-        this.result.PLN * (this.currency.RUB / this.currency.USD / 100)
+        this.result.RUB * (this.currency.RUB / this.currency.USD / 100)
       );
       this.result.EUR = this.formatNumber(
-        this.result.PLN * (this.currency.RUB / this.currency.EUR / 100)
+        this.result.RUB * (this.currency.RUB / this.currency.EUR / 100)
       );
       this.result.PLN = this.formatNumber(
-        this.result.PLN * ((this.currency.RUB / this.currency.PLN / 100) * 10)
+        this.result.RUB * ((this.currency.RUB / this.currency.PLN / 100) * 10)
+      );
+      this.result.UAH = this.formatNumber(
+        this.result.RUB * (this.currency.RUB / this.currency.UAH / 100) * 100
       );
     },
     currencyPLN: function () {
@@ -213,6 +248,27 @@ export default {
       this.result.RUB = this.formatNumber(
         this.result.PLN * ((this.currency.PLN / this.currency.RUB) * 10)
       );
+      this.result.UAH = this.formatNumber(
+        this.result.PLN * ((this.currency.PLN / this.currency.UAH) * 10)
+      );
+    },
+    currencyUAH: function () {
+      this.result.UAH = event.target.value = this.ifNaN(event.target.value);
+      this.result.BYN = this.formatNumber(
+        (this.result.UAH * this.currency.UAH) / 100
+      );
+      this.result.USD = this.formatNumber(
+        this.result.UAH * (this.currency.UAH / this.currency.USD / 100)
+      );
+      this.result.EUR = this.formatNumber(
+        this.result.UAH * (this.currency.UAH / this.currency.EUR / 100)
+      );
+      this.result.RUB = this.formatNumber(
+        this.result.UAH * (this.currency.UAH / this.currency.RUB)
+      );
+      this.result.PLN = this.formatNumber(
+        this.result.UAH * (this.currency.UAH / this.currency.PLN / 10)
+      );
     },
     clearFields: function () {
       this.result.BYN = "";
@@ -220,6 +276,7 @@ export default {
       this.result.EUR = "";
       this.result.RUB = "";
       this.result.PLN = "";
+      this.result.UAH = "";
     },
     formatNumber: function (value) {
       return parseFloat(value)
