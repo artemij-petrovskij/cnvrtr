@@ -3,32 +3,26 @@
     v-loading="loading"
     v-show="visible"
     element-loading-background="transparent"
-    style="
-      max-width: 500px;
-      position: relative;
-      margin: 0px auto;
-      padding: 10px;
-    "
     label-width="60px"
   >
-    <div class="index">
-      <h6>
-        <div class="full-name-crypto">Bitcoin</div>
-        <div v-if="BTC.difference_currency > 0" class="up-class">
-          {{ BTC.difference_currency }} +{{ BTC.difference_percent }}
-        </div>
 
-        <div v-else class="down-class">
+      <div class="index">
+      <h6>
+        <span v-if="BTC.difference_currency > 0" class="up-class">
+          {{ BTC.difference_currency }} + {{ BTC.difference_percent }}
+        </span>
+
+        <span v-else class="down-class">
           {{ BTC.difference_currency }} {{ BTC.difference_percent }}
-        </div>
+        </span>
       </h6>
-      <span slot="label" class="label">
-        <img
-          class="flag btc-logo"
-          src="@/assets/images/crypto-icons/bitcoin.png"
-        />
-      </span>
-      BTC {{ BTC.last }}$
+
+      <img
+        class="flag btc-logo"
+        src="@/assets/images/crypto-icons/bitcoin.png"
+      />
+      <span> BTC {{ BTC.last }}$ </span>
+
       <el-link
         icon="el-icon-copy-document"
         @click="copyRate('Bitcoin', BTC.last)"
@@ -36,28 +30,26 @@
     </div>
 
     <el-divider></el-divider>
-
     <div class="index">
       <h6>
-        <div class="full-name-crypto">Ethereum</div>
-        <div v-if="ETH.difference_currency > 0" class="up-class">
-          {{ ETH.difference_currency }} +{{ ETH.difference_percent }}
-        </div>
+        <span v-if="ETH.difference_currency > 0" class="up-class">
+          {{ ETH.difference_currency }} + {{ ETH.difference_percent }}
+        </span>
 
-        <div v-else class="down-class">
+        <span v-else class="down-class">
           {{ ETH.difference_currency }} {{ ETH.difference_percent }}
-        </div>
+        </span>
       </h6>
-      <span slot="label" class="label">
-        <img
-          class="flag btc-logo"
-          src="@/assets/images/crypto-icons/ethereum.png"
-        />
-      </span>
-      ETH {{ ETH.last }}$
+
+      <img
+        class="flag btc-logo"
+        src="@/assets/images/crypto-icons/ethereum.png"
+      />
+      <span> ETH {{ ETH.last }}$ </span>
+
       <el-link
         icon="el-icon-copy-document"
-        @click="copyRate('Etherium', ETH.last)"
+        @click="copyRate('Ethereum', ETH.last)"
       ></el-link>
     </div>
 
@@ -65,7 +57,6 @@
 
     <div class="index">
       <h6>
-        <div class="full-name-crypto">Cardano</div>
         <div v-if="ADA.difference_currency > 0" class="up-class">
           {{ ADA.difference_currency }} +{{ ADA.difference_percent }}
         </div>
@@ -78,7 +69,7 @@
         class="flag btc-logo"
         src="@/assets/images/crypto-icons/cardano.png"
       />
-      ADA {{ ADA.last }}$
+      <span> ADA {{ ADA.last }}$ </span>
       <el-link
         icon="el-icon-copy-document"
         @click="copyRate('Cardano', ADA.last)"
@@ -89,7 +80,6 @@
 
     <div class="index">
       <h6>
-        <div class="full-name-crypto">Polkadot</div>
         <div v-if="DOT.difference_currency > 0" class="up-class">
           {{ DOT.difference_currency }} +{{ DOT.difference_percent }}
         </div>
@@ -104,7 +94,7 @@
           src="@/assets/images/crypto-icons/polkadot.png"
         />
       </span>
-      DOT {{ DOT.last }}$
+      <span> DOT {{ DOT.last }}$ </span>
       <el-link
         icon="el-icon-copy-document"
         @click="copyRate('Polkadot', DOT.last)"
@@ -115,7 +105,6 @@
 
     <div class="index">
       <h6>
-        <div class="full-name-crypto">XRP</div>
         <div v-if="XRP.difference_currency > 0" class="up-class">
           {{ XRP.difference_currency }} +{{ XRP.difference_percent }}
         </div>
@@ -127,7 +116,7 @@
       <span slot="label" class="label">
         <img class="flag btc-logo" src="@/assets/images/crypto-icons/xrp.png" />
       </span>
-      XRP {{ XRP.last }}$
+      <span> XRP {{ XRP.last }}$ </span>
       <el-link
         icon="el-icon-copy-document"
         @click="copyRate('XRP', XRP.last)"
@@ -136,19 +125,25 @@
 
     <el-divider></el-divider>
 
-    <el-autocomplete
-      v-model="state"
-      :fetch-suggestions="querySearchAsync"
-      placeholder="Please input"
-      @select="handleSelect"
-      clearable
+    <el-table
+      :data="
+        links.filter(
+          (data) =>
+            !search || data.value.toLowerCase().includes(search.toLowerCase())
+        )
+      "
+      height="250"
+      style="width: 100%"
     >
-      <template slot-scope="{ item }">
-        <div class="value">{{ item.value }}</div>
-        <span class="link">{{ item.last }}</span>
-        <el-divider></el-divider>
-      </template>
-    </el-autocomplete>
+      <el-table-column label="Asset" prop="value"> </el-table-column>
+      <el-table-column label="Last" prop="last"> </el-table-column>
+
+      <el-table-column>
+        <template slot="header" slot-scope="scope">
+          <el-input v-model="search" size="mini" placeholder="Type to search" />
+        </template>
+      </el-table-column>
+    </el-table>
   </el-form>
 </template>
 
@@ -160,6 +155,7 @@ export default {
     return {
       links: [],
       state: "",
+      search: "",
       timeout: null,
       loading: true,
       visible: false,
@@ -298,27 +294,6 @@ export default {
         message: `Скопировано ${el.value}`,
         type: "success",
       });
-    },
-    querySearchAsync(queryString, cb) {
-      var links = this.links;
-      var results = queryString
-        ? links.filter(this.createFilter(queryString))
-        : links;
-
-      clearTimeout(this.timeout);
-      this.timeout = setTimeout(() => {
-        cb(results);
-      }, 1000 * Math.random());
-    },
-    createFilter(queryString) {
-      return (link) => {
-        return (
-          link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0
-        );
-      };
-    },
-    handleSelect(item) {
-      console.log(item);
     },
   },
 };

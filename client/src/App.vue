@@ -33,11 +33,11 @@
 </template>
 
 <script>
-import 'particles.js';
-import TICKER from './components/TICKER-component.vue';
-import CRYPTO from './components/CRYPTO-component.vue';
-import NBRB from './components/NBRB-component.vue';
-import CBR from './components/CBR-component.vue';
+import "particles.js";
+import TICKER from "./components/TICKER-component.vue";
+import CRYPTO from "./components/CRYPTO-component.vue";
+import NBRB from "./components/NBRB-component.vue";
+import CBR from "./components/CBR-component.vue";
 
 export default {
   data() {
@@ -45,7 +45,7 @@ export default {
       nightMode: false,
     };
   },
-  name: 'App',
+  name: "App",
   components: {
     TICKER,
     CRYPTO,
@@ -59,28 +59,28 @@ export default {
   },
 
   watch: {
-    nightMode: function() {
+    nightMode: function () {
       localStorage.nightMode = this.nightMode;
     },
   },
   methods: {
     localControllerNightMode() {
-      if (localStorage.nightMode === 'true') {
+      if (localStorage.nightMode === "true") {
         this.nightMode = true;
       }
-      if (localStorage.nightMode === 'false') {
+      if (localStorage.nightMode === "false") {
         this.nightMode = false;
       }
     },
     openAPI() {
       this.$alert(
         '<p>Bitcoin <a href="https://cnvrtr.herokuapp.com/api/currency/BTC">BTC</a></p><p>Etherium <a href="https://cnvrtr.herokuapp.com/api/currency/ETH">ETH</a></p><p> Национальный банк Республики Беларусь <a href=""></a><a href="https://cnvrtr.herokuapp.com/api/currency/NBRB">НБРБ</a></p> <p>Центральный банк России <a href="https://cnvrtr.herokuapp.com/api/currency/CRB">ЦБР</a></p>',
-        'API CNVRTR',
-        { dangerouslyUseHTMLString: true, confirmButtonText: 'OK' }
+        "API CNVRTR",
+        { dangerouslyUseHTMLString: true, confirmButtonText: "OK" }
       );
     },
     initParticles() {
-      window.particlesJS('particles-js', {
+      window.particlesJS("particles-js", {
         particles: {
           number: {
             value: 8,
@@ -90,19 +90,19 @@ export default {
             },
           },
           color: {
-            value: '#1b1e34',
+            value: "#1b1e34",
           },
           shape: {
-            type: 'image',
+            type: "image",
             stroke: {
               width: 1,
-              color: '#000',
+              color: "#000",
             },
             polygon: {
               nb_sides: 1,
             },
             image: {
-              src: 'https://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png',
+              src: "https://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png",
               width: 10,
               height: 10,
             },
@@ -130,17 +130,17 @@ export default {
           line_linked: {
             enable: false,
             distance: 200,
-            color: '#ffffff',
+            color: "#ffffff",
             opacity: 1,
             width: 2,
           },
           move: {
             enable: true,
             speed: 1,
-            direction: 'top',
+            direction: "top",
             random: true,
             straight: false,
-            out_mode: 'out',
+            out_mode: "out",
             bounce: false,
             attract: {
               enable: true,
@@ -150,15 +150,15 @@ export default {
           },
         },
         interactivity: {
-          detect_on: 'canvas',
+          detect_on: "canvas",
           events: {
             onhover: {
               enable: false,
-              mode: 'grab',
+              mode: "grab",
             },
             onclick: {
               enable: false,
-              mode: 'push',
+              mode: "push",
             },
             resize: true,
           },
@@ -197,7 +197,7 @@ export default {
 
 <style lang="css">
 #app {
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -207,7 +207,7 @@ export default {
 body,
 html {
   height: 100%;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -229,8 +229,11 @@ h2 {
 }
 
 h6 {
+  height: 20px;
   margin: 0px;
+  padding: 0px;
   font-size: 0.5em;
+
 }
 
 @media (max-width: 600px) {
@@ -243,7 +246,7 @@ h6 {
   text-align: left;
   font-weight: 600;
   font-size: 25px;
-  white-space: pre;
+
 }
 .small-icon {
   color: rgb(177, 184, 199);
@@ -270,6 +273,14 @@ div.el-input-group__append {
 }
 .el-button {
   width: 100%;
+}
+.el-form {
+  max-width: 600px;
+  position: relative;
+  margin: 0px auto;
+  padding: 10px;
+  border-radius:4px;
+  
 }
 input {
   outline: none;
@@ -341,25 +352,28 @@ a.el-link {
   color: #409eff;
 }
 .el-divider {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .up-class {
   color: green;
-  inline-size: 150px;
-  display: inline-block;
 }
 .down-class {
+  
   color: red;
-  inline-size: 150px;
-  display: inline-block;
 }
 
 .full-name-crypto {
-  display: inline-block;
-  width: 65px;
+  color: black !important;
 }
 .el-autocomplete {
   width: 100%;
 }
+
+.el-table {
+  border-radius: 5px;
+  border: 1px solid black;
+}
+
+
 </style>
