@@ -125,6 +125,7 @@
 
     <el-divider></el-divider>
 
+<h4>All CRYPTO</h4>
     <el-table
       :data="
         links.filter(
@@ -135,6 +136,7 @@
       height="250"
       style="width: 100%"
     >
+    
       <el-table-column label="Asset" prop="value"> </el-table-column>
       <el-table-column label="Last" prop="last"> </el-table-column>
 

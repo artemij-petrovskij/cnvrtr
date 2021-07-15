@@ -143,6 +143,8 @@ import CurrencyService from "../CurrencyService";
 export default {
   data() {
     return {
+      tenScale: 10,
+      hundredScale: 100,
       currency: {
         USD: "",
         EUR: "",
@@ -162,11 +164,15 @@ export default {
   },
   async created() {
     const currencies = await CurrencyService.getNBRBCurrency();
-    this.currency.USD = currencies[4].Cur_OfficialRate;
-    this.currency.EUR = currencies[5].Cur_OfficialRate;
-    this.currency.RUB = currencies[16].Cur_OfficialRate;
-    this.currency.PLN = currencies[6].Cur_OfficialRate;
-    this.currency.UAH = currencies[2].Cur_OfficialRate;
+    this.currency.USD = currencies[5].Cur_OfficialRate;
+    this.currency.EUR = currencies[6].Cur_OfficialRate;
+    this.currency.RUB = currencies[17].Cur_OfficialRate;
+    this.currency.PLN = currencies[7].Cur_OfficialRate;
+    this.currency.UAH = currencies[3].Cur_OfficialRate;
+
+
+    const currenciesamp = currencies.map()
+    console.log(currenciesamp)
   },
 
   methods: {
@@ -175,13 +181,13 @@ export default {
       this.result.USD = this.formatNumber(this.result.BYN / this.currency.USD);
       this.result.EUR = this.formatNumber(this.result.BYN / this.currency.EUR);
       this.result.RUB = this.formatNumber(
-        (this.result.BYN / this.currency.RUB) * 100
+        (this.result.BYN / this.currency.RUB) * this.hundredScale
       );
       this.result.PLN = this.formatNumber(
-        (this.result.BYN / this.currency.PLN) * 10
+        (this.result.BYN / this.currency.PLN) * this.tenScale
       );
       this.result.UAH = this.formatNumber(
-        (this.result.BYN / this.currency.UAH) * 100
+        (this.result.BYN / this.currency.UAH) * this.hundredScale
       );
     },
     currencyUSD: function () {
@@ -191,13 +197,13 @@ export default {
         this.result.USD * (this.currency.USD / this.currency.EUR)
       );
       this.result.RUB = this.formatNumber(
-        this.result.USD * (this.currency.USD / this.currency.RUB) * 100
+        this.result.USD * (this.currency.USD / this.currency.RUB) * this.hundredScale
       );
       this.result.PLN = this.formatNumber(
-        this.result.USD * (this.currency.USD / this.currency.PLN) * 10
+        this.result.USD * (this.currency.USD / this.currency.PLN) * this.tenScale
       );
       this.result.UAH = this.formatNumber(
-        this.result.USD * (this.currency.USD / this.currency.UAH) * 100
+        this.result.USD * (this.currency.USD / this.currency.UAH) * this.hundredScale
       );
     },
     currencyEUR: function () {
@@ -207,67 +213,67 @@ export default {
         this.result.EUR * (this.currency.EUR / this.currency.USD)
       );
       this.result.RUB = this.formatNumber(
-        this.result.EUR * (this.currency.EUR / this.currency.RUB) * 100
+        this.result.EUR * (this.currency.EUR / this.currency.RUB) * this.hundredScale
       );
       this.result.PLN = this.formatNumber(
-        this.result.EUR * (this.currency.EUR / this.currency.PLN) * 10
+        this.result.EUR * (this.currency.EUR / this.currency.PLN) * this.tenScale
       );
       this.result.UAH = this.formatNumber(
-        this.result.EUR * (this.currency.EUR / this.currency.UAH) * 100
+        this.result.EUR * (this.currency.EUR / this.currency.UAH) * this.hundredScale
       );
     },
     currencyRUB: function () {
       this.result.PLN = event.target.value = this.ifNaN(event.target.value);
       this.result.BYN = this.formatNumber(
-        (this.result.RUB * this.currency.RUB) / 100
+        (this.result.RUB * this.currency.RUB) / this.hundredScale
       );
       this.result.USD = this.formatNumber(
-        this.result.RUB * (this.currency.RUB / this.currency.USD / 100)
+        this.result.RUB * (this.currency.RUB / this.currency.USD / this.hundredScale)
       );
       this.result.EUR = this.formatNumber(
-        this.result.RUB * (this.currency.RUB / this.currency.EUR / 100)
+        this.result.RUB * (this.currency.RUB / this.currency.EUR / this.hundredScale)
       );
       this.result.PLN = this.formatNumber(
-        this.result.RUB * ((this.currency.RUB / this.currency.PLN / 100) * 10)
+        this.result.RUB * ((this.currency.RUB / this.currency.PLN / this.hundredScale) * this.tenScale)
       );
       this.result.UAH = this.formatNumber(
-        this.result.RUB * (this.currency.RUB / this.currency.UAH / 100) * 100
+        this.result.RUB * (this.currency.RUB / this.currency.UAH / this.hundredScale) * this.hundredScale
       );
     },
     currencyPLN: function () {
       this.result.PLN = event.target.value = this.ifNaN(event.target.value);
       this.result.BYN = this.formatNumber(
-        (this.result.PLN * this.currency.PLN) / 10
+        (this.result.PLN * this.currency.PLN) / this.tenScale
       );
       this.result.USD = this.formatNumber(
-        this.result.PLN * (this.currency.PLN / this.currency.USD / 10)
+        this.result.PLN * (this.currency.PLN / this.currency.USD / this.tenScale)
       );
       this.result.EUR = this.formatNumber(
-        this.result.PLN * (this.currency.PLN / this.currency.EUR / 10)
+        this.result.PLN * (this.currency.PLN / this.currency.EUR / this.tenScale)
       );
       this.result.RUB = this.formatNumber(
-        this.result.PLN * ((this.currency.PLN / this.currency.RUB) * 10)
+        this.result.PLN * ((this.currency.PLN / this.currency.RUB) * this.tenScale)
       );
       this.result.UAH = this.formatNumber(
-        this.result.PLN * ((this.currency.PLN / this.currency.UAH) * 10)
+        this.result.PLN * ((this.currency.PLN / this.currency.UAH) * this.tenScale)
       );
     },
     currencyUAH: function () {
       this.result.UAH = event.target.value = this.ifNaN(event.target.value);
       this.result.BYN = this.formatNumber(
-        (this.result.UAH * this.currency.UAH) / 100
+        (this.result.UAH * this.currency.UAH) / this.hundredScale
       );
       this.result.USD = this.formatNumber(
-        this.result.UAH * (this.currency.UAH / this.currency.USD / 100)
+        this.result.UAH * (this.currency.UAH / this.currency.USD / this.hundredScale)
       );
       this.result.EUR = this.formatNumber(
-        this.result.UAH * (this.currency.UAH / this.currency.EUR / 100)
+        this.result.UAH * (this.currency.UAH / this.currency.EUR / this.hundredScale)
       );
       this.result.RUB = this.formatNumber(
         this.result.UAH * (this.currency.UAH / this.currency.RUB)
       );
       this.result.PLN = this.formatNumber(
-        this.result.UAH * (this.currency.UAH / this.currency.PLN / 10)
+        this.result.UAH * (this.currency.UAH / this.currency.PLN / this.tenScale)
       );
     },
     clearFields: function () {

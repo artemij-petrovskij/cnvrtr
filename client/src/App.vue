@@ -372,7 +372,11 @@ a.el-link {
 
 .el-table {
   border-radius: 5px;
-  border: 1px solid black;
+  border: 1px solid #A9A9A9;
+}
+
+h4{
+  text-align: center;
 }
 
 
