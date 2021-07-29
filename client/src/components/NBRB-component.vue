@@ -169,10 +169,6 @@ export default {
     this.currency.RUB = currencies[17].Cur_OfficialRate;
     this.currency.PLN = currencies[7].Cur_OfficialRate;
     this.currency.UAH = currencies[3].Cur_OfficialRate;
-
-
-    const currenciesamp = currencies.map()
-    console.log(currenciesamp)
   },
 
   methods: {

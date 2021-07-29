@@ -1,12 +1,6 @@
 <template>
-  <el-form
-    v-loading="loading"
-    v-show="visible"
-    element-loading-background="transparent"
-    label-width="60px"
-  >
-
-      <div class="index">
+  <el-form element-loading-background="transparent" label-width="60px">
+    <div class="index">
       <h6>
         <span v-if="BTC.difference_currency > 0" class="up-class">
           {{ BTC.difference_currency }} + {{ BTC.difference_percent }}
@@ -125,7 +119,7 @@
 
     <el-divider></el-divider>
 
-<h4>All CRYPTO</h4>
+    <h4>All CRYPTO</h4>
     <el-table
       :data="
         links.filter(
@@ -136,8 +130,7 @@
       height="250"
       style="width: 100%"
     >
-    
-      <el-table-column label="Asset" prop="value"> </el-table-column>
+      <el-table-column label="Asset" prop="asset"> </el-table-column>
       <el-table-column label="Last" prop="last"> </el-table-column>
 
       <el-table-column>
@@ -150,6 +143,7 @@
 </template>
 
 <script>
+
 import CurrencyService from "../CurrencyService";
 
 export default {
@@ -159,8 +153,7 @@ export default {
       state: "",
       search: "",
       timeout: null,
-      loading: true,
-      visible: false,
+
       BTC: {
         last: "",
         difference_currency: "",
@@ -194,7 +187,6 @@ export default {
   },
 
   mounted() {
-    this.fetchCurrencyBTC();
     this.fetchCurrencyETH();
     this.fetchCurrencyADA();
     this.fetchCurrencyDOT();
@@ -216,11 +208,10 @@ export default {
       return `${percent.toFixed(2)}%`;
     },
 
-    async fetchCurrencyBTC() {
-      let btcPrice = await CurrencyService.getBTCCurrency();
-      this.BTC.last = this.formatNumber(btcPrice.last);
-      this.BTC.difference_currency = this.calculateDifferenceCurrency(btcPrice);
-      this.BTC.difference_percent = this.calculatePercentСurrency(btcPrice);
+    CalculateCurrencyBTC(currency) {
+      this.BTC.last = this.formatNumber(currency.last);
+      this.BTC.difference_currency = this.calculateDifferenceCurrency(currency);
+      this.BTC.difference_percent = this.calculatePercentСurrency(currency);
     },
 
     async fetchCurrencyETH() {
@@ -249,8 +240,6 @@ export default {
       this.XRP.last = this.formatNumber(xrpPrice.last);
       this.XRP.difference_currency = this.calculateDifferenceCurrency(xrpPrice);
       this.XRP.difference_percent = this.calculatePercentСurrency(xrpPrice);
-      this.visible = true;
-      this.loading = false;
     },
 
     async fetchIndexTickers() {
@@ -258,22 +247,18 @@ export default {
       let indexes = [];
       for (let i in index_tickers) {
         indexes.push({
-          value: index_tickers[i]["instId"],
+          asset: index_tickers[i]["instId"],
           last: index_tickers[i]["idxPx"],
+          sodUtc0: index_tickers[i]["sodUtc0"],
         });
       }
-      //console.log(indexes);
+      this.CalculateCurrencyBTC(indexes[0]);
       this.links = indexes;
       return indexes;
     },
 
     refreshСurrencies() {
       setInterval(() => {
-        this.fetchCurrencyBTC();
-        this.fetchCurrencyETH();
-        this.fetchCurrencyADA();
-        this.fetchCurrencyDOT();
-        this.fetchCurrencyXRP();
         this.fetchIndexTickers();
       }, 2000);
     },
