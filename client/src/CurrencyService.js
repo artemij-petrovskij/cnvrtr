@@ -31,46 +31,7 @@ class CurrencyService {
       console.error(err);
     }
   };
-  static getETHCurrency = async () => {
-    try {
-      const res = await fetch(`${url}/ETH`);
-      const currencydata = await res.json();
-      return currencydata.data[0];
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  static getADACurrency = async () => {
-    try {
-      const res = await fetch(`${url}/ADA`);
-      const currencydata = await res.json();
-      return currencydata.data[0];
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  static getDOTCurrency = async () => {
-    try {
-      const res = await fetch(`${url}/DOT`);
-      const currencydata = await res.json();
-      return currencydata.data[0];
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  static getXRPCurrency = async () => {
-    try {
-      const res = await fetch(`${url}/XRP`);
-      const currencydata = await res.json();
-      return currencydata.data[0];
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
+ 
   static getIndexTickers = async () => {
     try {
       const res = await fetch(`${url}/index-tickers`);

@@ -42,61 +42,6 @@ router.get('/BTC', async function (req, res) {
   }
 });
 
-router.get('/ETH', async function (req, res) {
-  try {
-    const data = await fetch(
-      `https://www.okex.com/api/v5/market/ticker?instId=ETH-USD-SWAP`
-    );
-    const jsondata = await data.json();
-    res.json(jsondata);
-    res.end();
-  } catch (err) {
-    console.log('connection error');
-    console.error(err);
-  }
-});
-
-router.get('/ADA', async function (req, res) {
-  try {
-    const data = await fetch(
-      `https://www.okex.com/api/v5/market/ticker?instId=ADA-USD-SWAP`
-    );
-    const jsondata = await data.json();
-    res.json(jsondata);
-    res.end();
-  } catch (err) {
-    console.log('connection error');
-    console.error(err);
-  }
-});
-
-router.get('/DOT', async function (req, res) {
-  try {
-    const data = await fetch(
-      `https://www.okex.com/api/v5/market/ticker?instId=DOT-USD-SWAP`
-    );
-    const jsondata = await data.json();
-    res.json(jsondata);
-    res.end();
-  } catch (err) {
-    console.log('connection error');
-    console.error(err);
-  }
-});
-
-router.get('/XRP', async function (req, res) {
-  try {
-    const data = await fetch(
-      `https://www.okex.com/api/v5/market/ticker?instId=XRP-USD-SWAP`
-    );
-    const jsondata = await data.json();
-    res.json(jsondata);
-    res.end();
-  } catch (err) {
-    console.log('connection error');
-    console.error(err);
-  }
-});
 
 router.get('/index-tickers', async function (req, res) {
   try {
