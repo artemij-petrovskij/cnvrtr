@@ -2,19 +2,9 @@ const fetch = require('node-fetch');
 const url = 'api/currency';
 
 class CurrencyService {
-  static getNBRBCurrency = async () => {
+  static fetchCurrency = async (route) => {
     try {
-      const res = await fetch(`${url}/NBRB`);
-      const data = await res.json();
-      return data;
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  static getCRBCurrency = async () => {
-    try {
-      const res = await fetch(`${url}/CRB`);
+      const res = await fetch(`api/currency/${route}`);
       const data = await res.json();
       return data;
     } catch (err) {

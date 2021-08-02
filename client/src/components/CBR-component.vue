@@ -137,7 +137,7 @@ export default {
     };
   },
   async created() {
-    const currencies = await CurrencyService.getCRBCurrency();
+    const currencies = await CurrencyService.fetchCurrency('CRB');
 
     this.currency.USD = currencies.rates.USD;
     this.currency.EUR = currencies.rates.EUR;

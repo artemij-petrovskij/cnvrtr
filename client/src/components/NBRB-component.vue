@@ -163,7 +163,7 @@ export default {
     };
   },
   async created() {
-    const currencies = await CurrencyService.getNBRBCurrency();
+    const currencies = await CurrencyService.fetchCurrency('NBRB');
     this.currency.USD = currencies[5].Cur_OfficialRate;
     this.currency.EUR = currencies[6].Cur_OfficialRate;
     this.currency.RUB = currencies[17].Cur_OfficialRate;
