@@ -10,19 +10,16 @@
           {{ value.valueDifference }} {{ value.percentDifference }}
         </div>
       </h6>
-      <img
-        class="flag btc-logo"
-        src="@/assets/images/crypto-icons/BTC-USDT.png"
-        alt=""
-      />
+      <img class="flag btc-logo" :src="require(`../assets/images/crypto-icons/${value.asset}.png`)" :alt="value.asset">
       <span> {{ value.asset }} {{ value.last }} </span>
       <el-link
         icon="el-icon-copy-document"
         @click="copyRate(value.asset, value.last)"
       ></el-link>
+        <el-divider></el-divider>
     </div>
 
-    <el-divider></el-divider>
+  
 
     <h4>All CRYPTO</h4>
     <el-table
@@ -56,7 +53,15 @@ export default {
       search: "",
       allCryptoTickers: [],
       favoritesArray: [],
-      favoritesPare: ["BTC-USDT", "ETH-USDT", "ADA-USDT", "OKT-USDT", "OKB"],
+      favoritesPare: [
+        "BTC-USDT",
+        "ETH-USDT",
+        "DOT-USDT",
+        // "DOGE-USDT"
+        "ADA-USDT",
+        "XRP-USDT"
+        
+      ],
       crypto: {},
     };
   },
@@ -82,16 +87,11 @@ export default {
               opening: tikers[value]["sodUtc0"],
               valueDifference: this.calcDifferenceCurrency(tikers[value]),
               percentDifference: this.calcPercentСurrency(tikers[value]),
-              image:'@/assets/images/crypto-icons/BTC-USDT.png',
             });
-           
           }
         }
-       
       }
       this.favoritesArray = indexes;
-       console.log(this.favoritesArray[0].image)
-  
     },
 
     async fetchIndexTickers() {

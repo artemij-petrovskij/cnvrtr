@@ -13,7 +13,7 @@
       <span slot="label" class="label">
         <img
           class="flag btc-logo"
-          src="@/assets/images/crypto-icons/bitcoin.png"
+          src="@/assets/images/crypto-icons/BTC-USDT.png"
         />
       </span>
       <el-input
