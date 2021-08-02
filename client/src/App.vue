@@ -197,9 +197,6 @@ export default {
 
 <style lang="css">
 #app {
-  font-family: "Inter", sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
@@ -208,6 +205,10 @@ body,
 html {
   height: 100%;
   font-family: "Inter", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
 }
@@ -233,7 +234,6 @@ h6 {
   margin: 0px;
   padding: 0px;
   font-size: 0.5em;
-
 }
 
 @media (max-width: 600px) {
@@ -246,7 +246,6 @@ h6 {
   text-align: left;
   font-weight: 600;
   font-size: 25px;
-
 }
 .small-icon {
   color: rgb(177, 184, 199);
@@ -279,8 +278,7 @@ div.el-input-group__append {
   position: relative;
   margin: 0px auto;
   padding: 10px;
-  border-radius:4px;
-  
+  border-radius: 4px;
 }
 input {
   outline: none;
@@ -359,7 +357,6 @@ a.el-link {
   color: green;
 }
 .down-class {
-  
   color: red;
 }
 
@@ -372,12 +369,10 @@ a.el-link {
 
 .el-table {
   border-radius: 5px;
-  border: 1px solid #A9A9A9;
+  border: 1px solid #a9a9a9;
 }
 
-h4{
+h4 {
   text-align: center;
 }
-
-
 </style>
