@@ -333,7 +333,7 @@ a.el-link {
 .el-tabs--top.el-tabs--border-card > .el-tabs__header .el-tabs__item:last-child,
 .el-tabs--top.el-tabs--card > .el-tabs__header .el-tabs__item:last-child {
   padding: 0px;
-}
+} 
 .night {
   background-color: #282828;
   color: white;
@@ -347,6 +347,7 @@ a.el-link {
   color: white !important;
 }
 .el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
+  font-weight:bold;
   color: #409eff;
 }
 .el-divider {
@@ -375,4 +376,6 @@ a.el-link {
 h4 {
   text-align: center;
 }
+
+
 </style>
