@@ -17,6 +17,7 @@
         />
       </span>
       <el-input
+        type="tel"
         placeholder="BTC"
         @input="convertBTC"
         v-model="fields.BTC"
@@ -31,6 +32,7 @@
         <img class="flag" src="@/assets/images/flags/flag_usa.jpg" />
       </span>
       <el-input
+        type="tel"
         placeholder="USD"
         @input="convertUSD"
         v-model="fields.USD"
@@ -43,7 +45,7 @@
 </template>
 
 <script>
-import CurrencyService from '../CurrencyService';
+import CurrencyService from "../CurrencyService";
 export default {
   data() {
     return {
@@ -53,8 +55,8 @@ export default {
         ADA: 0,
       },
       fields: {
-        BTC: '',
-        USD: '',
+        BTC: "",
+        USD: "",
       },
     };
   },
@@ -88,23 +90,23 @@ export default {
 
     ifNaN(e) {
       return e
-        .replace(',', '.')
-        .replace(/[^\d.]/g, '')
-        .replace(/\./, 'x')
-        .replace(/\./g, '')
-        .replace(/x/, '.');
+        .replace(",", ".")
+        .replace(/[^\d.]/g, "")
+        .replace(/\./, "x")
+        .replace(/\./g, "")
+        .replace(/x/, ".");
     },
-    formatNumber: function(value) {
+    formatNumber: function (value) {
       return parseFloat(value)
         .toFixed(2)
-        .replace(/(\d)(?=(\d{3})+\.)/g, '$1 ')
-        .replace('.', '.');
+        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+        .replace(".", ".");
     },
-    formatBTC: function(value) {
+    formatBTC: function (value) {
       return parseFloat(value)
         .toFixed(7)
-        .replace(/(\d)(?=(\d{3})+\.)/g, '$1 ')
-        .replace('.', '.');
+        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+        .replace(".", ".");
     },
   },
 };
