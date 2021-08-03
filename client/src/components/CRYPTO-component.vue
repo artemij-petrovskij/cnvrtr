@@ -21,7 +21,7 @@
         placeholder="BTC"
         @input="convertBTC"
         v-model="fields.BTC"
-        clearable
+        
       >
         <template slot="append">BTC</template>
       </el-input>
@@ -36,7 +36,7 @@
         placeholder="USD"
         @input="convertUSD"
         v-model="fields.USD"
-        clearable
+        
       >
         <template slot="append">USD</template>
       </el-input>
@@ -52,7 +52,6 @@ export default {
       currency: {
         BTC: 0,
         ETH: 0,
-        ADA: 0,
       },
       fields: {
         BTC: "",
@@ -70,7 +69,7 @@ export default {
   methods: {
     convertBTC() {
       this.fields.BTC = event.target.value = this.ifNaN(event.target.value);
-      this.fields.USD = this.formatNumber(this.fields.BTC * this.currency.BTC);
+      this.fields.USD = this.formatUSD(this.fields.BTC * this.currency.BTC);
     },
     convertUSD() {
       this.fields.USD = event.target.value = this.ifNaN(event.target.value);
@@ -78,8 +77,8 @@ export default {
     },
 
     async fetchCurrencyBTC() {
-      let btcPrice = await CurrencyService.getBTCCurrency();
-      this.currency.BTC = btcPrice.last;
+      let btcLastPrice = await CurrencyService.fetchCurrency("/BTC");
+      this.currency.BTC = btcLastPrice;
     },
 
     refreshСurrencies() {
@@ -89,24 +88,30 @@ export default {
     },
 
     ifNaN(e) {
-      return e
-        .replace(",", ".")
-        .replace(/[^\d.]/g, "")
-        .replace(/\./, "x")
-        .replace(/\./g, "")
-        .replace(/x/, ".");
+      if (e) {
+        return e
+          .replace(",", ".")
+          .replace(/[^\d.]/g, "")
+          .replace(/\./, "x")
+          .replace(/\./g, "")
+          .replace(/x/, ".");
+      }
     },
-    formatNumber: function (value) {
-      return parseFloat(value)
-        .toFixed(2)
-        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
-        .replace(".", ".");
+    formatUSD: function (e) {
+      if (e) {
+        return parseFloat(e)
+          .toFixed(2)
+          .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+          .replace(".", ".");
+      }
     },
-    formatBTC: function (value) {
-      return parseFloat(value)
-        .toFixed(7)
-        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
-        .replace(".", ".");
+    formatBTC: function (e) {
+      if (e) {
+        return parseFloat(e)
+          .toFixed(7)
+          .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+          .replace(".", ".");
+      }
     },
   },
 };

@@ -34,7 +34,7 @@ router.get('/BTC', async function (req, res) {
       `https://www.okex.com/api/v5/market/ticker?instId=BTC-USD-SWAP`
     );
     const jsondata = await data.json();
-    res.json(jsondata);
+    res.json(jsondata.data[0].last);
     res.end();
   } catch (err) {
     console.log('connection error');

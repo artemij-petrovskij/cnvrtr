@@ -137,7 +137,7 @@ export default {
     };
   },
   async created() {
-    const currencies = await CurrencyService.fetchCurrency('CRB');
+    const currencies = await CurrencyService.fetchCurrency("/CRB");
 
     this.currency.USD = currencies.rates.USD;
     this.currency.EUR = currencies.rates.EUR;
@@ -217,19 +217,23 @@ export default {
       this.result.RUB = "";
       this.result.PLN = "";
     },
-    formatNumber: function (value) {
-      return parseFloat(value)
-        .toFixed(2)
-        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
-        .replace(".", ".");
+    formatNumber: function (e) {
+      if (e) {
+        return parseFloat(e)
+          .toFixed(2)
+          .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+          .replace(".", ".");
+      }
     },
     ifNaN(e) {
-      return e
-        .replace(",", ".")
-        .replace(/[^\d.]/g, "")
-        .replace(/\./, "x")
-        .replace(/\./g, "")
-        .replace(/x/, ".");
+      if (e) {
+        return e
+          .replace(",", ".")
+          .replace(/[^\d.]/g, "")
+          .replace(/\./, "x")
+          .replace(/\./g, "")
+          .replace(/x/, ".");
+      }
     },
   },
 };

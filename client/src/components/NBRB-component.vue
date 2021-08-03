@@ -163,7 +163,7 @@ export default {
     };
   },
   async created() {
-    const currencies = await CurrencyService.fetchCurrency('NBRB');
+    const currencies = await CurrencyService.fetchCurrency("/NBRB");
     this.currency.USD = currencies[5].Cur_OfficialRate;
     this.currency.EUR = currencies[6].Cur_OfficialRate;
     this.currency.RUB = currencies[17].Cur_OfficialRate;
@@ -193,13 +193,19 @@ export default {
         this.result.USD * (this.currency.USD / this.currency.EUR)
       );
       this.result.RUB = this.formatNumber(
-        this.result.USD * (this.currency.USD / this.currency.RUB) * this.hundredScale
+        this.result.USD *
+          (this.currency.USD / this.currency.RUB) *
+          this.hundredScale
       );
       this.result.PLN = this.formatNumber(
-        this.result.USD * (this.currency.USD / this.currency.PLN) * this.tenScale
+        this.result.USD *
+          (this.currency.USD / this.currency.PLN) *
+          this.tenScale
       );
       this.result.UAH = this.formatNumber(
-        this.result.USD * (this.currency.USD / this.currency.UAH) * this.hundredScale
+        this.result.USD *
+          (this.currency.USD / this.currency.UAH) *
+          this.hundredScale
       );
     },
     currencyEUR: function () {
@@ -209,13 +215,19 @@ export default {
         this.result.EUR * (this.currency.EUR / this.currency.USD)
       );
       this.result.RUB = this.formatNumber(
-        this.result.EUR * (this.currency.EUR / this.currency.RUB) * this.hundredScale
+        this.result.EUR *
+          (this.currency.EUR / this.currency.RUB) *
+          this.hundredScale
       );
       this.result.PLN = this.formatNumber(
-        this.result.EUR * (this.currency.EUR / this.currency.PLN) * this.tenScale
+        this.result.EUR *
+          (this.currency.EUR / this.currency.PLN) *
+          this.tenScale
       );
       this.result.UAH = this.formatNumber(
-        this.result.EUR * (this.currency.EUR / this.currency.UAH) * this.hundredScale
+        this.result.EUR *
+          (this.currency.EUR / this.currency.UAH) *
+          this.hundredScale
       );
     },
     currencyRUB: function () {
@@ -224,16 +236,22 @@ export default {
         (this.result.RUB * this.currency.RUB) / this.hundredScale
       );
       this.result.USD = this.formatNumber(
-        this.result.RUB * (this.currency.RUB / this.currency.USD / this.hundredScale)
+        this.result.RUB *
+          (this.currency.RUB / this.currency.USD / this.hundredScale)
       );
       this.result.EUR = this.formatNumber(
-        this.result.RUB * (this.currency.RUB / this.currency.EUR / this.hundredScale)
+        this.result.RUB *
+          (this.currency.RUB / this.currency.EUR / this.hundredScale)
       );
       this.result.PLN = this.formatNumber(
-        this.result.RUB * ((this.currency.RUB / this.currency.PLN / this.hundredScale) * this.tenScale)
+        this.result.RUB *
+          ((this.currency.RUB / this.currency.PLN / this.hundredScale) *
+            this.tenScale)
       );
       this.result.UAH = this.formatNumber(
-        this.result.RUB * (this.currency.RUB / this.currency.UAH / this.hundredScale) * this.hundredScale
+        this.result.RUB *
+          (this.currency.RUB / this.currency.UAH / this.hundredScale) *
+          this.hundredScale
       );
     },
     currencyPLN: function () {
@@ -242,16 +260,20 @@ export default {
         (this.result.PLN * this.currency.PLN) / this.tenScale
       );
       this.result.USD = this.formatNumber(
-        this.result.PLN * (this.currency.PLN / this.currency.USD / this.tenScale)
+        this.result.PLN *
+          (this.currency.PLN / this.currency.USD / this.tenScale)
       );
       this.result.EUR = this.formatNumber(
-        this.result.PLN * (this.currency.PLN / this.currency.EUR / this.tenScale)
+        this.result.PLN *
+          (this.currency.PLN / this.currency.EUR / this.tenScale)
       );
       this.result.RUB = this.formatNumber(
-        this.result.PLN * ((this.currency.PLN / this.currency.RUB) * this.tenScale)
+        this.result.PLN *
+          ((this.currency.PLN / this.currency.RUB) * this.tenScale)
       );
       this.result.UAH = this.formatNumber(
-        this.result.PLN * ((this.currency.PLN / this.currency.UAH) * this.tenScale)
+        this.result.PLN *
+          ((this.currency.PLN / this.currency.UAH) * this.tenScale)
       );
     },
     currencyUAH: function () {
@@ -260,16 +282,19 @@ export default {
         (this.result.UAH * this.currency.UAH) / this.hundredScale
       );
       this.result.USD = this.formatNumber(
-        this.result.UAH * (this.currency.UAH / this.currency.USD / this.hundredScale)
+        this.result.UAH *
+          (this.currency.UAH / this.currency.USD / this.hundredScale)
       );
       this.result.EUR = this.formatNumber(
-        this.result.UAH * (this.currency.UAH / this.currency.EUR / this.hundredScale)
+        this.result.UAH *
+          (this.currency.UAH / this.currency.EUR / this.hundredScale)
       );
       this.result.RUB = this.formatNumber(
         this.result.UAH * (this.currency.UAH / this.currency.RUB)
       );
       this.result.PLN = this.formatNumber(
-        this.result.UAH * (this.currency.UAH / this.currency.PLN / this.tenScale)
+        this.result.UAH *
+          (this.currency.UAH / this.currency.PLN / this.tenScale)
       );
     },
     clearFields: function () {
@@ -280,19 +305,23 @@ export default {
       this.result.PLN = "";
       this.result.UAH = "";
     },
-    formatNumber: function (value) {
-      return parseFloat(value)
-        .toFixed(2)
-        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
-        .replace(".", ".");
+    formatNumber: function (e) {
+      if (e) {
+        return parseFloat(e)
+          .toFixed(2)
+          .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+          .replace(".", ".");
+      }
     },
     ifNaN(e) {
-      return e
-        .replace(",", ".")
-        .replace(/[^\d.]/g, "")
-        .replace(/\./, "x")
-        .replace(/\./g, "")
-        .replace(/x/, ".");
+      if (e) {
+        return e
+          .replace(",", ".")
+          .replace(/[^\d.]/g, "")
+          .replace(/\./, "x")
+          .replace(/\./g, "")
+          .replace(/x/, ".");
+      }
     },
   },
 };

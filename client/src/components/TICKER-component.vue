@@ -76,6 +76,7 @@ export default {
 
   methods: {
     creatingFavoritesArray() {
+     
       const tikers = this.allCryptoTickers;
       const indexes = [];
 
@@ -96,7 +97,7 @@ export default {
     },
 
     async fetchIndexTickers() {
-      this.allCryptoTickers = await CurrencyService.getIndexTickers();
+      this.allCryptoTickers = await CurrencyService.fetchCurrency("/index-tickers");
       this.creatingFavoritesArray();
     },
 
