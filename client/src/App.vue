@@ -1,36 +1,17 @@
 <template>
-  <el-container v-bind:class="{ night: nightMode }">
-    <div class="particles">
-      <div id="particles-js"></div>
-    </div>
+  <v-card>
+    <v-tabs background-color="deep-purple accent-4" center-active v-model="tab">
+      <v-tab>TICKER</v-tab>
+      <v-tab>CRYPTO</v-tab>
+    </v-tabs>
 
-    <el-header>
-      <h1>
-        <el-link icon="el-icon-s-tools" @click="openAPI"></el-link>
-        CNVRTR
-        <el-switch
-          v-model="nightMode"
-          active-color="#A9A9A9"
-          inactive-color="#282828"
-        >
-        </el-switch>
-        &nbsp;
-        <i class="el-icon-moon"></i>
-      </h1>
-    </el-header>
-
-    <el-main>
-      <el-tabs type="card" stretch>
-        <el-tab-pane label="TICKER"><TICKER></TICKER> </el-tab-pane>
-        <el-tab-pane label="CRYPTO"><CRYPTO></CRYPTO> </el-tab-pane>
-        <el-tab-pane label="НБРБ"><NBRB></NBRB> </el-tab-pane>
-        <el-tab-pane label="ЦБР"><CBR></CBR></el-tab-pane>
-      </el-tabs>
-    </el-main>
-
-    <el-footer> </el-footer>
-  </el-container>
+    <v-tabs-items v-model="tab">
+      <v-tab-item><TICKER /></v-tab-item>
+      <v-tab-item><CRYPTO /></v-tab-item>
+    </v-tabs-items>
+  </v-card>
 </template>
+
 
 <script>
 import "particles.js";
@@ -38,11 +19,11 @@ import TICKER from "./components/TICKER-component.vue";
 import CRYPTO from "./components/CRYPTO-component.vue";
 import NBRB from "./components/NBRB-component.vue";
 import CBR from "./components/CBR-component.vue";
-
 export default {
   data() {
     return {
       nightMode: false,
+      tab: null,
     };
   },
   name: "App",
@@ -52,12 +33,10 @@ export default {
     NBRB,
     CBR,
   },
-
   mounted() {
     this.initParticles();
     this.localControllerNightMode();
   },
-
   watch: {
     nightMode: function () {
       localStorage.nightMode = this.nightMode;
@@ -212,7 +191,11 @@ html {
   margin: 0;
   padding: 0;
 }
-.el-container {
+.v-window-item--active {
+  border-bottom: none !important;
+}
+
+/* .el-container {
   height: 100%;
 }
 .el-header {
@@ -221,27 +204,23 @@ html {
 h1 {
   text-shadow: 0 0 1px rgba(0, 0, 0, 5);
 }
-
 h2 {
   text-align: center;
   font-weight: 600;
   font-size: 30px;
   white-space: pre;
 }
-
 h6 {
   height: 20px;
   margin: 0px;
   padding: 0px;
   font-size: 0.5em;
 }
-
 @media (max-width: 600px) {
   h2 {
     font-size: 28px;
   }
 }
-
 .index {
   text-align: left;
   font-weight: 600;
@@ -252,20 +231,7 @@ h6 {
   font-size: 22px;
   font-weight: 500;
 }
-img.flag {
-  margin-top: 10px;
-  margin-right: 10px;
-  max-height: 20px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.5);
-}
-img.btc-logo {
-  max-height: 20px;
-  box-shadow: none;
-}
-img.btc {
-  width: 100%;
-  height: auto;
-}
+
 div.el-input-group__append {
   width: 30px !important;
   font-size: 15px;
@@ -290,7 +256,6 @@ input:focus {
   width: 100%;
   height: 80px;
   position: absolute;
-
   top: 0;
   left: 0;
 }
@@ -333,7 +298,7 @@ a.el-link {
 .el-tabs--top.el-tabs--border-card > .el-tabs__header .el-tabs__item:last-child,
 .el-tabs--top.el-tabs--card > .el-tabs__header .el-tabs__item:last-child {
   padding: 0px;
-} 
+}
 .night {
   background-color: #282828;
   color: white;
@@ -347,18 +312,12 @@ a.el-link {
   color: white !important;
 }
 .el-tabs--card > .el-tabs__header .el-tabs__item.is-active {
-  font-weight:bold;
+  font-weight: bold;
   color: #409eff;
 }
 .el-divider {
   margin-top: 5px;
   margin-bottom: 5px;
-}
-.up-class {
-  color: green;
-}
-.down-class {
-  color: red;
 }
 
 .full-name-crypto {
@@ -367,15 +326,11 @@ a.el-link {
 .el-autocomplete {
   width: 100%;
 }
-
 .el-table {
   border-radius: 5px;
   border: 1px solid #a9a9a9;
 }
-
 h4 {
   text-align: center;
-}
-
-
+} */
 </style>

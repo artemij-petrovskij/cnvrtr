@@ -1,47 +1,43 @@
 <template>
-  <el-form
-    element-loading-background="transparent"
-    style="
-      max-width: 500px;
-      position: relative;
-      margin: 0px auto;
-      padding: 10px;
-    "
-    label-width="60px"
-  >
+  <v-container fluid>
     <el-form-item>
-      <span slot="label" class="label">
-        <img
-          class="flag btc-logo"
-          src="@/assets/images/crypto-icons/BTC-USDT.png"
-        />
-      </span>
-      <el-input
+      <v-text-field
         type="tel"
         placeholder="BTC"
         @input="convertBTC"
         v-model="fields.BTC"
-        
       >
+        <template slot="prepend">
+          <v-img
+            height="30"
+            width="30"
+            class="logo"
+            src="@/assets/images/crypto-icons/BTC-USDT.png"
+          />
+        </template>
         <template slot="append">BTC</template>
-      </el-input>
+      </v-text-field>
     </el-form-item>
 
     <el-form-item>
-      <span slot="label" class="label">
-        <img class="flag" src="@/assets/images/flags/flag_usa.jpg" />
-      </span>
-      <el-input
+      <v-text-field
         type="tel"
         placeholder="USD"
         @input="convertUSD"
         v-model="fields.USD"
-        
       >
+        <template slot="prepend">
+          <v-img
+            height="30"
+            width="30"
+            class="logo"
+            src="@/assets/images/crypto-icons/tether.webp"
+          />
+        </template>
         <template slot="append">USD</template>
-      </el-input>
+      </v-text-field>
     </el-form-item>
-  </el-form>
+  </v-container>
 </template>
 
 <script>
@@ -116,3 +112,16 @@ export default {
   },
 };
 </script>
+<style scoped>
+.container {
+  max-width: 550px;
+  height: 100vh;
+  position: relative;
+  margin: 0px auto;
+  padding: 10px;
+  border-radius: 4px;
+}
+.logo {
+  margin-right: 1rem;
+}
+</style>

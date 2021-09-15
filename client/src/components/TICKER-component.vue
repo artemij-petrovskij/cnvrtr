@@ -1,49 +1,29 @@
 <template>
-  <el-form element-loading-background="transparent" label-width="60px">
-    <div class="index" v-for="value in favoritesArray">
-      <h6>
-        <div v-if="value.valueDifference > 0" class="up-class">
-          {{ value.valueDifference }} {{ value.percentDifference }}
-        </div>
+  <v-container fluid>
+    <div class="index" v-for="value in favoritesArray" :key="value.asset">
+      <v-card class="mx-auto" max-width="600" outlined>
+        <v-list-item two-line>
+          <v-avatar class="ma-3" size="40" tile>
+            <v-img
+              :src="require(`../assets/images/crypto-icons/${value.asset}.png`)"
+            ></v-img>
+          </v-avatar>
+          <v-list-item-content>
+            <v-list-item-title class="text-h5 mb-1">
+              <div v-if="value.valueDifference > 0" class="up-class">
+                {{ value.valueDifference }} {{ value.percentDifference }}
+              </div>
 
-        <div v-else class="down-class">
-          {{ value.valueDifference }} {{ value.percentDifference }}
-        </div>
-      </h6>
-      <img
-        class="flag btc-logo"
-        :src="require(`../assets/images/crypto-icons/${value.asset}.png`)"
-        :alt="value.asset"
-      />
-      <span> {{ value.asset }} {{ value.last }} </span>
-      <el-link
-        icon="el-icon-copy-document"
-        @click="copyRate(value.asset, value.last)"
-      ></el-link>
-      <el-divider></el-divider>
+              <div v-else class="down-class">
+                {{ value.valueDifference }} {{ value.percentDifference }}
+              </div>
+            </v-list-item-title>
+            <div class="text-overline">{{ value.asset }} {{ value.last }}</div>
+          </v-list-item-content>
+        </v-list-item>
+      </v-card>
     </div>
-
-    <h4>All CRYPTO</h4>
-    <el-table
-      :data="
-        allCryptoTickers.filter(
-          (data) =>
-            !search || data.instId.toLowerCase().includes(search.toLowerCase())
-        )
-      "
-      height="250"
-      style="width: 100%"
-    >
-      <el-table-column label="Asset" prop="instId"> </el-table-column>
-      <el-table-column label="Last" prop="idxPx"> </el-table-column>
-
-      <el-table-column>
-        <template slot="header" slot-scope="scope">
-          <el-input v-model="search" size="mini" placeholder="Type to search" />
-        </template>
-      </el-table-column>
-    </el-table>
-  </el-form>
+  </v-container>
 </template>
 
 <script>
@@ -76,7 +56,6 @@ export default {
 
   methods: {
     creatingFavoritesArray() {
-     
       const tikers = this.allCryptoTickers;
       const indexes = [];
 
@@ -97,7 +76,9 @@ export default {
     },
 
     async fetchIndexTickers() {
-      this.allCryptoTickers = await CurrencyService.fetchCurrency("/index-tickers");
+      this.allCryptoTickers = await CurrencyService.fetchCurrency(
+        "/index-tickers"
+      );
       this.creatingFavoritesArray();
     },
 
@@ -141,3 +122,29 @@ export default {
   },
 };
 </script>
+<style scoped>
+* {
+  text-shadow: 0 0 1px rgba(0, 0, 0, 5);
+}
+.text-overline {
+  font-weight: bold;
+  font-size: 1.4rem;
+}
+.up-class {
+  color: green;
+}
+.down-class {
+  color: red;
+}
+.container {
+  max-width: 550px;
+  height: 100vh;
+  position: relative;
+  margin: 0px auto;
+  padding: 10px;
+  border-radius: 4px;
+}
+.v-list-item__content {
+  padding-left: 20px;
+}
+</style>
