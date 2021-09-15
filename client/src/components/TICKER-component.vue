@@ -18,11 +18,26 @@
                 {{ value.valueDifference }} {{ value.percentDifference }}
               </div>
             </v-list-item-title>
-            <div class="text-overline">{{ value.asset }} {{ value.last }}</div>
+            <div class="text-overline">
+              {{ value.asset }} {{ value.last }}
+              <v-btn
+                @click="copyRate(value.asset, value.last)"
+                class="mx-2"
+                fab
+                x-small
+                dark
+                color="primary"
+                ><v-icon dark small>content_copy</v-icon></v-btn
+              >
+            </div>
           </v-list-item-content>
         </v-list-item>
       </v-card>
     </div>
+
+    <v-snackbar v-model="snackbar">
+      {{ text }}
+    </v-snackbar>
   </v-container>
 </template>
 
@@ -44,6 +59,8 @@ export default {
         "XRP-USDT",
       ],
       crypto: {},
+      snackbar: false,
+      text: "",
     };
   },
 
@@ -113,11 +130,8 @@ export default {
       el.select();
       document.execCommand("copy");
       document.body.removeChild(el);
-
-      this.$message({
-        message: `Скопировано ${el.value}`,
-        type: "success",
-      });
+      this.snackbar = true;
+      this.text = `Скопировано ${el.value}`;
     },
   },
 };
@@ -145,6 +159,6 @@ export default {
   border-radius: 4px;
 }
 .v-list-item__content {
-  padding-left: 20px;
+  padding-left: 10px;
 }
 </style>

@@ -1,42 +1,38 @@
 <template>
   <v-container fluid>
-    <el-form-item>
-      <v-text-field
-        type="tel"
-        placeholder="BTC"
-        @input="convertBTC"
-        v-model="fields.BTC"
-      >
-        <template slot="prepend">
-          <v-img
-            height="30"
-            width="30"
-            class="logo"
-            src="@/assets/images/crypto-icons/BTC-USDT.png"
-          />
-        </template>
-        <template slot="append">BTC</template>
-      </v-text-field>
-    </el-form-item>
+    <v-text-field
+      type="tel"
+      placeholder="BTC"
+      @input="convertBTC"
+      v-model="fields.BTC"
+    >
+      <template slot="prepend">
+        <v-img
+          height="30"
+          width="30"
+          class="logo"
+          src="@/assets/images/crypto-icons/BTC-USDT.png"
+        />
+      </template>
+      <template slot="append">BTC</template>
+    </v-text-field>
 
-    <el-form-item>
-      <v-text-field
-        type="tel"
-        placeholder="USD"
-        @input="convertUSD"
-        v-model="fields.USD"
-      >
-        <template slot="prepend">
-          <v-img
-            height="30"
-            width="30"
-            class="logo"
-            src="@/assets/images/crypto-icons/tether.webp"
-          />
-        </template>
-        <template slot="append">USD</template>
-      </v-text-field>
-    </el-form-item>
+    <v-text-field
+      type="tel"
+      placeholder="USD"
+      @input="convertUSD"
+      v-model="fields.USD"
+    >
+      <template slot="prepend">
+        <v-img
+          height="30"
+          width="30"
+          class="logo"
+          src="@/assets/images/crypto-icons/tether.webp"
+        />
+      </template>
+      <template slot="append">USD</template>
+    </v-text-field>
   </v-container>
 </template>
 

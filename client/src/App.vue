@@ -34,7 +34,7 @@ export default {
     CBR,
   },
   mounted() {
-    this.initParticles();
+    //this.initParticles();
     this.localControllerNightMode();
   },
   watch: {
@@ -51,125 +51,119 @@ export default {
         this.nightMode = false;
       }
     },
-    openAPI() {
-      this.$alert(
-        '<p>Bitcoin <a href="https://cnvrtr.herokuapp.com/api/currency/BTC">BTC</a></p><p>Etherium <a href="https://cnvrtr.herokuapp.com/api/currency/ETH">ETH</a></p><p> Национальный банк Республики Беларусь <a href=""></a><a href="https://cnvrtr.herokuapp.com/api/currency/NBRB">НБРБ</a></p> <p>Центральный банк России <a href="https://cnvrtr.herokuapp.com/api/currency/CRB">ЦБР</a></p>',
-        "API CNVRTR",
-        { dangerouslyUseHTMLString: true, confirmButtonText: "OK" }
-      );
-    },
-    initParticles() {
-      window.particlesJS("particles-js", {
-        particles: {
-          number: {
-            value: 8,
-            density: {
-              enable: false,
-              value_area: 394.57382081613633,
-            },
-          },
-          color: {
-            value: "#1b1e34",
-          },
-          shape: {
-            type: "image",
-            stroke: {
-              width: 1,
-              color: "#000",
-            },
-            polygon: {
-              nb_sides: 1,
-            },
-            image: {
-              src: "https://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png",
-              width: 10,
-              height: 10,
-            },
-          },
-          opacity: {
-            value: 0.12626362266116362,
-            random: false,
-            anim: {
-              enable: false,
-              speed: 0.1,
-              opacity_min: 0.1,
-              sync: false,
-            },
-          },
-          size: {
-            value: 10,
-            random: false,
-            anim: {
-              enable: true,
-              speed: 5,
-              size_min: 40,
-              sync: false,
-            },
-          },
-          line_linked: {
-            enable: false,
-            distance: 200,
-            color: "#ffffff",
-            opacity: 1,
-            width: 2,
-          },
-          move: {
-            enable: true,
-            speed: 1,
-            direction: "top",
-            random: true,
-            straight: false,
-            out_mode: "out",
-            bounce: false,
-            attract: {
-              enable: true,
-              rotateX: 320.6824121731046,
-              rotateY: 721.5354273894853,
-            },
-          },
-        },
-        interactivity: {
-          detect_on: "canvas",
-          events: {
-            onhover: {
-              enable: false,
-              mode: "grab",
-            },
-            onclick: {
-              enable: false,
-              mode: "push",
-            },
-            resize: true,
-          },
-          modes: {
-            grab: {
-              distance: 400,
-              line_linked: {
-                opacity: 1,
-              },
-            },
-            bubble: {
-              distance: 400,
-              size: 40,
-              duration: 2,
-              opacity: 8,
-              speed: 3,
-            },
-            repulse: {
-              distance: 200,
-              duration: 0.4,
-            },
-            push: {
-              particles_nb: 4,
-            },
-            remove: {
-              particles_nb: 2,
-            },
-          },
-        },
-        retina_detect: true,
-      });
-    },
+
+    // initParticles() {
+    //   window.particlesJS("particles-js", {
+    //     particles: {
+    //       number: {
+    //         value: 8,
+    //         density: {
+    //           enable: false,
+    //           value_area: 394.57382081613633,
+    //         },
+    //       },
+    //       color: {
+    //         value: "#1b1e34",
+    //       },
+    //       shape: {
+    //         type: "image",
+    //         stroke: {
+    //           width: 1,
+    //           color: "#000",
+    //         },
+    //         polygon: {
+    //           nb_sides: 1,
+    //         },
+    //         image: {
+    //           src: "https://pngimg.com/uploads/bitcoin/small/bitcoin_PNG47.png",
+    //           width: 10,
+    //           height: 10,
+    //         },
+    //       },
+    //       opacity: {
+    //         value: 0.12626362266116362,
+    //         random: false,
+    //         anim: {
+    //           enable: false,
+    //           speed: 0.1,
+    //           opacity_min: 0.1,
+    //           sync: false,
+    //         },
+    //       },
+    //       size: {
+    //         value: 10,
+    //         random: false,
+    //         anim: {
+    //           enable: true,
+    //           speed: 5,
+    //           size_min: 40,
+    //           sync: false,
+    //         },
+    //       },
+    //       line_linked: {
+    //         enable: false,
+    //         distance: 200,
+    //         color: "#ffffff",
+    //         opacity: 1,
+    //         width: 2,
+    //       },
+    //       move: {
+    //         enable: true,
+    //         speed: 1,
+    //         direction: "top",
+    //         random: true,
+    //         straight: false,
+    //         out_mode: "out",
+    //         bounce: false,
+    //         attract: {
+    //           enable: true,
+    //           rotateX: 320.6824121731046,
+    //           rotateY: 721.5354273894853,
+    //         },
+    //       },
+    //     },
+    //     interactivity: {
+    //       detect_on: "canvas",
+    //       events: {
+    //         onhover: {
+    //           enable: false,
+    //           mode: "grab",
+    //         },
+    //         onclick: {
+    //           enable: false,
+    //           mode: "push",
+    //         },
+    //         resize: true,
+    //       },
+    //       modes: {
+    //         grab: {
+    //           distance: 400,
+    //           line_linked: {
+    //             opacity: 1,
+    //           },
+    //         },
+    //         bubble: {
+    //           distance: 400,
+    //           size: 40,
+    //           duration: 2,
+    //           opacity: 8,
+    //           speed: 3,
+    //         },
+    //         repulse: {
+    //           distance: 200,
+    //           duration: 0.4,
+    //         },
+    //         push: {
+    //           particles_nb: 4,
+    //         },
+    //         remove: {
+    //           particles_nb: 2,
+    //         },
+    //       },
+    //     },
+    //     retina_detect: true,
+    //   });
+    // },
   },
 };
 </script>
@@ -190,9 +184,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   margin: 0;
   padding: 0;
-}
-.v-window-item--active {
-  border-bottom: none !important;
 }
 
 /* .el-container {
