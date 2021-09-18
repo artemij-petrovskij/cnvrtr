@@ -1,8 +1,43 @@
 <template>
   <v-container fluid>
     <div class="index" v-for="value in favoritesArray" :key="value.asset">
-      <v-card class="mx-auto" max-width="600" outlined>
+      <v-card class="mx-auto" max-width="400" outlined>
         <v-list-item two-line>
+          <v-list-item-avatar tile size="40">
+            <v-img
+              :src="require(`../assets/images/crypto-icons/${value.asset}.png`)"
+            ></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-subtitle>
+              <div v-if="value.valueDifference > 0" class="up-class">
+                {{ value.valueDifference }} {{ value.percentDifference }}
+              </div>
+
+              <div v-else class="down-class">
+                -{{ value.valueDifference }} {{ value.percentDifference }}
+              </div></v-list-item-subtitle
+            >
+            <v-list-item-title class="text-h6 mb-1">
+              {{ value.asset }} {{ value.last }}
+            </v-list-item-title>
+          </v-list-item-content>
+          <v-card-actions>
+            <v-btn
+              @click="copyRate(value.asset, value.last)"
+              class="mx-2"
+              fab
+              x-small
+              dark
+              color="primary"
+              ><v-icon dark small>content_copy</v-icon></v-btn
+            >
+          </v-card-actions>
+        </v-list-item>
+      </v-card>
+
+      <!--    <v-card class="mx-auto" max-width="600" outlined>
+          <v-list-item two-line>
           <v-avatar class="ma-3" size="40" tile>
             <v-img
               :src="require(`../assets/images/crypto-icons/${value.asset}.png`)"
@@ -32,7 +67,7 @@
             </div>
           </v-list-item-content>
         </v-list-item>
-      </v-card>
+      </v-card> -->
     </div>
 
     <v-snackbar v-model="snackbar">
@@ -54,7 +89,7 @@ export default {
         "BTC-USDT",
         "ETH-USDT",
         "DOT-USDT",
-        // "DOGE-USDT"
+        // "DOGE-USDT",
         "ADA-USDT",
         "XRP-USDT",
       ],
@@ -141,24 +176,22 @@ export default {
   text-shadow: 0 0 1px rgba(0, 0, 0, 5);
 }
 .text-overline {
-  font-weight: bold;
+  font-weight: bold !important;
   font-size: 1.4rem;
 }
 .up-class {
   color: green;
+  text-align: left;
 }
 .down-class {
   color: red;
+  text-align: left;
 }
-.container {
-  max-width: 550px;
-  height: 100vh;
-  position: relative;
-  margin: 0px auto;
-  padding: 10px;
-  border-radius: 4px;
+.v-list-item-title {
+  text-align: left;
 }
-.v-list-item__content {
-  padding-left: 10px;
+
+.v-list-item__title {
+  text-align: left;
 }
 </style>

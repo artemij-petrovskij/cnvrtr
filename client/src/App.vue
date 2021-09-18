@@ -1,15 +1,18 @@
 <template>
-  <v-card>
-    <v-tabs background-color="deep-purple accent-4" center-active v-model="tab">
-      <v-tab>TICKER</v-tab>
-      <v-tab>CRYPTO</v-tab>
-    </v-tabs>
+  <v-app>
+    <v-main>
+      <v-tabs center-active v-model="tab">
+        <v-tab>TICKER</v-tab>
+        <v-tab>CRYPTO</v-tab>
+      </v-tabs>
 
-    <v-tabs-items v-model="tab">
-      <v-tab-item><TICKER /></v-tab-item>
-      <v-tab-item><CRYPTO /></v-tab-item>
-    </v-tabs-items>
-  </v-card>
+      <v-tabs-items v-model="tab">
+        <v-tab-item><TICKER /></v-tab-item>
+        <v-tab-item><CRYPTO /></v-tab-item>
+    
+      </v-tabs-items>
+    </v-main>
+  </v-app>
 </template>
 
 
@@ -172,7 +175,9 @@ export default {
 #app {
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+.v-application .v-application--is-ltr .theme--light {
+  margin-top: 0px !important;
 }
 body,
 html {
