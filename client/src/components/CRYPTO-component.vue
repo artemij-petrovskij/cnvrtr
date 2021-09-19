@@ -2,9 +2,10 @@
   <v-container fluid>
     <v-card elevation="0" class="mx-auto" max-width="400">
       <v-text-field
-        type="tel"
+        type="input"
         placeholder="BTC"
-        @input="convertBTC($event.target.value)"
+        inputmode="numeric"
+        @input="convertBTC"
         v-model="input.BTC"
       >
         <template slot="prepend">
@@ -20,9 +21,10 @@
       </v-text-field>
 
       <v-text-field
-        type="tel"
+        type="input"
         placeholder="USD"
-        @input="convertUSD($event.target.value)"
+        inputmode="numeric"
+        @input="convertUSD"
         v-model="input.USD"
       >
         <template slot="prepend">
@@ -63,19 +65,15 @@ export default {
   },
 
   methods: {
-    // BTC: function () {
-    //   this.USD = this.BTC * this.currency.BTC;
-    // },
-    // USD: function () {
-    //   this.BTC = this.USD / this.currency.BTC;
-    // },
-    convertBTC(val) {
-     
-      this.input.USD = val;
+    convertBTC: function () {
+      this.input.USD = this.formatUSD(
+        this.ifNaN(this.input.BTC) * this.currency.BTC
+      );
     },
-    convertUSD() {
-      this.input.USD = event.target.value = this.ifNaN(event.target.value);
-      this.input.BTC = this.formatBTC(this.input.USD / this.currency.BTC);
+    convertUSD: function () {
+      this.input.BTC = this.formatBTC(
+        this.ifNaN(this.input.USD) / this.currency.BTC
+      );
     },
 
     async fetchCurrencyBTC() {
@@ -89,22 +87,22 @@ export default {
       }, 5000);
     },
 
-    ifNaN: function (e) {
+    ifNaN(e) {
       return e
         .replace(",", ".")
-        .replace(/[^\d]/g, "")
+        .replace(/[^\d.]/g, "")
         .replace(/\./, "x")
         .replace(/\./g, "")
         .replace(/x/, ".");
     },
     formatUSD: function (e) {
-      return parseFloat(e)
+      return e
         .toFixed(2)
         .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
         .replace(".", ".");
     },
     formatBTC: function (e) {
-      return parseFloat(e)
+      return e
         .toFixed(7)
         .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
         .replace(".", ".");
