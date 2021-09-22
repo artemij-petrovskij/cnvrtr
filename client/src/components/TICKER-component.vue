@@ -200,4 +200,7 @@ export default {
 .v-card {
   margin:10px;
 }
+.container{
+  height:100vh;
+}
 </style>

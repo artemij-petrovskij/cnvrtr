@@ -1,141 +1,123 @@
 <template>
-  <el-form
-    style="
-      max-width: 400px;
-      position: relative;
-      margin: 0px auto;
-      padding: 10px;
-    "
-    label-width="60px"
-  >
-    <h2>Курс НБРБ</h2>
-    <!-- item  -->
-    <el-form-item>
-      <span slot="label" class="label">
-        <img
-          class="flag"
-          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_belorussija_enl.jpg"
-        />
-      </span>
+  <v-container fluid>
+    <v-card elevation="0" class="mx-auto" max-width="400">
+      <h2>Exchange NBRB</h2>
 
-      <el-input
+      <v-text-field
         type="tel"
         name="text"
         v-model="result.BYN"
         @input="currencyBYN"
         clearable
       >
+        <template slot="prepend">
+          <v-img
+            height="25"
+            width="40"
+            class="logo"
+            cleareble
+            src="@/assets/images/flags/by.jpg"
+          />
+        </template>
         <template slot="append">BYN</template>
-      </el-input>
-    </el-form-item>
-    <!--  item -->
+      </v-text-field>
 
-    <!-- item -->
-    <el-form-item>
-      <span slot="label" class="label">
-        <img
-          class="flag"
-          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_usa_enl.jpg"
-        />
-      </span>
-
-      <el-input
+      <v-text-field
         type="tel"
         name="text"
         v-model="result.USD"
         @input="currencyUSD"
         clearable
       >
+        <template slot="prepend">
+          <v-img
+            height="25"
+            width="40"
+            class="logo"
+            cleareble
+            src="@/assets/images/flags/us.jpg"
+          />
+        </template>
         <template slot="append">USD</template>
-      </el-input>
-    </el-form-item>
-    <!-- item -->
+      </v-text-field>
 
-    <!-- item -->
-    <el-form-item>
-      <span slot="label" class="label">
-        <img
-          class="flag"
-          src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/250px-Flag_of_Europe.svg.png"
-        />
-      </span>
-
-      <el-input
+      <v-text-field
         type="tel"
         name="text"
         v-model="result.EUR"
         @input="currencyEUR"
         clearable
       >
+        <template slot="prepend">
+          <v-img
+            height="25"
+            width="40"
+            class="logo"
+            cleareble
+            src="@/assets/images/flags/eu.jpg"
+          />
+        </template>
         <template slot="append">EUR</template>
-      </el-input>
-    </el-form-item>
-    <!-- item -->
+      </v-text-field>
 
-    <!-- item -->
-    <el-form-item>
-      <span slot="label" class="label">
-        <img
-          class="flag"
-          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/shop/products/flag_rf_enl.jpg"
-        />
-      </span>
-
-      <el-input
+      <v-text-field
         type="tel"
         name="text"
         v-model="result.RUB"
         @input="currencyRUB"
         clearable
       >
+        <template slot="prepend">
+          <v-img
+            height="25"
+            width="40"
+            class="logo"
+            cleareble
+            src="@/assets/images/flags/ru.jpg"
+          />
+        </template>
         <template slot="append">RUB</template>
-      </el-input>
-    </el-form-item>
-    <!-- item -->
+      </v-text-field>
 
-    <!-- item -->
-    <el-form-item>
-      <span slot="label" class="label">
-        <img
-          class="flag"
-          src="https://www.megaflag.ru/sites/default/files/styles/h_60/public/images/directory_names/flag_polsha_enl.jpg"
-        />
-      </span>
-
-      <el-input
+      <v-text-field
         type="tel"
         name="text"
         v-model="result.PLN"
         @input="currencyPLN"
         clearable
       >
+        <template slot="prepend">
+          <v-img
+            height="25"
+            width="40"
+            class="logo"
+            cleareble
+            src="@/assets/images/flags/pl.jpg"
+          />
+        </template>
         <template slot="append">PLN</template>
-      </el-input>
-    </el-form-item>
-    <!-- item -->
+      </v-text-field>
 
-    <!-- item -->
-    <el-form-item>
-      <span slot="label" class="label">
-        <img
-          class="flag"
-          src="https://www.megaflag.ru/sites/default/files/styles/galleryformatter_slide/public/images/shop/products/flag_ukraina_new.jpg"
-        />
-      </span>
-
-      <el-input
+      <v-text-field
         type="tel"
         name="text"
         v-model="result.UAH"
         @input="currencyUAH"
         clearable
       >
+        <template slot="prepend">
+          <v-img
+            height="25"
+            width="40"
+            class="logo"
+            cleareble
+            src="@/assets/images/flags/ua.jpg"
+          />
+        </template>
         <template slot="append">UAH</template>
-      </el-input>
-    </el-form-item>
-    <!-- item -->
-    <el-button type="danger" @click="clearFields" round>Очистить</el-button>
-  </el-form>
+      </v-text-field>
+    </v-card>
+  </v-container>
 </template>
 
 <script>
@@ -326,5 +308,10 @@ export default {
   },
 };
 </script>
+<style scoped>
+.container{
+  height:100vh;
+}
+</style>
 
 

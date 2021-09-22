@@ -124,4 +124,7 @@ export default {
 .v-card{
   padding:10px;
 }
+.container{
+  height:100vh;
+}
 </style>

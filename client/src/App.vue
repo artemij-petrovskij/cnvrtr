@@ -5,11 +5,15 @@
       <v-tabs center-active v-model="tab">
         <v-tab>TICKER</v-tab>
         <v-tab>CRYPTO</v-tab>
+        <v-tab>NBRB</v-tab>
+        <v-tab>CBR</v-tab>
       </v-tabs>
 
       <v-tabs-items v-model="tab">
         <v-tab-item><TICKER /></v-tab-item>
         <v-tab-item><CRYPTO /></v-tab-item>
+        <v-tab-item><NBRB /></v-tab-item>
+        <v-tab-item><CBR /></v-tab-item>
       </v-tabs-items>
     </v-main>
   </v-app>
