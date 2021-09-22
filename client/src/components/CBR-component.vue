@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-card elevation="0" class="mx-auto" max-width="400">
-      <h2>Exchange ЦБР</h2>
+      <h2>Exchange CBR</h2>
 
       <v-text-field
         type="tel"
@@ -224,4 +224,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.container {
+  height: 100vh;
+}
+</style>
+
+
 
