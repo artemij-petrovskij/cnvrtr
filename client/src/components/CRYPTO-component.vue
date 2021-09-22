@@ -1,42 +1,40 @@
 <template>
   <v-container fluid>
     <v-card elevation="0" class="mx-auto" max-width="400">
-      <v-text-field
-        type="input"
-        placeholder="BTC"
-        inputmode="numeric"
-        @input="convertBTC"
-        v-model="input.BTC"
-      >
-        <template slot="prepend">
-          <v-img
-            height="30"
-            width="30"
-            class="logo"
-            cleareble
-            src="@/assets/images/crypto-icons/BTC-USDT.png"
-          />
-        </template>
-        <template slot="append">BTC</template>
-      </v-text-field>
+      <v-row class=" teal lighten-5 rounded-lg">
+        <v-col cols="12" sm="12">
+          <h3>USDT convert</h3>
+        </v-col>
+        <v-col cols="12" sm="6">
+          <v-text-field
+            dense
+            label="Value"
+            outlined
+            v-model="currentValue"
+          ></v-text-field>
+        </v-col>
 
-      <v-text-field
-        type="input"
-        placeholder="USD"
-        inputmode="numeric"
-        @input="convertUSD"
-        v-model="input.USD"
-      >
-        <template slot="prepend">
-          <v-img
-            height="30"
-            width="30"
-            class="logo"
-            src="@/assets/images/crypto-icons/tether.webp"
-          />
-        </template>
-        <template slot="append">USD</template>
-      </v-text-field>
+        <v-col cols="12" sm="6">
+          <v-autocomplete
+            dense
+            outlined
+            clearable
+            v-model="selectedAsset"
+            :items="assetArray"
+            label="Crypto asset"
+            @change="getPrice()"
+          ></v-autocomplete>
+        </v-col>
+
+        <v-col cols="12" sm="12">
+          <h4>
+            {{ currentValue }} {{ selectedAsset }} =
+            {{ currentAssetPrice * currentValue }} USDT
+          </h4>
+        </v-col>
+      </v-row>
+
+      <v-row class="blue-grey lighten-4 rounded-lg"> </v-row>
     </v-card>
   </v-container>
 </template>
@@ -46,72 +44,84 @@ import CurrencyService from "../CurrencyService";
 export default {
   data() {
     return {
-      currency: {
-        BTC: 0,
-        ETH: 0,
-      },
-      input: {
-        BTC: "",
-        USD: "",
-      },
+      allCryptoTickers: [],
+      assetArray: [],
+      selectedAsset: "BTC",
+      currentValue: 1,
+      currentAssetPrice: "",
     };
   },
-
-  mounted() {
-    this.fetchCurrencyBTC();
-  },
   created() {
+    this.fetchIndexTickers();
+
     this.refreshСurrencies();
   },
 
-  methods: {
-    convertBTC: function () {
-      this.input.USD = this.formatUSD(
-        this.ifNaN(this.input.BTC) * this.currency.BTC
-      );
+  mounted() {
+    this.getFirstPrice();
+  },
+  watch: {
+    currentValue: function () {
+      this.getPrice();
     },
-    convertUSD: function () {
-      this.input.BTC = this.formatBTC(
-        this.ifNaN(this.input.USD) / this.currency.BTC
+  },
+
+  methods: {
+    async fetchIndexTickers() {
+      const globalArray = await CurrencyService.fetchCurrency("/index-tickers");
+      this.allCryptoTickers = await globalArray;
+      const assetArray = this.allCryptoTickers.map(
+        (item) => item.instId.split("-")[0]
       );
+      this.assetArray = assetArray;
+      this.getPrice();
     },
 
-    async fetchCurrencyBTC() {
-      let btcLastPrice = await CurrencyService.fetchCurrency("/BTC");
-      this.currency.BTC = btcLastPrice;
+    getPrice: function () {
+      const currentPrice = this.allCryptoTickers.find(
+        (item) => item.instId == `${this.selectedAsset}-USDT`
+      );
+      this.currentAssetPrice = currentPrice.idxPx;
+    },
+
+    async getFirstPrice() {
+      const res = await CurrencyService.fetchCurrency("/BTC");
+      this.currentAssetPrice = res;
     },
 
     refreshСurrencies() {
       setInterval(() => {
-        this.fetchCurrencyBTC();
-      }, 5000);
+        this.fetchIndexTickers();
+      }, 2000);
     },
-
-    ifNaN(e) {
-      return e
-        .replace(",", ".")
-        .replace(/[^\d.]/g, "")
-        .replace(/\./, "x")
-        .replace(/\./g, "")
-        .replace(/x/, ".");
-    },
-    formatUSD: function (e) {
-      return e
-        .toFixed(2)
-        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
-        .replace(".", ".");
-    },
-    formatBTC: function (e) {
-      return e
-        .toFixed(7)
-        .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
-        .replace(".", ".");
-    },
+    // ifNaN(e) {
+    //   return e
+    //     .replace(",", ".")
+    //     .replace(/[^\d.]/g, "")
+    //     .replace(/\./, "x")
+    //     .replace(/\./g, "")
+    //     .replace(/x/, ".");
+    // },
+    // formatUSD: function (e) {
+    //   return e
+    //     .toFixed(2)
+    //     .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+    //     .replace(".", ".");
+    // },
+    // formatBTC: function (e) {
+    //   return e
+    //     .toFixed(7)
+    //     .replace(/(\d)(?=(\d{3})+\.)/g, "$1 ")
+    //     .replace(".", ".");
+    // },
   },
 };
 </script>
 <style scoped>
 .logo {
   margin-right: 1rem;
+}
+.v-card{
+  padding:10px;
 }
 </style>

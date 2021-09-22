@@ -33,6 +33,7 @@
               ><v-icon dark small>content_copy</v-icon></v-btn
             >
           </v-card-actions>
+          
         </v-list-item>
       </v-card>
 
@@ -89,7 +90,9 @@ export default {
         "BTC-USDT",
         "ETH-USDT",
         "DOT-USDT",
-        // "DOGE-USDT",
+        "LTC-USDT",
+        "BCH-USDT",
+        "DASH-USDT",
         "ADA-USDT",
         "XRP-USDT",
       ],
@@ -193,5 +196,8 @@ export default {
 
 .v-list-item__title {
   text-align: left;
+}
+.v-card {
+  margin:10px;
 }
 </style>

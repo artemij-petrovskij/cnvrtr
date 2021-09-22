@@ -31,7 +31,7 @@ router.get('/CRB', async function (req, res) {
 router.get('/BTC', async function (req, res) {
   try {
     const data = await fetch(
-      `https://www.okex.com/api/v5/market/ticker?instId=BTC-USD-SWAP`
+      `https://www.okex.com/api/v5/market/ticker?instId=BTC-USDT-SWAP`
     );
     const jsondata = await data.json();
     res.json(jsondata.data[0].last);
