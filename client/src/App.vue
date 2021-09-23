@@ -86,4 +86,9 @@ h1 {
   margin-left: auto;
   margin-right: auto;
 }
+.v-text-field{
+  font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 </style>

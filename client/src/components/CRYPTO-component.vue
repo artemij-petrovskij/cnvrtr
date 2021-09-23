@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <v-card elevation="0" class="mx-auto" max-width="400">
-      <v-row class=" teal lighten-5 rounded-lg">
+      <v-row class="teal lighten-5 rounded-lg">
         <v-col cols="12" sm="12">
           <h3>USDT convert</h3>
         </v-col>
@@ -11,6 +11,7 @@
             label="Value"
             outlined
             v-model="currentValue"
+            inputmode="numeric"
           ></v-text-field>
         </v-col>
 
@@ -23,6 +24,7 @@
             :items="assetArray"
             label="Crypto asset"
             @change="getPrice()"
+            inputmode="numeric"
           ></v-autocomplete>
         </v-col>
 
@@ -121,10 +123,10 @@ export default {
 .logo {
   margin-right: 1rem;
 }
-.v-card{
-  padding:10px;
+.v-card {
+  padding: 10px;
 }
-.container{
-  height:100vh;
+.container {
+  height: 100vh;
 }
 </style>

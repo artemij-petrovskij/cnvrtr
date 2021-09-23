@@ -8,6 +8,7 @@
         name="text"
         v-model="result.RUB"
         @input="currencyRUB"
+        inputmode="numeric"
         clearable
       >
         <template slot="prepend">
@@ -27,6 +28,7 @@
         name="text"
         v-model="result.USD"
         @input="currencyUSD"
+        inputmode="numeric"
         clearable
       >
         <template slot="prepend">
@@ -46,6 +48,7 @@
         name="text"
         v-model="result.EUR"
         @input="currencyEUR"
+        inputmode="numeric"
         clearable
       >
         <template slot="prepend">
@@ -65,6 +68,7 @@
         name="text"
         v-model="result.BYN"
         @input="currencyBYN"
+        inputmode="numeric"
         clearable
       >
         <template slot="prepend">
@@ -84,6 +88,7 @@
         name="text"
         v-model="result.PLN"
         @input="currencyPLN"
+        inputmode="numeric"
         clearable
       >
         <template slot="prepend">
@@ -228,6 +233,9 @@ export default {
 <style scoped>
 .container {
   height: 100vh;
+}
+.logo{
+   box-shadow: 0 0 10px rgba(0,0,0,0.5); 
 }
 </style>
 
