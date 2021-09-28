@@ -24,7 +24,6 @@
             :items="assetArray"
             label="Crypto asset"
             @change="getPrice()"
-            inputmode="numeric"
           ></v-autocomplete>
         </v-col>
 
