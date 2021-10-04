@@ -1,5 +1,17 @@
 <template>
   <v-container fluid>
+    {{ fngIndex.name }} - {{ fngIndex.data[0]["value_classification"] }}
+    <v-progress-circular
+      :rotate="90"
+      :size="50"
+      :width="4"
+      :value="50"
+       gradient=""
+      color="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+     
+    >
+      {{ fngIndex.data[0]["value"] }}
+    </v-progress-circular>
     <div class="index" v-for="value in favoritesArray" :key="value.asset">
       <v-card class="mx-auto" max-width="400" outlined>
         <v-list-item two-line>
@@ -33,7 +45,6 @@
               ><v-icon dark small>content_copy</v-icon></v-btn
             >
           </v-card-actions>
-          
         </v-list-item>
       </v-card>
 
@@ -99,6 +110,10 @@ export default {
       crypto: {},
       snackbar: false,
       text: "",
+      fngIndex: {
+        // name:'',
+        // data:[]
+      },
     };
   },
 
@@ -135,6 +150,12 @@ export default {
         "/index-tickers"
       );
       this.creatingFavoritesArray();
+
+      const fearAndGreedIndex = await CurrencyService.fng();
+      // this.fngIndex.name = fearAndGreedIndex.name
+      //  this.fngIndex.data =  fearAndGreedIndex.data
+      console.log(this.fngIndex.data);
+      this.fngIndex = fearAndGreedIndex;
     },
 
     refreshСurrencies() {
@@ -198,9 +219,9 @@ export default {
   text-align: left;
 }
 .v-card {
-  margin:10px;
+  margin: 10px;
 }
-.container{
-  height:100vh;
+.container {
+  height: 100vh;
 }
 </style>
