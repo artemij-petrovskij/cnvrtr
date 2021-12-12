@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
-    {{ fngIndex.name }} - {{ fngIndex.data[0]["value_classification"] }}
-    <v-progress-circular
+    <!-- {{ fngIndex.name }} - {{ fngIndex.data[0]["value_classification"] }}
+   <v-progress-circular
       :rotate="90"
       :size="50"
       :width="4"
@@ -11,7 +11,15 @@
      
     >
       {{ fngIndex.data[0]["value"] }}
-    </v-progress-circular>
+    </v-progress-circular> -->
+
+    <v-img
+      contain
+      style="margin-left: auto; margin-right: auto"
+      max-height="100%"
+      max-width="400px"
+      src="https://alternative.me/crypto/fear-and-greed-index.png"
+    ></v-img>
     <div class="index" v-for="value in favoritesArray" :key="value.asset">
       <v-card class="mx-auto" max-width="400" outlined>
         <v-list-item two-line>
@@ -222,6 +230,6 @@ export default {
   margin: 10px;
 }
 .container {
-  height: 100vh;
+  /* height: 100vh; */
 }
 </style>
