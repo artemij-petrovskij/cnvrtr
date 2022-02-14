@@ -1,18 +1,5 @@
 <template>
   <v-container fluid>
-    <!-- {{ fngIndex.name }} - {{ fngIndex.data[0]["value_classification"] }}
-   <v-progress-circular
-      :rotate="90"
-      :size="50"
-      :width="4"
-      :value="50"
-       gradient=""
-      color="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
-     
-    >
-      {{ fngIndex.data[0]["value"] }}
-    </v-progress-circular> -->
-
     <v-img
       contain
       style="margin-left: auto; margin-right: auto"
@@ -49,45 +36,13 @@
               fab
               x-small
               dark
-              color="primary"
+              color="indigo"
               ><v-icon dark small>content_copy</v-icon></v-btn
             >
           </v-card-actions>
         </v-list-item>
       </v-card>
 
-      <!--    <v-card class="mx-auto" max-width="600" outlined>
-          <v-list-item two-line>
-          <v-avatar class="ma-3" size="40" tile>
-            <v-img
-              :src="require(`../assets/images/crypto-icons/${value.asset}.png`)"
-            ></v-img>
-          </v-avatar>
-          <v-list-item-content>
-            <v-list-item-title class="text-h5 mb-1">
-              <div v-if="value.valueDifference > 0" class="up-class">
-                {{ value.valueDifference }} {{ value.percentDifference }}
-              </div>
-
-              <div v-else class="down-class">
-                {{ value.valueDifference }} {{ value.percentDifference }}
-              </div>
-            </v-list-item-title>
-            <div class="text-overline">
-              {{ value.asset }} {{ value.last }}
-              <v-btn
-                @click="copyRate(value.asset, value.last)"
-                class="mx-2"
-                fab
-                x-small
-                dark
-                color="primary"
-                ><v-icon dark small>content_copy</v-icon></v-btn
-              >
-            </div>
-          </v-list-item-content>
-        </v-list-item>
-      </v-card> -->
     </div>
 
     <v-snackbar v-model="snackbar">
@@ -155,14 +110,11 @@ export default {
 
     async fetchIndexTickers() {
       this.allCryptoTickers = await CurrencyService.fetchCurrency(
-        "/index-tickers"
+        "/okex-index-tickers"
       );
       this.creatingFavoritesArray();
 
       const fearAndGreedIndex = await CurrencyService.fng();
-      // this.fngIndex.name = fearAndGreedIndex.name
-      //  this.fngIndex.data =  fearAndGreedIndex.data
-      console.log(this.fngIndex.data);
       this.fngIndex = fearAndGreedIndex;
     },
 
@@ -230,6 +182,6 @@ export default {
   margin: 10px;
 }
 .container {
-  /* height: 100vh; */
+  height: 100vh; 
 }
 </style>

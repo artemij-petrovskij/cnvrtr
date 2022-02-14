@@ -16,14 +16,17 @@ let ExchangeRatesController = class ExchangeRatesController {
     constructor(exchangeRatesService) {
         this.exchangeRatesService = exchangeRatesService;
     }
-    getExchangeRateNBRB() {
-        return this.exchangeRatesService.getExchangeRateNBRB();
+    getExchangeRatesNBRB() {
+        return this.exchangeRatesService.getExchangeRatesNBRB();
     }
-    getExchangeRateCBR() {
-        return this.exchangeRatesService.getExchangeRateCBR();
+    getExchangeRatesCBR() {
+        return this.exchangeRatesService.getExchangeRatesCBR();
     }
-    getExchangeRateOKEX() {
-        return this.exchangeRatesService.getExchangeRateOKEX();
+    getExchangeRatesOKEX() {
+        return this.exchangeRatesService.getExchangeRatesOKEX();
+    }
+    getExchangeRatesBybit() {
+        return this.exchangeRatesService.getExchangeRatesBybit();
     }
 };
 __decorate([
@@ -31,19 +34,25 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], ExchangeRatesController.prototype, "getExchangeRateNBRB", null);
+], ExchangeRatesController.prototype, "getExchangeRatesNBRB", null);
 __decorate([
     (0, common_1.Get)('/currency/crb'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], ExchangeRatesController.prototype, "getExchangeRateCBR", null);
+], ExchangeRatesController.prototype, "getExchangeRatesCBR", null);
 __decorate([
-    (0, common_1.Get)('/currency/index-tickers'),
+    (0, common_1.Get)('/currency/okex-index-tickers'),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
-], ExchangeRatesController.prototype, "getExchangeRateOKEX", null);
+], ExchangeRatesController.prototype, "getExchangeRatesOKEX", null);
+__decorate([
+    (0, common_1.Get)('/currency/bybit-index-tickers'),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], ExchangeRatesController.prototype, "getExchangeRatesBybit", null);
 ExchangeRatesController = __decorate([
     (0, common_1.Controller)('/api'),
     __metadata("design:paramtypes", [exchangeRates_service_1.ExchangeRatesService])

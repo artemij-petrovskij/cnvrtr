@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card elevation="0" class="mx-auto" max-width="400">
+    <v-card elevation="0" class="mx-auto" max-width="400" >
       <v-row class="teal lighten-5 rounded-lg">
         <v-col cols="12" sm="12">
           <h3>USDT convert</h3>
@@ -58,9 +58,6 @@ export default {
     this.refreshСurrencies();
   },
 
-  mounted() {
-    this.getFirstPrice();
-  },
   watch: {
     currentValue: function () {
       this.getPrice();
@@ -69,7 +66,9 @@ export default {
 
   methods: {
     async fetchIndexTickers() {
-      const globalArray = await CurrencyService.fetchCurrency("/index-tickers");
+      const globalArray = await CurrencyService.fetchCurrency(
+        "/okex-index-tickers"
+      );
       this.allCryptoTickers = await globalArray;
       const assetArray = this.allCryptoTickers.map(
         (item) => item.instId.split("-")[0]
@@ -83,11 +82,6 @@ export default {
         (item) => item.instId == `${this.selectedAsset}-USDT`
       );
       this.currentAssetPrice = currentPrice.idxPx;
-    },
-
-    async getFirstPrice() {
-      const res = await CurrencyService.fetchCurrency("/BTC");
-      this.currentAssetPrice = res;
     },
 
     refreshСurrencies() {

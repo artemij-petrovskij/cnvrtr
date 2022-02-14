@@ -6,17 +6,23 @@ export class ExchangeRatesController {
     constructor(private exchangeRatesService: ExchangeRatesService) { }
 
     @Get('/currency/nbrb')
-    getExchangeRateNBRB() {
-        return this.exchangeRatesService.getExchangeRateNBRB();
+    getExchangeRatesNBRB() {
+        return this.exchangeRatesService.getExchangeRatesNBRB();
     }
 
     @Get('/currency/crb')
-    getExchangeRateCBR() {
-        return this.exchangeRatesService.getExchangeRateCBR();
+    getExchangeRatesCBR() {
+        return this.exchangeRatesService.getExchangeRatesCBR();
     }
 
-    @Get('/currency/index-tickers')
-    getExchangeRateOKEX() {
-        return this.exchangeRatesService.getExchangeRateOKEX();
+    @Get('/currency/okex-index-tickers')
+    getExchangeRatesOKEX() {
+        return this.exchangeRatesService.getExchangeRatesOKEX();
     }
+
+    @Get('/currency/bybit-index-tickers')
+    getExchangeRatesBybit() {
+        return this.exchangeRatesService.getExchangeRatesBybit();
+    }
+
 }

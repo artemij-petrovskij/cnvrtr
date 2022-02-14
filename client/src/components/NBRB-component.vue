@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card elevation="0" class="mx-auto" max-width="400">
+    <v-card elevation="0" class="mx-auto pa-4" max-width="400">
       <h2>Exchange NBRB</h2>
 
       <v-text-field

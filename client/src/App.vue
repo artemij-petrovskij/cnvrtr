@@ -1,16 +1,28 @@
 <template>
-  <v-app>
-    <v-app-bar app> <h1>CNVRTR</h1></v-app-bar>
-    <v-main>
-      <v-tabs center-active v-model="tab">
+  <v-app v-bind:class="{ night: nightMode }">
+    <v-app-bar app v-bind:class="{ night: nightMode }">
+      <h1>CNVRTR</h1>
+      <v-switch v-model="nightMode"></v-switch
+    ></v-app-bar>
+    <v-main v-bind:class="{ night: nightMode }">
+      <v-tabs
+        center-active
+        grow
+        background-color="indigo"
+        dark
+        color="#fff"
+        v-model="tab"
+      >
         <v-tab>TICKER</v-tab>
-        <v-tab>CRYPTO</v-tab>
+        <v-tab>BYBIT</v-tab>
+        <v-tab>CRYPTO-CONVERT</v-tab>
         <v-tab>NBRB</v-tab>
         <v-tab>CBR</v-tab>
       </v-tabs>
 
-      <v-tabs-items v-model="tab">
+      <v-tabs-items v-model="tab" v-bind:class="{ night: nightMode }">
         <v-tab-item><TICKER /></v-tab-item>
+        <v-tab-item><BYBIT /></v-tab-item>
         <v-tab-item><CRYPTO /></v-tab-item>
         <v-tab-item><NBRB /></v-tab-item>
         <v-tab-item><CBR /></v-tab-item>
@@ -26,6 +38,8 @@ import TICKER from "./components/TICKER-component.vue";
 import CRYPTO from "./components/CRYPTO-component.vue";
 import NBRB from "./components/NBRB-component.vue";
 import CBR from "./components/CBR-component.vue";
+import BYBIT from "./components/Bybit-component.vue";
+
 export default {
   data() {
     return {
@@ -37,6 +51,7 @@ export default {
   components: {
     TICKER,
     CRYPTO,
+    BYBIT,
     NBRB,
     CBR,
   },
@@ -86,9 +101,22 @@ h1 {
   margin-left: auto;
   margin-right: auto;
 }
-.v-text-field{
+.v-text-field {
   font-weight: bold;
-    -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/**/
+
+.night > * {
+  background-color: #282828 !important;
+  color: white !important;
+}
+
+
+.v-data-table.v-data-table--fixed-height.theme--dark{
+   background-color: #282828 !important;
+  color: white !important;
 }
 </style>

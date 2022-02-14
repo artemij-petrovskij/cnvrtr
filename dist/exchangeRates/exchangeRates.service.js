@@ -10,34 +10,44 @@ exports.ExchangeRatesService = void 0;
 const common_1 = require("@nestjs/common");
 const node_fetch_1 = require("node-fetch");
 let ExchangeRatesService = class ExchangeRatesService {
-    async getExchangeRateNBRB() {
+    async getExchangeRatesNBRB() {
         try {
             const data = await (0, node_fetch_1.default)(`https://www.nbrb.by/api/exrates/rates?periodicity=0`);
             const jsondata = await data.json();
             return jsondata;
         }
         catch (err) {
-            console.error(`fetch error getExchangeRateNBRB: ${err}`);
+            console.error(`fetch error getExchangeRatesNBRB: ${err}`);
         }
     }
-    async getExchangeRateCBR() {
+    async getExchangeRatesCBR() {
         try {
             const data = await (0, node_fetch_1.default)(`https://www.cbr-xml-daily.ru/latest.js`);
             const jsondata = await data.json();
             return jsondata;
         }
         catch (err) {
-            console.error(`fetch error getExchangeRateCBR: ${err}`);
+            console.error(`fetch error getExchangeRatesCBR: ${err}`);
         }
     }
-    async getExchangeRateOKEX() {
+    async getExchangeRatesOKEX() {
         try {
             const data = await (0, node_fetch_1.default)(`https://www.okex.com/api/v5/market/index-tickers?quoteCcy=USDT`);
             const jsondata = await data.json();
             return jsondata.data;
         }
         catch (err) {
-            console.error(`fetch error getExchangeRateOKEX: ${err}`);
+            console.error(`fetch error getExchangeRatesOKEX: ${err}`);
+        }
+    }
+    async getExchangeRatesBybit() {
+        try {
+            const data = await (0, node_fetch_1.default)(`https://api.bytick.com/v2/public/tickers`);
+            const jsondata = await data.json();
+            return jsondata.result;
+        }
+        catch (err) {
+            console.error(`fetch error getExchangeRatesBybit: ${err}`);
         }
     }
 };

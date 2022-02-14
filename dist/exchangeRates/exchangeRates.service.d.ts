@@ -1,5 +1,6 @@
 export declare class ExchangeRatesService {
-    getExchangeRateNBRB(): Promise<any>;
-    getExchangeRateCBR(): Promise<any>;
-    getExchangeRateOKEX(): Promise<any>;
+    getExchangeRatesNBRB(): Promise<any>;
+    getExchangeRatesCBR(): Promise<any>;
+    getExchangeRatesOKEX(): Promise<any>;
+    getExchangeRatesBybit(): Promise<any>;
 }
