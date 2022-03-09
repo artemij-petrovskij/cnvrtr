@@ -12,7 +12,7 @@ const node_fetch_1 = require("node-fetch");
 let ExchangeRatesService = class ExchangeRatesService {
     async getExchangeRatesNBRB() {
         try {
-            const data = await (0, node_fetch_1.default)(`https://www.nbrb.by/api/exrates/rates?periodicity=0`);
+            const data = await (0, node_fetch_1.default)(`https://www.nbrb.by/API/ExRates/Rates?Periodicity=0`);
             const jsondata = await data.json();
             return jsondata;
         }

@@ -7,7 +7,7 @@ export class ExchangeRatesService {
     async getExchangeRatesNBRB() {
         try {
             const data = await fetch(
-                `https://www.nbrb.by/api/exrates/rates?periodicity=0`
+                `https://www.nbrb.by/API/ExRates/Rates?Periodicity=0`
             );
             const jsondata = await data.json();
 
