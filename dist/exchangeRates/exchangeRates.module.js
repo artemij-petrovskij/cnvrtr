@@ -12,11 +12,11 @@ const exchangeRates_controller_1 = require("./exchangeRates.controller");
 const exchangeRates_service_1 = require("./exchangeRates.service");
 let ExchangeRatesModule = class ExchangeRatesModule {
 };
-ExchangeRatesModule = __decorate([
+exports.ExchangeRatesModule = ExchangeRatesModule;
+exports.ExchangeRatesModule = ExchangeRatesModule = __decorate([
     (0, common_1.Module)({
         controllers: [exchangeRates_controller_1.ExchangeRatesController],
         providers: [exchangeRates_service_1.ExchangeRatesService]
     })
 ], ExchangeRatesModule);
-exports.ExchangeRatesModule = ExchangeRatesModule;
 //# sourceMappingURL=exchangeRates.module.js.map

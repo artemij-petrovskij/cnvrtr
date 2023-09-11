@@ -51,8 +51,8 @@ let ExchangeRatesService = class ExchangeRatesService {
         }
     }
 };
-ExchangeRatesService = __decorate([
+exports.ExchangeRatesService = ExchangeRatesService;
+exports.ExchangeRatesService = ExchangeRatesService = __decorate([
     (0, common_1.Injectable)()
 ], ExchangeRatesService);
-exports.ExchangeRatesService = ExchangeRatesService;
 //# sourceMappingURL=exchangeRates.service.js.map

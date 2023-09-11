@@ -15,7 +15,8 @@ const serve_static_1 = require("@nestjs/serve-static");
 const path = require("path");
 let AppModule = class AppModule {
 };
-AppModule = __decorate([
+exports.AppModule = AppModule;
+exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [exchangeRates_module_1.ExchangeRatesModule, serve_static_1.ServeStaticModule.forRoot({
                 rootPath: path.resolve(__dirname, 'static'),
@@ -25,5 +26,4 @@ AppModule = __decorate([
         providers: [app_service_1.AppService],
     })
 ], AppModule);
-exports.AppModule = AppModule;
 //# sourceMappingURL=app.module.js.map

@@ -29,6 +29,7 @@ let ExchangeRatesController = class ExchangeRatesController {
         return this.exchangeRatesService.getExchangeRatesBybit();
     }
 };
+exports.ExchangeRatesController = ExchangeRatesController;
 __decorate([
     (0, common_1.Get)('/currency/nbrb'),
     __metadata("design:type", Function),
@@ -53,9 +54,8 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ExchangeRatesController.prototype, "getExchangeRatesBybit", null);
-ExchangeRatesController = __decorate([
+exports.ExchangeRatesController = ExchangeRatesController = __decorate([
     (0, common_1.Controller)('/api'),
     __metadata("design:paramtypes", [exchangeRates_service_1.ExchangeRatesService])
 ], ExchangeRatesController);
-exports.ExchangeRatesController = ExchangeRatesController;
 //# sourceMappingURL=exchangeRates.controller.js.map
