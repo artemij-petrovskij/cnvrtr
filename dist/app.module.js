@@ -19,7 +19,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [exchangeRates_module_1.ExchangeRatesModule, serve_static_1.ServeStaticModule.forRoot({
-                rootPath: path.resolve(__dirname, 'static'),
+                rootPath: path.basename('static'),
                 exclude: ['/api'],
             }),],
         controllers: [app_controller_1.AppController],
