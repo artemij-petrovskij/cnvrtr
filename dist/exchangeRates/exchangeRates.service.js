@@ -32,7 +32,7 @@ let ExchangeRatesService = class ExchangeRatesService {
     }
     async getExchangeRatesOKEX() {
         try {
-            const data = await (0, node_fetch_1.default)(`https://www.okex.com/api/v5/market/index-tickers?quoteCcy=USDT`);
+            const data = await (0, node_fetch_1.default)(`https://www.okx.com/api/v5/market/index-tickers?quoteCcy=USDT`);
             const jsondata = await data.json();
             return jsondata.data;
         }

@@ -35,7 +35,7 @@ export class ExchangeRatesService {
     async getExchangeRatesOKEX() {
         try {
             const data = await fetch(
-                `https://www.okex.com/api/v5/market/index-tickers?quoteCcy=USDT`
+                `https://www.okx.com/api/v5/market/index-tickers?quoteCcy=USDT`
             );
             const jsondata = await data.json();
 
